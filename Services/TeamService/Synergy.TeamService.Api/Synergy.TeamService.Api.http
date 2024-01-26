@@ -1,0 +1,6 @@
+@Synergy.TeamService.Api_HostAddress = http://localhost:5193
+
+GET {{Synergy.TeamService.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

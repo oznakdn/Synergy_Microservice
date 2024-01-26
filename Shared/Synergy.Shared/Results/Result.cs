@@ -40,6 +40,17 @@ public class Result : IResult
         };
     }
 
+    public static Result Failure(int statusCode,string message)
+    {
+        return new Result
+        {
+            IsSuccess = false,
+            StatusCode = statusCode,
+            Message = message,
+            Errors = Enumerable.Empty<string>(),
+        };
+    }
+
     public static Result Failure(int statusCode, IEnumerable<string> errors)
     {
         return new Result

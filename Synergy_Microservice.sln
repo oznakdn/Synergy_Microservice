@@ -7,19 +7,31 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{38
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdentityService", "IdentityService", "{3AC373D9-397E-4864-B79B-9F28A6B27EF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.IdentityService.Domain", "Services\IdentityService\Synergy.IdentityService.Domain\Synergy.IdentityService.Domain.csproj", "{F22CBAE6-9B2A-483E-A41E-483F3E0DE47A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synergy.IdentityService.Domain", "Services\IdentityService\Synergy.IdentityService.Domain\Synergy.IdentityService.Domain.csproj", "{F22CBAE6-9B2A-483E-A41E-483F3E0DE47A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.IdentityService.Api", "Services\IdentityService\Synergy.IdentityService.Api\Synergy.IdentityService.Api.csproj", "{E8C9F9CF-D847-4C66-8AE7-BCEEF5F731DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synergy.IdentityService.Api", "Services\IdentityService\Synergy.IdentityService.Api\Synergy.IdentityService.Api.csproj", "{E8C9F9CF-D847-4C66-8AE7-BCEEF5F731DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.IdentityService.Infrastructure", "Services\IdentityService\Synergy.IdentityService.Infrastructure\Synergy.IdentityService.Infrastructure.csproj", "{D54CD966-CDF0-4999-81E1-AAF52C55C574}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synergy.IdentityService.Infrastructure", "Services\IdentityService\Synergy.IdentityService.Infrastructure\Synergy.IdentityService.Infrastructure.csproj", "{D54CD966-CDF0-4999-81E1-AAF52C55C574}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{005B7164-2C3B-4005-9CB9-58ABFB4196DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.Shared", "Shared\Synergy.Shared\Synergy.Shared.csproj", "{EF7AAD1D-5426-4FD5-9483-3B9B66935697}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synergy.Shared", "Shared\Synergy.Shared\Synergy.Shared.csproj", "{EF7AAD1D-5426-4FD5-9483-3B9B66935697}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.IdentityService.Shared", "Services\IdentityService\Synergy.IdentityService.Shared\Synergy.IdentityService.Shared.csproj", "{A5E763FC-CB33-44D0-988C-2175523FBD0C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synergy.IdentityService.Shared", "Services\IdentityService\Synergy.IdentityService.Shared\Synergy.IdentityService.Shared.csproj", "{A5E763FC-CB33-44D0-988C-2175523FBD0C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.IdentityService.Application", "Services\IdentityService\Synergy.IdentityService.Application\Synergy.IdentityService.Application.csproj", "{AB69E87C-E13B-48A1-A093-EAC32B754F23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synergy.IdentityService.Application", "Services\IdentityService\Synergy.IdentityService.Application\Synergy.IdentityService.Application.csproj", "{AB69E87C-E13B-48A1-A093-EAC32B754F23}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TeamService", "TeamService", "{5C117822-87F7-43B1-9E8B-AD238C0E1DA0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.TeamService.Api", "Services\TeamService\Synergy.TeamService.Api\Synergy.TeamService.Api.csproj", "{348632AD-93F1-4637-B504-A6939FE87A1D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.TeamService.Domain", "Services\TeamService\Synergy.TeamService.Domain\Synergy.TeamService.Domain.csproj", "{0FE1ADDF-D7E0-4748-AB81-5AA16E0F9ECF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.TeamService.Shared", "Services\TeamService\Synergy.TeamService.Shared\Synergy.TeamService.Shared.csproj", "{6122279A-9A27-44DE-A7E8-0F9710072D69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.TeamService.Infrastructure", "Services\TeamService\Synergy.TeamService.Infrastructure\Synergy.TeamService.Infrastructure.csproj", "{173787E1-6A4F-4754-85DD-EE1745743C65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.TeamService.Application", "Services\TeamService\Synergy.TeamService.Application\Synergy.TeamService.Application.csproj", "{46094C39-9A02-485A-BA7A-681108A02833}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +63,26 @@ Global
 		{AB69E87C-E13B-48A1-A093-EAC32B754F23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB69E87C-E13B-48A1-A093-EAC32B754F23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB69E87C-E13B-48A1-A093-EAC32B754F23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{348632AD-93F1-4637-B504-A6939FE87A1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{348632AD-93F1-4637-B504-A6939FE87A1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{348632AD-93F1-4637-B504-A6939FE87A1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{348632AD-93F1-4637-B504-A6939FE87A1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FE1ADDF-D7E0-4748-AB81-5AA16E0F9ECF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FE1ADDF-D7E0-4748-AB81-5AA16E0F9ECF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FE1ADDF-D7E0-4748-AB81-5AA16E0F9ECF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FE1ADDF-D7E0-4748-AB81-5AA16E0F9ECF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6122279A-9A27-44DE-A7E8-0F9710072D69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6122279A-9A27-44DE-A7E8-0F9710072D69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6122279A-9A27-44DE-A7E8-0F9710072D69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6122279A-9A27-44DE-A7E8-0F9710072D69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{173787E1-6A4F-4754-85DD-EE1745743C65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{173787E1-6A4F-4754-85DD-EE1745743C65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{173787E1-6A4F-4754-85DD-EE1745743C65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{173787E1-6A4F-4754-85DD-EE1745743C65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46094C39-9A02-485A-BA7A-681108A02833}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46094C39-9A02-485A-BA7A-681108A02833}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46094C39-9A02-485A-BA7A-681108A02833}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46094C39-9A02-485A-BA7A-681108A02833}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,6 +95,12 @@ Global
 		{EF7AAD1D-5426-4FD5-9483-3B9B66935697} = {005B7164-2C3B-4005-9CB9-58ABFB4196DD}
 		{A5E763FC-CB33-44D0-988C-2175523FBD0C} = {3AC373D9-397E-4864-B79B-9F28A6B27EF9}
 		{AB69E87C-E13B-48A1-A093-EAC32B754F23} = {3AC373D9-397E-4864-B79B-9F28A6B27EF9}
+		{5C117822-87F7-43B1-9E8B-AD238C0E1DA0} = {3822480C-A0C8-4D3F-8064-8FFC2BEBEC9D}
+		{348632AD-93F1-4637-B504-A6939FE87A1D} = {5C117822-87F7-43B1-9E8B-AD238C0E1DA0}
+		{0FE1ADDF-D7E0-4748-AB81-5AA16E0F9ECF} = {5C117822-87F7-43B1-9E8B-AD238C0E1DA0}
+		{6122279A-9A27-44DE-A7E8-0F9710072D69} = {5C117822-87F7-43B1-9E8B-AD238C0E1DA0}
+		{173787E1-6A4F-4754-85DD-EE1745743C65} = {5C117822-87F7-43B1-9E8B-AD238C0E1DA0}
+		{46094C39-9A02-485A-BA7A-681108A02833} = {5C117822-87F7-43B1-9E8B-AD238C0E1DA0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A98B446-27F9-4F37-B0F4-5B0F1E171F0D}
