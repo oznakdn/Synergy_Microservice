@@ -1,13 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Synergy.Shared.Results;
+using Synergy.WebApp.Helpers;
 using Synergy.WebApp.Models.UserModels;
 using Synergy.WebApp.Services;
-using System.Security.Claims;
 
 namespace Synergy.WebApp.Pages.User
 {
-    public class LoginModel(UserService userService, IHttpContextAccessor httpContext) : PageModel
+    public class LoginModel(UserService userService) : PageModel
     {
 
         [BindProperty]
@@ -19,15 +19,17 @@ namespace Synergy.WebApp.Pages.User
 
             if (response.IsSuccess)
             {
-                httpContext.HttpContext!.Response.Cookies.Append("Access", response.Value!.Token, new CookieOptions
-                {
-                    Expires = Convert.ToDateTime(response.Value.TokenExpire)
-                });
+                CookieHelper.SetCookie(CookieKey.ACCESS_TOKEN, response.Value!.Token, Convert.ToDateTime(response.Value.TokenExpire));
 
-                httpContext.HttpContext!.Response.Cookies.Append("User", response.Value!.User.Username, new CookieOptions
-                {
-                    Expires = Convert.ToDateTime(response.Value.TokenExpire)
-                });
+                CookieHelper.SetCookie(CookieKey.REFRESH_TOKEN, response.Value.RefreshToken, Convert.ToDateTime(response.Value.RefreshExpire));
+
+                CookieHelper.SetCookie(CookieKey.USERNAME, response.Value.User.Username, Convert.ToDateTime(response.Value.TokenExpire));
+
+                CookieHelper.SetCookie(CookieKey.EMAIL, response.Value.User.Email, Convert.ToDateTime(response.Value.TokenExpire));
+
+                CookieHelper.SetCookie(CookieKey.ID, response.Value.User.Id, Convert.ToDateTime(response.Value.TokenExpire));
+
+                CookieHelper.SetCookie(CookieKey.ROLE, response.Value.Role.RoleName, Convert.ToDateTime(response.Value.TokenExpire));
 
                 return RedirectToPage("/Index");
             }

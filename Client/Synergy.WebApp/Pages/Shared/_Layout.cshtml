@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Synergy.WebApp.Helpers
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -29,26 +31,28 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav">
-                        @if (string.IsNullOrEmpty(Context.Request.Cookies["User"]))
+                        @if (string.IsNullOrEmpty(CookieHelper.GetCookie(CookieKey.ACCESS_TOKEN)))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-black" href="#">Login</a>
+                                <a class="nav-link text-black" href="/Login">Login</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-black" href="#">Register</a>
+                                <a class="nav-link text-black" href="/Register">Register</a>
                             </li>
                         }
                         else
 
                         {
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-white btn btn-secondary" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@Context.Request.Cookies["User"]</a>
+                                <a class="nav-link dropdown-toggle text-white btn btn-secondary" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    @CookieHelper.GetCookie(CookieKey.USERNAME)
+                                </a>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="#">Action</a>
                                     <a class="dropdown-item" href="#">Another action</a>
                                     <a class="dropdown-item" href="#">Something else here</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Sign Out</a>
+                                    <a class="dropdown-item" href="/Logout">Sign Out</a>
                                 </div>
                             </li>
                         }
