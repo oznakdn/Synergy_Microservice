@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Synergy.IdentityService.Application.Commands.UserCommands.RegisterUser;
 using Synergy.IdentityService.Application.Queries.UserQueries.LoginUser;
+using Synergy.IdentityService.Application.Queries.UserQueries.LogoutUser;
 using Synergy.IdentityService.Shared.Dtos.UserDtos;
 
 namespace Synergy.IdentityService.Api.Controllers;
@@ -30,5 +31,13 @@ public class UserController(IMediator _mediator) : ControllerBase
             Login = login
         });
         return result.IsSuccess ? Ok(result.Value) : BadRequest(result.Errors);
+    }
+
+
+    [HttpGet("logout/{refreshToken}")]
+    public async Task<IActionResult> Logout(string refreshToken)
+    {
+        var result = await _mediator.Send(new LogoutUserQuery(refreshToken));
+        return result.IsSuccess ? Ok(result.Message) : NotFound();
     }
 }
