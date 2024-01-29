@@ -1,0 +1,8 @@
+@Synergy.ProjectService.Api_HostAddress = http://localhost:5083
+
+GET {{Synergy.ProjectService.Api_HostAddress}}/api/projects
+Accept: application/json
+Authorization: "Bearer "
+
+
+###
