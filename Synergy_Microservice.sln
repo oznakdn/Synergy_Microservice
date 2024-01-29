@@ -35,15 +35,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synergy.TeamService.Applica
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProjectService", "ProjectService", "{60EE7A2F-042D-4E7D-A11F-FA1DB0A5C881}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.ProjectService.Api", "Services\ProjectService\Synergy.ProjectService.Api\Synergy.ProjectService.Api.csproj", "{EBECB8E8-B9CE-4FA9-930C-5EF72327F8B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synergy.ProjectService.Api", "Services\ProjectService\Synergy.ProjectService.Api\Synergy.ProjectService.Api.csproj", "{EBECB8E8-B9CE-4FA9-930C-5EF72327F8B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.ProjectService.Domain", "Services\ProjectService\Synergy.ProjectService.Domain\Synergy.ProjectService.Domain.csproj", "{87E71DAF-CEBC-416A-9190-4E9F82C340B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synergy.ProjectService.Domain", "Services\ProjectService\Synergy.ProjectService.Domain\Synergy.ProjectService.Domain.csproj", "{87E71DAF-CEBC-416A-9190-4E9F82C340B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.ProjectService.Shared", "Services\ProjectService\Synergy.ProjectService.Shared\Synergy.ProjectService.Shared.csproj", "{06393652-56A4-46BE-A204-0AB94257879D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synergy.ProjectService.Shared", "Services\ProjectService\Synergy.ProjectService.Shared\Synergy.ProjectService.Shared.csproj", "{06393652-56A4-46BE-A204-0AB94257879D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.ProjectService.Infrastructure", "Services\ProjectService\Synergy.ProjectService.Infrastructure\Synergy.ProjectService.Infrastructure.csproj", "{040F5A52-0458-41B0-9D46-C3B95FA5F292}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synergy.ProjectService.Infrastructure", "Services\ProjectService\Synergy.ProjectService.Infrastructure\Synergy.ProjectService.Infrastructure.csproj", "{040F5A52-0458-41B0-9D46-C3B95FA5F292}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.ProjectService.Application", "Services\ProjectService\Synergy.ProjectService.Application\Synergy.ProjectService.Application.csproj", "{5F6041B0-E123-4257-9A06-63C8CFBC9FD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synergy.ProjectService.Application", "Services\ProjectService\Synergy.ProjectService.Application\Synergy.ProjectService.Application.csproj", "{5F6041B0-E123-4257-9A06-63C8CFBC9FD6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{97CE7910-F7BA-4CED-AD2A-28F47CD3EDBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.Gateway", "Gateway\Synergy.Gateway\Synergy.Gateway.csproj", "{15ED340C-0031-43DF-B842-1CB90FE35225}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -115,6 +119,10 @@ Global
 		{5F6041B0-E123-4257-9A06-63C8CFBC9FD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F6041B0-E123-4257-9A06-63C8CFBC9FD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F6041B0-E123-4257-9A06-63C8CFBC9FD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15ED340C-0031-43DF-B842-1CB90FE35225}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15ED340C-0031-43DF-B842-1CB90FE35225}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15ED340C-0031-43DF-B842-1CB90FE35225}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15ED340C-0031-43DF-B842-1CB90FE35225}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -139,6 +147,7 @@ Global
 		{06393652-56A4-46BE-A204-0AB94257879D} = {60EE7A2F-042D-4E7D-A11F-FA1DB0A5C881}
 		{040F5A52-0458-41B0-9D46-C3B95FA5F292} = {60EE7A2F-042D-4E7D-A11F-FA1DB0A5C881}
 		{5F6041B0-E123-4257-9A06-63C8CFBC9FD6} = {60EE7A2F-042D-4E7D-A11F-FA1DB0A5C881}
+		{15ED340C-0031-43DF-B842-1CB90FE35225} = {97CE7910-F7BA-4CED-AD2A-28F47CD3EDBA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A98B446-27F9-4F37-B0F4-5B0F1E171F0D}
