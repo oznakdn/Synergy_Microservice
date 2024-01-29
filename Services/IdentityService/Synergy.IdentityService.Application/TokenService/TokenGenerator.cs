@@ -16,6 +16,8 @@ public class TokenGenerator : ITokenGenerator
         _option = option;
     }
 
+
+
     public TokenDto GenerateToken(User user, List<Role>? roles = null)
     {
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_option.Key));
@@ -23,7 +25,8 @@ public class TokenGenerator : ITokenGenerator
         var claims = new List<Claim>
         {
             new Claim(ClaimTypes.NameIdentifier,user.Id),
-            new Claim(ClaimTypes.Name,user.Username)
+            new Claim(ClaimTypes.Name,user.Username),
+            new Claim(ClaimTypes.Email,user.Email)
         };
 
         if (roles is not null && roles.Count > 0)
@@ -48,8 +51,9 @@ public class TokenGenerator : ITokenGenerator
         var token = securityToken.WriteToken(createdToken);
         return new TokenDto(token, DateTime.Now.AddDays(5).ToString(), new UserDto(user.Username));
 
-
-
     }
+
+    public string GenerateRefreshToken() => Guid.NewGuid().ToString();
+
 
 }

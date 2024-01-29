@@ -23,6 +23,7 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, R
         var user = new User
         {
             Username = request.Register.Username,
+            Email = request.Register.Email,
             Password = request.Register.Password
         };
 

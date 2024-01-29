@@ -27,6 +27,11 @@ public class LoginUserQueryHandler : IRequestHandler<LoginUserQuery, Result<Toke
 
         var tokenDto = tokenGenerator.GenerateToken(user, user.Roles);
 
+        user.Token = tokenGenerator.GenerateRefreshToken();
+        user.TokenExpire = DateTime.Now.AddDays(7);
+
+        await userRepo.Update(user);
+
         return Result<TokenDto>.Success(200, tokenDto);
 
     }
