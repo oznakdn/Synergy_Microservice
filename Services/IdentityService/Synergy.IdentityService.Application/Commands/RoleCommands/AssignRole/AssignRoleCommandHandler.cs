@@ -25,18 +25,16 @@ public class AssignRoleCommandHandler : IRequestHandler<AssignRoleCommand, Resul
         if (role is null)
             return Result.Failure(404);
 
-        if (!user.Roles.Where(x => x.RoleName.Equals(role.RoleName)).Any())
+        if (user.Role is null)
+            user.Role = new();
+
+        if (user.Role.RoleName != role.RoleName)
         {
-            user.Roles.Add(role);
+            user.Role = role;
             await userRepo.Update(user);
-
             return Result.Success(204);
-
         }
 
-
-        return Result.Failure(400,new List<string> { "User already has this role!"});
-
-
+        return Result.Failure(400, new List<string> { "User already has this role!" });
     }
 }

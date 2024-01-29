@@ -12,11 +12,12 @@ namespace Synergy.IdentityService.Api.Controllers;
 
 [Route("api/auth")]
 [ApiController]
+[Authorize(Roles = "manager")]
+
 public class AuthController(IMediator mediator) : ControllerBase
 {
 
     [HttpGet("users")]
-    [Authorize(Roles = "admin")]
     public async Task<IActionResult> GetUsers()
     {
         var result = await mediator.Send(new GetUsersQuery());
@@ -25,7 +26,6 @@ public class AuthController(IMediator mediator) : ControllerBase
 
 
     [HttpGet("roles")]
-    [Authorize(Roles = "admin")]
     public async Task<IActionResult> GetRoles()
     {
         var result = await mediator.Send(new GetRolesQuery());
@@ -33,7 +33,6 @@ public class AuthController(IMediator mediator) : ControllerBase
     }
 
     [HttpPost("roles")]
-    [Authorize(Roles = "admin")]
     public async Task<IActionResult> Create([FromBody] CreateRoleDto createRole)
     {
         var result = await mediator.Send(new CreateRoleCommand { CreateRole = createRole });
@@ -41,7 +40,6 @@ public class AuthController(IMediator mediator) : ControllerBase
     }
 
     [HttpPut("roles")]
-    [Authorize(Roles = "admin")]
     public async Task<IActionResult> Update([FromBody] UpdateRoleDto updateRole)
     {
         var result = await mediator.Send(new UpdateRoleCommand(updateRole));
@@ -50,7 +48,6 @@ public class AuthController(IMediator mediator) : ControllerBase
 
 
     [HttpPut("roles/assign")]
-    [Authorize(Roles = "admin")]
     public async Task<IActionResult> AssignRole([FromBody] AssignRoleCommand assignRole)
     {
         var result = await mediator.Send(assignRole);

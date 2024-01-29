@@ -15,6 +15,6 @@ public class User
     public string? Token { get; set; } 
     public DateTime? TokenExpire { get; set; }
 
-    public List<Role> Roles { get; set; } = new();
+    public Role? Role { get; set; }
 
 }
