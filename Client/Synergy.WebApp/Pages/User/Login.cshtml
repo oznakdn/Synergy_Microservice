@@ -1,0 +1,25 @@
+﻿@page "/Login"
+@model Synergy.WebApp.Pages.User.LoginModel
+
+    <div class="row col">
+        <div class="display-6 text-center my-5">LOGIN</div>
+    </div>
+
+
+    <form method="post">
+        <div class="row justify-content-center">
+            <div class="col-6 offset-3">
+                <div class="form-group col-6">
+                    <label class="form-label">Username</label>
+                    <input asp-for="loginInput.Username" class="form-control" />
+                </div>
+                <div class="form-group col-6 my-2">
+                    <label class="form-label">Password</label>
+                    <input asp-for="loginInput.Password" type="password" class="form-control" />
+                </div>
+                <div class="form-group col-6 my-3">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </div>
+        </div>
+    </form>
