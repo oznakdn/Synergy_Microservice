@@ -29,9 +29,9 @@ namespace Synergy.WebApp.Pages.User
 
                 CookieHelper.SetCookie(CookieKey.ID, response.Value.User.Id, Convert.ToDateTime(response.Value.TokenExpire));
 
-                if (!string.IsNullOrEmpty(response.Value.Role))
+                if (!string.IsNullOrEmpty(response.Value.User.Role))
                 {
-                    CookieHelper.SetCookie(CookieKey.ROLE, response.Value.Role, Convert.ToDateTime(response.Value.TokenExpire));
+                    CookieHelper.SetCookie(CookieKey.ROLE, response.Value.User.Role, Convert.ToDateTime(response.Value.TokenExpire));
                 }
 
 

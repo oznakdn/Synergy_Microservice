@@ -48,9 +48,13 @@
                                     @CookieHelper.GetCookie(CookieKey.USERNAME)
                                 </a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    @if (CookieHelper.GetCookie(CookieKey.ROLE) == "manager")
+                                    {
+                                        <a class="dropdown-item" href="/Auth/Users">Users</a>
+                                        <a class="dropdown-item" >Roles</a>
+                                    }
+
+                                    <a class="dropdown-item" asp-route-id="@CookieHelper.GetCookie(CookieKey.ID)">Project</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="/Logout">Sign Out</a>
                                 </div>
@@ -60,17 +64,16 @@
                 </div>
             </div>
         </nav>
-
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
     </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2024 - Synergy.WebApp - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; 2024 - Synergy - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
 

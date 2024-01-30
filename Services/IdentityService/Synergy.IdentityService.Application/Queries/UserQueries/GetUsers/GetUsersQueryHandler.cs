@@ -1,11 +1,11 @@
 ﻿using MediatR;
-using Synergy.IdentityService.Domain.Models;
 using Synergy.IdentityService.Infrastructure.Repositories.Contracts;
+using Synergy.IdentityService.Shared.Dtos.UserDtos;
 using Synergy.Shared.Results;
 
 namespace Synergy.IdentityService.Application.Queries.UserQueries.GetUsers;
 
-public class GetUsersQueryHandler : IRequestHandler<GetUsersQuery, Result<User>>
+public class GetUsersQueryHandler : IRequestHandler<GetUsersQuery, Result<UserDto>>
 {
     private readonly IUserRepository userRepo;
 
@@ -14,9 +14,13 @@ public class GetUsersQueryHandler : IRequestHandler<GetUsersQuery, Result<User>>
         this.userRepo = userRepo;
     }
 
-    public async Task<Result<User>> Handle(GetUsersQuery request, CancellationToken cancellationToken)
+    public async Task<Result<UserDto>> Handle(GetUsersQuery request, CancellationToken cancellationToken)
     {
         var users = await userRepo.GetAllAsync();
-        return Result<User>.Success(200, users);
+        var usersDto = users
+            .Select(_ => new UserDto(_.Id, _.Username, _.Email,_.Role is not null ? _.Role.RoleName : default))
+            .ToList();
+
+        return Result<UserDto>.Success(200, usersDto);
     }
 }

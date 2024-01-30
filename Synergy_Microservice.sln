@@ -47,11 +47,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synergy.ProjectService.Appl
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{97CE7910-F7BA-4CED-AD2A-28F47CD3EDBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.Gateway", "Gateway\Synergy.Gateway\Synergy.Gateway.csproj", "{15ED340C-0031-43DF-B842-1CB90FE35225}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synergy.Gateway", "Gateway\Synergy.Gateway\Synergy.Gateway.csproj", "{15ED340C-0031-43DF-B842-1CB90FE35225}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{9F628627-86A1-4541-9DEC-EC156EF4D025}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.WebApp", "Client\Synergy.WebApp\Synergy.WebApp.csproj", "{AD7E9697-C104-4435-A411-6F3CC10D590E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synergy.WebApp", "Client\Synergy.WebApp\Synergy.WebApp.csproj", "{AD7E9697-C104-4435-A411-6F3CC10D590E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

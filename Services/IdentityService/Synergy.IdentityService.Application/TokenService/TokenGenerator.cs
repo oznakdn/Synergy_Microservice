@@ -55,8 +55,7 @@ public class TokenGenerator : ITokenGenerator
             TokenExpire: DateTime.Now.AddDays(5).ToString(),
             RefreshToken: refreshToken,
             RefreshExpire: DateTime.Now.AddDays(6).ToString(),
-            User: new UserDto(user.Id, user.Username, user.Email),
-            Role: user.Role != null ? user.Role!.RoleName : default);
+            User: new UserDto(user.Id, user.Username, user.Email, user.Role != null ? user.Role.RoleName : default));
     }
 
     private string GenerateRefreshToken() => Guid.NewGuid().ToString();
