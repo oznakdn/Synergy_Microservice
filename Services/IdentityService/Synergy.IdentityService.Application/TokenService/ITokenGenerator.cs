@@ -5,5 +5,5 @@ namespace Synergy.IdentityService.Application.TokenService;
 
 public interface ITokenGenerator
 {
-    TokenDto GenerateToken(User user, Role? role = null);
+    TokenDto GenerateToken(User user);
 }

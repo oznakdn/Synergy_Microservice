@@ -29,7 +29,11 @@ namespace Synergy.WebApp.Pages.User
 
                 CookieHelper.SetCookie(CookieKey.ID, response.Value.User.Id, Convert.ToDateTime(response.Value.TokenExpire));
 
-                CookieHelper.SetCookie(CookieKey.ROLE, response.Value.Role.RoleName, Convert.ToDateTime(response.Value.TokenExpire));
+                if (!string.IsNullOrEmpty(response.Value.Role))
+                {
+                    CookieHelper.SetCookie(CookieKey.ROLE, response.Value.Role, Convert.ToDateTime(response.Value.TokenExpire));
+                }
+
 
                 return RedirectToPage("/Index");
             }

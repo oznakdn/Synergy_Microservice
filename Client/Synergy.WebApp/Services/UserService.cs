@@ -1,5 +1,4 @@
 ﻿using Synergy.Shared.Results;
-using Synergy.WebApp.Helpers;
 using Synergy.WebApp.Models.UserModels;
 
 namespace Synergy.WebApp.Services;
@@ -26,6 +25,15 @@ public class UserService : ClientServiceBase
         return Result.Success(200, "Sign out is successfull.");
 
         return Result.Failure(400,"A Error");
+    }
+
+    public async Task<Result>RegisterAsync(RegisterInput register)
+    {
+        HttpResponseMessage responseMessage = await HttpClient.PostAsJsonAsync<RegisterInput>(Endpoints.Identity.Register, register);
+        if (responseMessage.IsSuccessStatusCode)
+            return Result.Success(204);
+
+        return Result.Failure(400);
     }
 
 }

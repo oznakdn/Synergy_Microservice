@@ -18,7 +18,7 @@ public class TokenGenerator : ITokenGenerator
 
 
 
-    public TokenDto GenerateToken(User user, Role? role = null)
+    public TokenDto GenerateToken(User user)
     {
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_option.Key));
         var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -29,10 +29,11 @@ public class TokenGenerator : ITokenGenerator
             new Claim(ClaimTypes.Email,user.Email)
         };
 
-        if (role is not null)
+        if (user.Role is not null)
         {
-            claims.Add(new Claim(ClaimTypes.Role, role.RoleName));
+            claims.Add(new Claim(ClaimTypes.Role, user.Role.RoleName));
         }
+
 
         var tokenDescriptor = new SecurityTokenDescriptor
         {
@@ -49,14 +50,13 @@ public class TokenGenerator : ITokenGenerator
         var refreshToken = GenerateRefreshToken();
 
 
-
         return new TokenDto(
             Token: token,
             TokenExpire: DateTime.Now.AddDays(5).ToString(),
             RefreshToken: refreshToken,
             RefreshExpire: DateTime.Now.AddDays(6).ToString(),
             User: new UserDto(user.Id, user.Username, user.Email),
-            Role: new UserRoleDto(role!.RoleName));
+            Role: user.Role != null ? user.Role!.RoleName : default);
     }
 
     private string GenerateRefreshToken() => Guid.NewGuid().ToString();

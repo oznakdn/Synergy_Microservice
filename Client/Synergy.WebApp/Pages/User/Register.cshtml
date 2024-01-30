@@ -1,0 +1,43 @@
+﻿@page "/Register"
+@model Synergy.WebApp.Pages.User.RegisterModel
+
+<div class="row col">
+    <div class="display-6 text-center my-5">REGISTER</div>
+</div>
+
+<div class="row justify-content-center">
+    @if (ViewData["success"] != null)
+    {
+        <div class="alert alert-primary col-3" role="alert">
+            @ViewData["success"]
+        </div>
+    }
+    @if (ViewData["error"] != null)
+    {
+        <div class="alert alert-danger col-3" role="alert">
+            @ViewData["error"]
+        </div>
+    }
+</div>
+
+<form method="post">
+    <div class="row justify-content-center">
+        <div class="col-6 offset-3">
+            <div class="form-group col-6">
+                <label class="form-label">Username</label>
+                <input asp-for="RegisterInput.Username" class="form-control" />
+            </div>
+            <div class="form-group col-6 my-2">
+                <label class="form-label">Email</label>
+                <input asp-for="RegisterInput.Email" type="email" class="form-control" />
+            </div>
+            <div class="form-group col-6 my-2">
+                <label class="form-label">Password</label>
+                <input asp-for="RegisterInput.Password" type="password" class="form-control" />
+            </div>
+            <div class="form-group col-6 my-3">
+                <button type="submit" class="btn btn-primary">Register</button>
+            </div>
+        </div>
+    </div>
+</form>
