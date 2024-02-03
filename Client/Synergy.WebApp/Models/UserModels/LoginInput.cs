@@ -1,3 +1,3 @@
 ﻿namespace Synergy.WebApp.Models.UserModels;
 
-public record LoginInput(string Username, string Password);
+public record LoginInput(string Username, string Password,bool RememberMe);

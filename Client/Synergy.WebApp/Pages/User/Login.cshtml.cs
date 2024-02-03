@@ -17,7 +17,7 @@ namespace Synergy.WebApp.Pages.User
         {
             Result<LoginResponse>? response = await userService.LoginAsync(loginInput);
 
-            if (response.IsSuccess)
+            if (response.IsSuccess && loginInput.RememberMe)
             {
                 CookieHelper.SetCookie(CookieKey.ACCESS_TOKEN, response.Value!.Token, Convert.ToDateTime(response.Value.TokenExpire));
 
