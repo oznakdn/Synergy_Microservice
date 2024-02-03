@@ -1,9 +1,6 @@
 ﻿@page "/Register"
 @model Synergy.WebApp.Pages.User.RegisterModel
 
-<div class="row col">
-    <div class="display-6 text-center my-5">REGISTER</div>
-</div>
 
 <div class="row justify-content-center">
     @if (ViewData["success"] != null)
@@ -20,24 +17,35 @@
     }
 </div>
 
-<form method="post">
-    <div class="row justify-content-center">
-        <div class="col-6 offset-3">
-            <div class="form-group col-6">
-                <label class="form-label">Username</label>
-                <input asp-for="RegisterInput.Username" class="form-control" />
-            </div>
-            <div class="form-group col-6 my-2">
-                <label class="form-label">Email</label>
-                <input asp-for="RegisterInput.Email" type="email" class="form-control" />
-            </div>
-            <div class="form-group col-6 my-2">
-                <label class="form-label">Password</label>
-                <input asp-for="RegisterInput.Password" type="password" class="form-control" />
-            </div>
-            <div class="form-group col-6 my-3">
-                <button type="submit" class="btn btn-primary">Register</button>
+
+<div class="row justify-content-center">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="row col">
+                    <div class="display-6 text-center my-5">REGISTER</div>
+                </div>
+                <form method="post">
+                    <div class="form-outline mb-4">
+                        <input type="text" id="form2Example1" asp-for="RegisterInput.Username" class="form-control" placeholder="Username" />
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <input type="email" id="form2Example1" asp-for="RegisterInput.Email" class="form-control" placeholder="Email" />
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <input type="password" id="form2Example2" asp-for="RegisterInput.Password" class="form-control" placeholder="Password" />
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary btn-block mb-4">Sign Up</button>
+                    </div>
+
+                </form>
+
             </div>
         </div>
     </div>
-</form>
+</div>
+
