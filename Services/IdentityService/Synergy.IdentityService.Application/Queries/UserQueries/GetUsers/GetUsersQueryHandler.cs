@@ -18,9 +18,9 @@ public class GetUsersQueryHandler : IRequestHandler<GetUsersQuery, Result<UserDt
     {
         var users = await userRepo.GetAllAsync();
         var usersDto = users
-            .Select(_ => new UserDto(_.Id, _.Username, _.Email,_.Role is not null ? _.Role.RoleName : default))
+            .Select(_ => new UserDto(_.Id, _.Username, _.Email, _.Role is not null ? _.Role.RoleName : default))
             .ToList();
 
-        return Result<UserDto>.Success(200, usersDto);
+        return Result<UserDto>.Success(statusCode: 200, values: usersDto);
     }
 }

@@ -20,7 +20,7 @@ public class GetRolesQueryHandler : IRequestHandler<GetRolesQuery, Result<RoleDt
 
         List<RoleDto> roleDto = roles.Select(_ => new RoleDto(_.Id, _.RoleName, _.Description)).ToList();
 
-        return Result<RoleDto>.Success(200,roleDto);
+        return Result<RoleDto>.Success(statusCode: 200, values: roleDto);
 
     }
 }

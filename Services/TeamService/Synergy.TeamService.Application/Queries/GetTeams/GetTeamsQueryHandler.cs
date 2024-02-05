@@ -26,10 +26,10 @@ public class GetTeamsQueryHandler : IRequestHandler<GetTeamsQuery, Result<TeamDt
             _.TeamName,
             _.TeamDescription,
             _.Developers
-                .Select(_=>new TeamDevelopers(_.GivenName,_.LastName,_.Title))
+                .Select(_ => new TeamDevelopers(_.GivenName, _.LastName, _.Title))
                 .ToList()
             )).ToList();
 
-        return Result<TeamDto>.Success(200,teamDto);
+        return Result<TeamDto>.Success(statusCode: 200, values: teamDto);
     }
 }

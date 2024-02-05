@@ -8,12 +8,16 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddHttpClient("SynergyClient", conf => conf.BaseAddress = new Uri(builder.Configuration["BaseUrl"]!));
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddAuthentication("Bearer")
+                .AddCookie("Bearer");
 
 builder.Services.Configure<Endpoints>(builder.Configuration.GetSection(nameof(Endpoints)));
 builder.Services.AddSingleton(sp => sp.GetRequiredService<IOptions<Endpoints>>().Value);
 
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<AuthService>();
+
+
 
 
 var app = builder.Build();
@@ -26,6 +30,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();

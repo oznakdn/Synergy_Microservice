@@ -31,7 +31,7 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav">
-                        @if (string.IsNullOrEmpty(CookieHelper.GetCookie(CookieKey.ACCESS_TOKEN)))
+                        @if (!User.Identity!.IsAuthenticated)
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-black" href="/Login">Login</a>
@@ -45,10 +45,10 @@
                         {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-white btn btn-secondary" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                    @CookieHelper.GetCookie(CookieKey.USERNAME)
+                                    @User.Identity.Name
                                 </a>
                                 <div class="dropdown-menu">
-                                    @if (CookieHelper.GetCookie(CookieKey.ROLE) == "manager")
+                                    @if (User.IsInRole("manager"))
                                     {
                                         <a class="dropdown-item" href="/Auth/Users">Users</a>
                                         <a class="dropdown-item" >Roles</a>

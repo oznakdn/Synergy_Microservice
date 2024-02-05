@@ -37,6 +37,6 @@ public class GetDevelopersQueryHandler : IRequestHandler<GetDevelopersQuery, Res
             developerSkillsDto
             )).ToList();
 
-        return Result<DeveloperDto>.Success(200, developerDto);
+        return Result<DeveloperDto>.Success(statusCode: 200, values: developerDto);
     }
 }

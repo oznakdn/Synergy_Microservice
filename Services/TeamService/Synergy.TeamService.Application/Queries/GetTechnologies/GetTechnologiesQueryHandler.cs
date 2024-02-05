@@ -21,6 +21,6 @@ public class GetTechnologiesQueryHandler : IRequestHandler<GetTechnologiesQuery,
         var technologioes = await query.ToListAsync(cancellationToken);
 
         var technologyDto = technologioes.Select(_ => new TechnologyDto(_.Id.ToString(), _.Name, _.Description)).ToList();
-        return Result<TechnologyDto>.Success(200,technologyDto);
+        return Result<TechnologyDto>.Success(statusCode: 200, values: technologyDto);
     }
 }

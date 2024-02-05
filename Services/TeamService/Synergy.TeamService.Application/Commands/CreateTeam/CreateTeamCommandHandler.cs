@@ -25,7 +25,7 @@ public class CreateTeamCommandHandler : IRequestHandler<CreateTeamCommand, Resul
         }
 
         if (erros.Any())
-            return Result.Failure(400, erros);
+            return Result.Failure(statusCode: 400, errors: erros);
 
         var team = new Team
         {
@@ -38,7 +38,7 @@ public class CreateTeamCommandHandler : IRequestHandler<CreateTeamCommand, Resul
         _manager.Team.Insert(team);
         var result = await _manager.SaveAsync(cancellationToken);
 
-        if(result>0)
+        if (result > 0)
             return Result.Success(204);
 
         return Result.Failure(500);

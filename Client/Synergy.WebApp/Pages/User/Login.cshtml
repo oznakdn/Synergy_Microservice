@@ -3,16 +3,30 @@
 
 
 <div class="row justify-content-center">
-    @if (TempData["message"] != null)
+    @if (ViewData["loginError"] is not null)
     {
-        <div class="alert alert-primary col-3" role="alert">
-            @TempData["message"]
+        <div class="col-3">
+            <div class="alert alert-danger" role="alert">
+                @ViewData["loginError"]
+            </div>
         </div>
     }
-    @if (TempData["error"] != null)
+</div>
+<div class="row justify-content-center">
+    @if (ViewData["error"] is not null)
     {
-        <div class="alert alert-danger col-3" role="alert">
-            @TempData["error"]
+        <div class="col-3">
+            <div class="alert alert-danger" role="alert">
+                @ViewData["error"]
+            </div>
+        </div>
+    }
+    @if (ViewData["message"] is not null)
+    {
+        <div class="col-3">
+            <div class="alert alert-success" role="alert">
+                @ViewData["message"]
+            </div>
         </div>
     }
 </div>
@@ -27,11 +41,11 @@
                 </div>
                 <form method="post">
                     <div class="form-outline mb-4">
-                        <input type="email" id="form2Example1" asp-for="loginInput.Username" class="form-control" placeholder="Username" />
+                        <input type="text" id="form2Example1" value="johndoe" asp-for="loginInput.Username" class="form-control" placeholder="Username" />
                     </div>
 
                     <div class="form-outline mb-4">
-                        <input type="password" id="form2Example2" asp-for="loginInput.Password" class="form-control" placeholder="Password" />
+                        <input type="password" id="form2Example2" value="johndoe123" asp-for="loginInput.Password" class="form-control" placeholder="Password" />
                     </div>
 
                     <div class="row mb-4">

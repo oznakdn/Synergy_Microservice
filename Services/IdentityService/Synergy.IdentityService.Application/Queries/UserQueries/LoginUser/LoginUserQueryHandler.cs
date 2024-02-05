@@ -31,7 +31,7 @@ public class LoginUserQueryHandler : IRequestHandler<LoginUserQuery, Result<Toke
 
         await userRepo.Update(user);
 
-        return Result<TokenDto>.Success(200, tokenDto);
+        return Result<TokenDto>.Success(statusCode: 200, value: tokenDto);
 
     }
 }

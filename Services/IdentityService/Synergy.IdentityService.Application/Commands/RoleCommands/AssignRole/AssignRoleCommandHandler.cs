@@ -35,6 +35,6 @@ public class AssignRoleCommandHandler : IRequestHandler<AssignRoleCommand, Resul
             return Result.Success(204);
         }
 
-        return Result.Failure(400, new List<string> { "User already has this role!" });
+        return Result.Failure(400,error: "User already has this role!");
     }
 }

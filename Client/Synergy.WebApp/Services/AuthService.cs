@@ -15,16 +15,16 @@ public class AuthService : ClientServiceBase
     public async Task<Result<GetUsersResponse>> GetUsersAsync()
     {
         string accessToken = CookieHelper.GetCookie(CookieKey.ACCESS_TOKEN);
-       
+
         HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
         var responseMessage = await HttpClient.GetAsync(Endpoints.Identity.GetUsers);
         if (responseMessage.IsSuccessStatusCode)
         {
             List<GetUsersResponse>? response = await responseMessage.Content.ReadFromJsonAsync<List<GetUsersResponse>>();
-            return Result<GetUsersResponse>.Success(200, response!);
+            return Result<GetUsersResponse>.Success(response!);
         }
 
-        return (Result<GetUsersResponse>)Result.Failure(400, "Server error");
+        return Result<GetUsersResponse>.Failure(error: "Server error");
 
     }
 }

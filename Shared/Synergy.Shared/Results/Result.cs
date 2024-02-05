@@ -4,61 +4,28 @@ public class Result : IResult
 {
     public bool IsSuccess { get; protected set; }
     public string? Message { get; protected set; }
-    public int StatusCode { get; protected set; }
+    public int? StatusCode { get; protected set; }
     public IEnumerable<string>? Errors { get; protected set; }
 
-    public static Result Success(int statusCode)
+    public static Result Success(int? statusCode = null, string? message = null)
     {
         return new Result
         {
             IsSuccess = true,
             StatusCode = statusCode,
-            Message = string.Empty,
-            Errors = Enumerable.Empty<string>(),
+            Message = message
         };
     }
 
-    public static Result Success(int statusCode, string message)
-    {
-        return new Result
-        {
-            IsSuccess = true,
-            StatusCode = statusCode,
-            Message = message,
-            Errors = Enumerable.Empty<string>(),
-        };
-    }
 
-    public static Result Failure(int statusCode)
+    public static Result Failure(int? statusCode = null, string? error = null, IEnumerable<string>? errors = null)
     {
         return new Result
         {
             IsSuccess = false,
             StatusCode = statusCode,
-            Message = string.Empty,
-            Errors = Enumerable.Empty<string>(),
-        };
-    }
-
-    public static Result Failure(int statusCode,string message)
-    {
-        return new Result
-        {
-            IsSuccess = false,
-            StatusCode = statusCode,
-            Message = message,
-            Errors = Enumerable.Empty<string>(),
-        };
-    }
-
-    public static Result Failure(int statusCode, IEnumerable<string> errors)
-    {
-        return new Result
-        {
-            IsSuccess = false,
-            StatusCode = statusCode,
-            Message = string.Empty,
-            Errors = errors
+            Message = error,
+            Errors = errors,
         };
     }
 
@@ -75,58 +42,70 @@ public class Result : IResult
 
 }
 
-public class Result<T> : Result,IResult<T>
+public class Result<T> : IResult<T>
 {
     public T? Value { get; private set; }
     public IEnumerable<T>? Values { get; private set; }
 
-    public static Result<T> Success(int statusCode,T value)
+    public bool IsSuccess { get; private set; }
+
+    public string? Message { get; private set; }
+
+    public int? StatusCode { get; private set; }
+
+    public IEnumerable<string>? Errors { get; private set; }
+
+
+    public static Result<T> Failure(int? statusCode = null, string? error = null, IEnumerable<string>? errors = null)
     {
         return new Result<T>
         {
-            IsSuccess = true,
+            IsSuccess = false,
             StatusCode = statusCode,
-            Value =value,
-            Message = string.Empty,
-            Errors = Enumerable.Empty<string>(),
+            Message = error,
+            Errors = errors,
         };
     }
 
-    public static Result<T> Success(int statusCode, T value, string message)
+    public static Result<T> Success(T value, int? statusCode = null, string? message = null)
     {
         return new Result<T>
         {
             IsSuccess = true,
             StatusCode = statusCode,
-            Value = value,
             Message = message,
-            Errors = Enumerable.Empty<string>(),
+            Value = value
         };
     }
 
-    public static Result<T> Success(int statusCode, IEnumerable<T> values)
+    public static Result<T> Success(IEnumerable<T> values, int? statusCode = null, string? message = null)
     {
         return new Result<T>
         {
             IsSuccess = true,
             StatusCode = statusCode,
-            Value = default(T)!,
-            Values = values,
-            Message = string.Empty,
-            Errors = Enumerable.Empty<string>(),
-        };
-    }
-
-    public static Result<T> Success(int statusCode, IEnumerable<T> values, string message)
-    {
-        return new Result<T>
-        {
-            IsSuccess = true,
-            StatusCode = statusCode,
-            Value = default(T)!,
             Values = values,
             Message = message,
-            Errors = Enumerable.Empty<string>(),
+        };
+    }
+
+    public static Result<T> Success(int? statusCode = null, string? message = null)
+    {
+        return new Result<T>
+        {
+            IsSuccess = true,
+            StatusCode = statusCode,
+            Message = message
+        };
+    }
+
+    public static Result<T> Error(Exception exception, int? statusCode = null)
+    {
+        return new Result<T>
+        {
+            IsSuccess = false,
+            StatusCode = statusCode,
+            Message = exception.Message,
         };
     }
 

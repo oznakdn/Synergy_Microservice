@@ -28,6 +28,6 @@ public class GetProjectsQueryHandler : IRequestHandler<GetProjectsQuery, Result<
             x.EndDate.ToShortDateString(),
             x.TeamId));
 
-        return Result<ProjectDto>.Success(200, result);
+        return Result<ProjectDto>.Success(statusCode: 200,values: result);
     }
 }

@@ -26,8 +26,8 @@ public class GetTeamQueryHandler : IRequestHandler<GetTeamQuery, Result<TeamDto>
         var teamDto = new TeamDto(team.Id.ToString(),
             team.TeamName,
             team.TeamDescription,
-            team.Developers.Select(_=> new TeamDevelopers(_.GivenName,_.LastName,_.Title)).ToList());
+            team.Developers.Select(_ => new TeamDevelopers(_.GivenName, _.LastName, _.Title)).ToList());
 
-        return Result<TeamDto>.Success(200, teamDto); 
+        return Result<TeamDto>.Success(statusCode: 200, value: teamDto);
     }
 }

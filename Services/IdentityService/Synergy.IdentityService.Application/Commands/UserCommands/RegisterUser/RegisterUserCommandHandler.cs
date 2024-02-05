@@ -18,7 +18,7 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, R
     {
         var existUserName = await userRepo.GetAsync(_ => _.Username.Equals(request.Register.Username),cancellationToken);
         if (existUserName is not null)
-            return Result.Failure(400, new List<string> { "You cannot use this username!" });
+            return Result.Failure(400, error: "You cannot use this username!");
 
         var user = new User
         {

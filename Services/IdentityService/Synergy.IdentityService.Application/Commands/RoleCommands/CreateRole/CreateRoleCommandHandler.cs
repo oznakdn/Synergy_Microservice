@@ -18,7 +18,7 @@ public class CreateRoleCommandHandler : IRequestHandler<CreateRoleCommand, Resul
         var existRole = await roleRepo.GetAsync(_ => _.RoleName.ToLower() == request.CreateRole.RoleName.ToLower());
 
         if (existRole is not null)
-            return Result.Failure(400, new List<string> { "Role is already exist!" });
+            return Result.Failure(400,error: "Role is already exist!");
 
         await roleRepo.CreateAsync(new Domain.Models.Role
         {
