@@ -5,12 +5,12 @@ using System.Security.Claims;
 
 namespace Synergy.WebApp.Services;
 
+
+
 public class UserService : ClientServiceBase
 {
-    private readonly IHttpContextAccessor _contextAccessor;
-    public UserService(IHttpClientFactory clientFactory, Endpoints endpoints, IHttpContextAccessor httpContextAccessor) : base(clientFactory, endpoints)
+    public UserService(IHttpClientFactory clientFactory, Endpoints endpoints, IHttpContextAccessor httpContextAccessor) : base(clientFactory, endpoints, httpContextAccessor)
     {
-        _contextAccessor = httpContextAccessor;
     }
 
     public async Task<Result<LoginResponse>> LoginAsync(LoginInput login)
@@ -54,7 +54,7 @@ public class UserService : ClientServiceBase
 
 
 
-        if (string.IsNullOrEmpty(result.User.Role))
+        if (!string.IsNullOrEmpty(result.User.Role))
         {
             claims.Add(new Claim(ClaimTypes.Role, result.User.Role!));
             authenticationTokens.Add(new AuthenticationToken
@@ -67,20 +67,20 @@ public class UserService : ClientServiceBase
         var claimsIdentity = new ClaimsIdentity(claims, "Bearer");
         var claimPrinciple = new ClaimsPrincipal(claimsIdentity);
 
-        await _contextAccessor.HttpContext!.SignInAsync("Bearer", claimPrinciple, authenticationProperties);
+        await HttpContextAccessor.HttpContext!.SignInAsync("Bearer", claimPrinciple, authenticationProperties);
         return Result<LoginResponse>.Success(result);
     }
 
     public async Task<Result> LogoutAsync()
     {
-        string? refreshToken = await _contextAccessor.HttpContext!.GetTokenAsync("refresh_token");
+        string? refreshToken = await HttpContextAccessor.HttpContext!.GetTokenAsync("refresh_token");
 
-        if (string.IsNullOrEmpty(refreshToken))
+        if (!string.IsNullOrEmpty(refreshToken))
         {
             HttpResponseMessage httpResponse = await HttpClient.GetAsync($"{Endpoints.Identity.Logout}/{refreshToken}");
             if (httpResponse.IsSuccessStatusCode)
             {
-                await _contextAccessor.HttpContext!.SignOutAsync("Bearer");
+                await HttpContextAccessor.HttpContext!.SignOutAsync("Bearer");
                 return Result.Success(200, "Sign out is successfull.");
             }
         }

@@ -12,6 +12,7 @@ public class Identity
     public string Login { get; set; }
     public string Register { get; set; }
     public string Logout { get; set; }
+    public string Relogin { get; set; }
     public string GetUsers { get; set; }
     public string GetRoles { get; set; }
     public string CreateRole { get; set; }
