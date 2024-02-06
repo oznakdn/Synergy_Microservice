@@ -37,7 +37,7 @@
                                 <a class="nav-link text-black" asp-page="/User/Login">Login</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-black" asp-page="/User/Register" href="/Register">Register</a>
+                                <a class="nav-link text-black" asp-page="/User/Register">Register</a>
                             </li>
                         }
                         else
@@ -50,11 +50,11 @@
                                 <div class="dropdown-menu">
                                     @if (User.IsInRole("manager"))
                                     {
-                                        <a class="dropdown-item" href="/Auth/Users">Users</a>
-                                        <a class="dropdown-item" href="/Auth/Roles">Roles</a>
+                                        <a class="dropdown-item" asp-page="/Auth/GetUsers">Users</a>
+                                        <a class="dropdown-item" asp-page="/Auth/GetRoles">Roles</a>
                                     }
 
-                                    <a class="dropdown-item" asp-route-id="@User.Claims.First(x=>x.Type == System.Security.Claims.ClaimTypes.NameIdentifier).Value">Project</a>
+                                    <a class="dropdown-item" @*asp-route-id="@User.Claims.First(x=>x.Type == System.Security.Claims.ClaimTypes.NameIdentifier).Value"*@>Project</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" asp-page="/User/Logout">Sign Out</a>
                                 </div>
