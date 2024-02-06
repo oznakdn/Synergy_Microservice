@@ -22,4 +22,27 @@ public class AuthService : ClientServiceBase
         return Result<GetUsersResponse>.Failure(error: "Server error");
 
     }
+
+    public async Task<Result<GetRolesResponse>> GetRolesAsync()
+    {
+        await base.AddAuthorizeHeader();
+        List<GetRolesResponse>? responseMessage = await HttpClient.GetFromJsonAsync<List<GetRolesResponse>>(Endpoints.Identity.GetRoles);
+        return Result<GetRolesResponse>.Success(values: responseMessage!);
+    }
+
+    public async Task<Result> AssignRoleAsync(AssignRoleRequest assignRole)
+    {
+        await base.AddAuthorizeHeader();
+        var response = await HttpClient.PutAsJsonAsync<AssignRoleRequest>(Endpoints.Identity.AssignRole, assignRole);
+
+        if (response.IsSuccessStatusCode)
+        {
+            return Result.Success(message: "Role has been assigned the user.");
+        }
+
+        var message = await response.Content.ReadFromJsonAsync<Result>();
+        return Result.Failure(error: message!.Message);
+    }
+
+
 }

@@ -1,9 +1,8 @@
-﻿@page "/Auth/Users"
-@model Synergy.WebApp.Pages.Auth.GetUsersModel
-
+﻿@page "/Auth/Roles"
+@model Synergy.WebApp.Pages.Auth.GetRolesModel
 
 <div class="row col my-4">
-    <div class="display-6 text-center">List of Users</div>
+    <div class="display-6 text-center">List of Roles</div>
 </div>
 
 <div class="row my-4 justify-content-center">
@@ -12,29 +11,21 @@
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Email</th>
                     <th>Role</th>
+                    <th>Description</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.Users)
+                @foreach (var item in Model.Roles)
                 {
                     <tr>
                         <td>@item.Id</td>
-                        <td>@item.Email</td>
-                        <td>@item.Role</td>
+                        <td>@item.RoleName</td>
+                        <td>@item.Description</td>
                         <td>
                             <a href="#" class="btn btn-warning btn-sm">Update</a>
                             <a href="#" class="btn btn-danger btn-sm">Delete</a>
-                            @if (item.Role is null)
-                            {
-                                <a asp-page="/Auth/AssignRole" asp-route-userId="@item.Id" class="btn btn-info btn-sm">Assign Role</a>
-                            }
-                            else
-                            {
-                                <a asp-page="/Auth/AssignRole" asp-route-userId="@item.Id" class="btn btn-info btn-sm">Update Role</a>
-                            }
                         </td>
 
                     </tr>

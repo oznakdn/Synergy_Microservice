@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Synergy.Shared.Results;
 using Synergy.WebApp.Models.UserModels;
 using System.Security.Claims;
 
@@ -40,6 +41,11 @@ public class ClientAuthenticationFilter : ActionFilterAttribute, IAsyncAuthoriza
                     {
                         Name = "refresh_token",
                         Value = response.RefreshToken
+                    },
+                    new AuthenticationToken
+                    {
+                         Name = "id",
+                         Value = response.User.Id
                     }
                 };
 
@@ -50,8 +56,6 @@ public class ClientAuthenticationFilter : ActionFilterAttribute, IAsyncAuthoriza
                      new Claim(ClaimTypes.Email,response.User.Email),
                      new Claim(ClaimTypes.NameIdentifier,response.User.Id)
                 };
-
-
 
                 if (string.IsNullOrEmpty(response.User.Role))
                 {

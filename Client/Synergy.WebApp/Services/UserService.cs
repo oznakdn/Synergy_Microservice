@@ -40,6 +40,11 @@ public class UserService : ClientServiceBase
             {
                 Name = "refresh_token",
                 Value = result.RefreshToken
+            },
+            new AuthenticationToken
+            {
+                Name = "id",
+                Value = result.User.Id
             }
         };
 
