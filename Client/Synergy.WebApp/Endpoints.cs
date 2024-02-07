@@ -26,6 +26,7 @@ public class Team
     public string GetTeamById { get; set; }
     public string CreateTeam { get; set; }
     public string GetDevelopers { get; set; }
+    public string GetDevelopersByTeamId { get; set; }
     public string CreateDeveloper { get; set; }
     public string AddDeveloperSkill { get; set; }
     public string GetTechnologies { get; set; }
