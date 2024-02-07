@@ -18,6 +18,7 @@ namespace Synergy.WebApp.Pages.User
 
             if(response.IsSuccess)
             {
+                TempData["loginSuccess"] = "You are in the system!";
                 return RedirectToPage("/Index");
             }
 

@@ -2,7 +2,8 @@
 @model Synergy.WebApp.Pages.User.LoginModel
 
 
-<div class="row justify-content-center bg-dark">
+
+<div class="row justify-content-center" id="alert">
     @if (ViewData["loginError"] is not null)
     {
         <div class="col-3">
@@ -11,28 +12,10 @@
             </div>
         </div>
     }
-</div>
-<div class="row justify-content-center bg-dark">
-    @if (ViewData["error"] is not null)
-    {
-        <div class="col-3">
-            <div class="alert alert-danger" role="alert">
-                @ViewData["error"]
-            </div>
-        </div>
-    }
-    @if (ViewData["message"] is not null)
-    {
-        <div class="col-3">
-            <div class="alert alert-success" role="alert">
-                @ViewData["message"]
-            </div>
-        </div>
-    }
+
 </div>
 
-
-<div class="row justify-content-center">
+<div class="row justify-content-center my-4">
     <div class="col-6">
         <div class="card">
             <div class="card-body">
@@ -74,5 +57,12 @@
     </div>
 </div>
 
-
+@section Scripts
+{
+    <script>
+        $(document).ready(() => {
+            $("#alert").hide(3000);
+        });
+    </script>
+}
 
