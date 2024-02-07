@@ -20,16 +20,7 @@ public class GetTeamsQueryHandler : IRequestHandler<GetTeamsQuery, Result<TeamDt
         var query = await _manager.Team.GetAsync(includes: _ => _.Developers);
 
         var teams = await query.ToListAsync(cancellationToken);
-        var teamDto = teams
-            .Select(_ => new TeamDto(
-            _.Id.ToString(),
-            _.TeamName,
-            _.TeamDescription,
-            _.Developers
-                .Select(_ => new TeamDevelopers(_.GivenName, _.LastName, _.Title))
-                .ToList()
-            )).ToList();
-
+        var teamDto = teams.Select(x=> new TeamDto(x.Id.ToString(),x.TeamName,x.TeamDescription)).ToList();
         return Result<TeamDto>.Success(statusCode: 200, values: teamDto);
     }
 }

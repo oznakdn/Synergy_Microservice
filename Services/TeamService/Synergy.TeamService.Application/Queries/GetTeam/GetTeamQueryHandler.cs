@@ -17,16 +17,13 @@ public class GetTeamQueryHandler : IRequestHandler<GetTeamQuery, Result<TeamDto>
 
     public async Task<Result<TeamDto>> Handle(GetTeamQuery request, CancellationToken cancellationToken)
     {
-        var query = await _manager.Team.GetAsync(filter: _ => _.Id == Guid.Parse(request.TeamId), includes: _ => _.Developers);
+        var query = await _manager.Team.GetAsync(filter: _ => _.Id == Guid.Parse(request.TeamId));
         var team = await query.SingleOrDefaultAsync();
 
         if (team is null)
             return (Result<TeamDto>)Result<TeamDto>.Failure(404);
 
-        var teamDto = new TeamDto(team.Id.ToString(),
-            team.TeamName,
-            team.TeamDescription,
-            team.Developers.Select(_ => new TeamDevelopers(_.GivenName, _.LastName, _.Title)).ToList());
+        var teamDto = new TeamDto(team.Id.ToString(),team.TeamName,team.TeamDescription);
 
         return Result<TeamDto>.Success(statusCode: 200, value: teamDto);
     }

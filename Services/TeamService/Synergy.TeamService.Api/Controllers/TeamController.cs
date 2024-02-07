@@ -11,11 +11,11 @@ namespace Synergy.TeamService.Api.Controllers;
 
 [Route("api/teams")]
 [ApiController]
+[Authorize(Roles ="manager")]
 public class TeamController(IMediator mediator) : ControllerBase
 {
 
     [HttpPost]
-    [Authorize(Roles ="admin")]
     public async Task<IActionResult> CreateTeam([FromBody] CreateTeamDto createTeam)
     {
 
