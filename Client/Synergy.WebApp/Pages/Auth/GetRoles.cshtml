@@ -24,7 +24,7 @@
                         <td>@item.RoleName</td>
                         <td>@item.Description</td>
                         <td>
-                            <a href="#" class="btn btn-warning btn-sm">Update</a>
+                            <a asp-page="/Auth/UpdateRole" asp-route-roleId="@item.Id" class="btn btn-warning btn-sm">Update</a>
                             <a href="#" class="btn btn-danger btn-sm">Delete</a>
                         </td>
 

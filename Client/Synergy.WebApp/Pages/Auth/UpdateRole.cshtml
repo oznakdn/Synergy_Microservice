@@ -1,0 +1,25 @@
+﻿@page "Auth/UpdateRole"
+@model Synergy.WebApp.Pages.Auth.UpdateRoleModel
+
+<div class="row justify-content-center my-5">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-title">Update the Role</div>
+        </div>
+        <div class="card-body">
+            <form method="post"  asp-page-handler="Edit" >
+                <input type="hidden" asp-for="UpdateRole.Id"/>
+                <div class="form-group my-3">
+                    <input asp-for="UpdateRole.RoleName" placeholder="Role Name" class="form-control" />
+                </div>
+                <div class="form-group my-3">
+                    <input asp-for="UpdateRole.Description" placeholder="Role Description" class="form-control" />
+                </div>
+                <div class="form-group my-3">
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <a asp-page="/Auth/GetRoles" class="btn btn-warning">Back</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -30,6 +30,19 @@ public class AuthService : ClientServiceBase
         return Result<GetRolesResponse>.Success(values: responseMessage!);
     }
 
+    public async Task<Result>UpdateRoleAsync(UpdateRoleRequest updateRole)
+    {
+        await base.AddAuthorizeHeader();
+        var responseMessage = await HttpClient.PutAsJsonAsync<UpdateRoleRequest>(Endpoints.Identity.UpdateRole,updateRole);
+
+        if(responseMessage.IsSuccessStatusCode)
+        {
+            return Result.Success(message:"Role was updated successfully.");
+        }
+
+        return Result.Failure(error: "A error!");
+    }
+
     public async Task<Result> AssignRoleAsync(AssignRoleRequest assignRole)
     {
         await base.AddAuthorizeHeader();
