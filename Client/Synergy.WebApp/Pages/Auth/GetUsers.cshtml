@@ -3,7 +3,7 @@
 
 
 <div class="row col my-4">
-    <div class="display-6 text-center">List of Users</div>
+    <div class="display-6 text-center">Users</div>
 </div>
 
 <div class="row my-4 justify-content-center">
@@ -25,8 +25,6 @@
                         <td>@item.Email</td>
                         <td>@item.Role</td>
                         <td>
-                            <a href="#" class="btn btn-warning btn-sm">Update</a>
-                            <a href="#" class="btn btn-danger btn-sm">Delete</a>
                             @if (item.Role is null)
                             {
                                 <a asp-page="/Auth/AssignRole" asp-route-userId="@item.Id" class="btn btn-info btn-sm">Assign Role</a>

@@ -43,6 +43,19 @@ public class AuthService : ClientServiceBase
         return Result.Failure(error: "A error!");
     }
 
+    public async Task<Result>CreateRoleAsync(CreateRoleRequest createRole)
+    {
+        await base.AddAuthorizeHeader();
+        var responseMessage = await HttpClient.PostAsJsonAsync<CreateRoleRequest>(Endpoints.Identity.CreateRole,createRole);
+
+        if(responseMessage.IsSuccessStatusCode)
+        {
+            return Result.Success(message: "Role was created successfully.");
+        }
+
+        return Result.Failure(error: "A error!");
+    }
+
     public async Task<Result> AssignRoleAsync(AssignRoleRequest assignRole)
     {
         await base.AddAuthorizeHeader();

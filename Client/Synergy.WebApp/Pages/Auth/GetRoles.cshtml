@@ -2,7 +2,13 @@
 @model Synergy.WebApp.Pages.Auth.GetRolesModel
 
 <div class="row col my-4">
-    <div class="display-6 text-center">List of Roles</div>
+    <div class="display-6 text-center">Roles</div>
+</div>
+
+<div class="row justify-content-lg-end my-3">
+    <div class="col-4">
+        <a asp-page="/Auth/CreateRole" class="btn btn-primary btn-sm">Create</a>
+    </div>
 </div>
 
 <div class="row my-4 justify-content-center">
@@ -25,7 +31,6 @@
                         <td>@item.Description</td>
                         <td>
                             <a asp-page="/Auth/UpdateRole" asp-route-roleId="@item.Id" class="btn btn-warning btn-sm">Update</a>
-                            <a href="#" class="btn btn-danger btn-sm">Delete</a>
                         </td>
 
                     </tr>
