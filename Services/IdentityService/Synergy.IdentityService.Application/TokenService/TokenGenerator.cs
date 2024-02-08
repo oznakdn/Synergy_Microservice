@@ -52,9 +52,9 @@ public class TokenGenerator : ITokenGenerator
 
         return new TokenDto(
             Token: token,
-            TokenExpire: DateTime.Now.AddDays(5).ToString(),
+            TokenExpire: DateTime.Now.AddDays(5),
             RefreshToken: refreshToken,
-            RefreshExpire: DateTime.Now.AddDays(6).ToString(),
+            RefreshExpire: DateTime.Now.AddDays(6),
             User: new UserDto(user.Id, user.Username, user.Email, user.Role != null ? user.Role.RoleName : default));
     }
 
