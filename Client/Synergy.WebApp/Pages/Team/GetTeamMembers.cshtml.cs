@@ -1,9 +1,12 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Synergy.WebApp.Filters;
 using Synergy.WebApp.Models.TeamModels;
 using Synergy.WebApp.Services;
 
 namespace Synergy.WebApp.Pages.Team;
 
+
+[ClientAuthenticationFilter]
 public class GetTeamMembersModel(TeamService teamService) : PageModel
 {
 

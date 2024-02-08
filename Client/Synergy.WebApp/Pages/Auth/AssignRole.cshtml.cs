@@ -1,11 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Synergy.WebApp.Filters;
 using Synergy.WebApp.Models.AuthModels;
 using Synergy.WebApp.Services;
 
 namespace Synergy.WebApp.Pages.Auth;
 
+
+[ClientAuthenticationFilter]
 public class AssignRoleModel(AuthService authService) : PageModel
 {
 

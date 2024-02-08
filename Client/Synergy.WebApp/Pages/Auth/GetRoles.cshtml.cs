@@ -6,6 +6,7 @@ using Synergy.WebApp.Services;
 
 namespace Synergy.WebApp.Pages.Auth;
 
+
 [ClientAuthenticationFilter]
 public class GetRolesModel(AuthService authService) : PageModel
 {

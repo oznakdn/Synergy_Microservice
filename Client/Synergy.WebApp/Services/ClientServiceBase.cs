@@ -16,10 +16,15 @@ public abstract class ClientServiceBase
 
     }
 
-    protected async Task AddAuthorizeHeader()
+    protected async Task<bool> AddAuthorizeHeader()
     {
         string? accessToken = await HttpContextAccessor.HttpContext!.GetTokenAsync("access_token");
+
+        if (string.IsNullOrEmpty(accessToken))
+            return false;
+
         HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+        return true;
     }
 
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Synergy.Shared.Results;
+using Synergy.WebApp.Constants;
 using Synergy.WebApp.Models.UserModels;
 using System.Security.Claims;
 
@@ -27,23 +28,23 @@ public class UserService : ClientServiceBase
 
         var authenticationProperties = new AuthenticationProperties();
         authenticationProperties.IsPersistent = login.RememberMe;
-        authenticationProperties.ExpiresUtc = Convert.ToDateTime(result!.TokenExpire);
+        authenticationProperties.ExpiresUtc = result!.TokenExpire;
 
         var authenticationTokens = new List<AuthenticationToken>
         {
             new AuthenticationToken
             {
-                Name = "access_token",
+                Name = TokenConsts.ACCESS_TOKEN,
                 Value = result.Token
             },
             new AuthenticationToken
             {
-                Name = "refresh_token",
+                Name = TokenConsts.REFRESH_TOKEN,
                 Value = result.RefreshToken
             },
             new AuthenticationToken
             {
-                Name = "id",
+                Name = TokenConsts.USER_ID,
                 Value = result.User.Id
             }
         };
@@ -64,7 +65,7 @@ public class UserService : ClientServiceBase
             claims.Add(new Claim(ClaimTypes.Role, result.User.Role!));
             authenticationTokens.Add(new AuthenticationToken
             {
-                Name = "role",
+                Name = TokenConsts.USER_ROLE,
                 Value = result.User.Role!
             });
         }

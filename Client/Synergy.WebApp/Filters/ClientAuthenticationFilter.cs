@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Synergy.Shared.Results;
+using Synergy.WebApp.Constants;
 using Synergy.WebApp.Models.UserModels;
 using System.Security.Claims;
 
@@ -28,23 +28,23 @@ public class ClientAuthenticationFilter : ActionFilterAttribute, IAsyncAuthoriza
                 var response = await clientService.GetFromJsonAsync<LoginResponse>(url);
 
                 var authenticationProperties = new AuthenticationProperties();
-                authenticationProperties.ExpiresUtc = Convert.ToDateTime(response!.TokenExpire);
+                authenticationProperties.ExpiresUtc = response!.TokenExpire;
 
                 var authenticationTokens = new List<AuthenticationToken>
                 {
                     new AuthenticationToken
                     {
-                        Name = "access_token",
+                        Name = TokenConsts.ACCESS_TOKEN,
                         Value = response.Token
                     },
                     new AuthenticationToken
                     {
-                        Name = "refresh_token",
+                        Name = TokenConsts.REFRESH_TOKEN,
                         Value = response.RefreshToken
                     },
                     new AuthenticationToken
                     {
-                         Name = "id",
+                         Name = TokenConsts.USER_ID,
                          Value = response.User.Id
                     }
                 };
@@ -57,12 +57,12 @@ public class ClientAuthenticationFilter : ActionFilterAttribute, IAsyncAuthoriza
                      new Claim(ClaimTypes.NameIdentifier,response.User.Id)
                 };
 
-                if (string.IsNullOrEmpty(response.User.Role))
+                if (!string.IsNullOrEmpty(response.User.Role))
                 {
                     claims.Add(new Claim(ClaimTypes.Role, response.User.Role!));
                     authenticationTokens.Add(new AuthenticationToken
                     {
-                        Name = "role",
+                        Name = TokenConsts.USER_ROLE,
                         Value = response.User.Role!
                     });
                 }
