@@ -30,7 +30,7 @@ public class Team
     public string CreateDeveloper { get; set; }
     public string AddDeveloperSkill { get; set; }
     public string GetTechnologies { get; set; }
-    public string CreateTechnologies { get; set; }
+    public string CreateTechnology { get; set; }
 
 }
 

@@ -1,4 +1,4 @@
-﻿
+﻿@using Synergy.Shared.Constants
 
 <!DOCTYPE html>
 <html lang="en">
@@ -48,11 +48,12 @@
                                     @User.Identity.Name
                                 </a>
                                 <div class="dropdown-menu">
-                                    @if (User.IsInRole("manager"))
+                                    @if (User.IsInRole(RoleConstant.MANAGER))
                                     {
                                         <a class="dropdown-item" asp-page="/Auth/GetUsers">Users</a>
                                         <a class="dropdown-item" asp-page="/Auth/GetRoles">Roles</a>
                                         <a class="dropdown-item" asp-page="/Team/GetTeams">Teams</a>
+                                        <a class="dropdown-item" asp-page="/Technology/GetTechnologies">Tecnologies</a>
 
                                     }
 
