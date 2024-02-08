@@ -6,6 +6,7 @@ using Synergy.TeamService.Shared.Dtos.TechnologyDtos;
 
 namespace Synergy.TeamService.Application.Queries.GetTechnologies;
 
+
 public class GetTechnologiesQueryHandler : IRequestHandler<GetTechnologiesQuery, Result<TechnologyDto>>
 {
     private readonly IRepositoryManager _manager;

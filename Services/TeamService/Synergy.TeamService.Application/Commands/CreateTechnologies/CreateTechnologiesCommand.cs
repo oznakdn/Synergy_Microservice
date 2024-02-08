@@ -6,5 +6,12 @@ namespace Synergy.TeamService.Application.Commands.CreateTechnologies;
 
 public class CreateTechnologiesCommand : IRequest<Result>
 {
-    public List<CreateTechnologyDto>? CreateTechnologies { get; set; }
+    public CreateTechnologiesCommand(CreateTechnologyDto createTechnology)
+    {
+        CreateTechnology = createTechnology;
+    }
+
+    //public List<CreateTechnologyDto>? CreateTechnologies { get; set; }
+    public CreateTechnologyDto CreateTechnology { get; set; }
+
 }

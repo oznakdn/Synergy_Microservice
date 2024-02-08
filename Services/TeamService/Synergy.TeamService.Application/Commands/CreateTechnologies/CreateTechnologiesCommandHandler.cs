@@ -16,23 +16,22 @@ public class CreateTechnologiesCommandHandler : IRequestHandler<CreateTechnologi
 
     public async Task<Result> Handle(CreateTechnologiesCommand request, CancellationToken cancellationToken)
     {
-        foreach (var item in request.CreateTechnologies!)
+
+        var query = await _manager.Technology.GetAsync(_ => _.Name == request.CreateTechnology.Name);
+
+        if (query.Any())
         {
-            var query = await _manager.Technology.GetAsync(_ => _.Name == item.Name);
-            
-            if(query.Any())
-            {
-                return Result.Failure(400,$"{item.Name} is already exist!");
-            }
-
-            _manager.Technology.Insert(new Technology
-            {
-                Name = item.Name,
-                Description = item.Description
-            });
-
-            await _manager.SaveAsync(cancellationToken);
+            return Result.Failure(400, $"{request.CreateTechnology.Name} is already exist!");
         }
+
+        _manager.Technology.Insert(new Technology
+        {
+            Name = request.CreateTechnology.Name,
+            Description = request.CreateTechnology.Description
+        });
+
+        await _manager.SaveAsync(cancellationToken);
+
 
         return Result.Success(204);
 
