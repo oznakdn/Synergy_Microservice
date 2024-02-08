@@ -19,7 +19,7 @@ internal class GetDevelopersByTeamIdQueryHandler : IRequestHandler<GetDevelopers
         var query = await _developerRepo.GetAsync(_ => _.TeamId == Guid.Parse(request.TeamId));
         var developers = await query.ToListAsync(cancellationToken);
 
-        var developersDto = developers.Select(d => new TeamDevelopers(d.GivenName, d.LastName, d.Title)).ToList();
+        var developersDto = developers.Select(d => new TeamDevelopers(d.GivenName, d.LastName, d.Title,d.Photo)).ToList();
         return Result<TeamDevelopers>.Success(values: developersDto);
     }
 }

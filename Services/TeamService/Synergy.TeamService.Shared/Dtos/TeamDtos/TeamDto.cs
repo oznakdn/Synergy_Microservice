@@ -2,4 +2,4 @@
 
 public record TeamDto(string Id, string Name, string Description);
 
-public record TeamDevelopers(string GivenName, string LastName, string Title);
+public record TeamDevelopers(string GivenName, string LastName, string Title, string Photo);
