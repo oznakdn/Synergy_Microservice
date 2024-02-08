@@ -1,0 +1,45 @@
+﻿@page "/Team/AddMember"
+@model Synergy.WebApp.Pages.Team.AddTeamMemberModel
+
+<div class="row justify-content-center my-5">
+    <div class="col-6">
+
+        <div class="display-6 text-center">Add a Team Member</div>
+
+
+        <form method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="AddTeamMember.TeamId" />
+
+            <div class="form-group my-3">
+                <input asp-for="AddTeamMember.GivenName" placeholder="Name" class="form-control" />
+            </div>
+
+            <div class="form-group my-3">
+                <input asp-for="AddTeamMember.LastName" placeholder="Surname" class="form-control" />
+            </div>
+
+            <div class="form-group my-3">
+                <input asp-for="AddTeamMember.Title" placeholder="Title" class="form-control" />
+            </div>
+
+            <div class="form-group my-3">
+                <input asp-for="AddTeamMember.ContractDto.Email" placeholder="Email" class="form-control" />
+            </div>
+            <div class="form-group my-3">
+                <input asp-for="AddTeamMember.ContractDto.PhoneNumber" placeholder="Phone" class="form-control" />
+            </div>
+            <div class="form-group my-3">
+                <input asp-for="AddTeamMember.ContractDto.Address" placeholder="Address" class="form-control" />
+            </div>
+
+            <div class="form-group my-3">
+                <input type="file" name="File" class="form-control" />
+            </div>
+            <div class="form-group my-5">
+                <button type="submit" class="btn btn-success">Save</button>
+                <a asp-page="/Team/GetTeamMembers" class="btn btn-warning">Back</a>
+            </div>
+        </form>
+    </div>
+</div>
+</div>

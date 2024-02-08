@@ -10,9 +10,11 @@ namespace Synergy.WebApp.Pages.Team;
 public class GetTeamMembersModel(TeamService teamService) : PageModel
 {
 
+    public string TeamId { get; set; }
     public List<GetTeamDeveloper> Members { get; set; } = new();
     public async Task OnGetAsync(string teamId)
     {
+        TeamId = teamId;
         var result = await teamService.GetDevelopersByTeamIdAsync(teamId);
         Members = result.Values!.ToList();
     }

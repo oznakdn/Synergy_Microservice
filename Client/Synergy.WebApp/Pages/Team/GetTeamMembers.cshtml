@@ -3,12 +3,12 @@
 
 
     <div class="row col my-4">
-        <div class="display-6 text-center text-black">Team Member</div>
+        <div class="display-6 text-center">Team Member</div>
     </div>
 
     <div class="row justify-content-lg-end my-3">
         <div class="col-4">
-            <a asp-page="/Team/AddMember" class="btn btn-primary btn-sm">Add Member</a>
+            <a asp-page="/Team/AddTeamMember" asp-route-teamId="@Model.TeamId" class="btn btn-primary btn-sm">Add Member</a>
         </div>
     </div>
 
@@ -17,6 +17,7 @@
             <table class="table table-hover table-striped table-responsive table-secondary">
                 <thead>
                     <tr>
+                        <th>Photo</th>
                         <th>Name</th>
                         <th>Last Name</th>
                         <th>Title</th>
@@ -25,7 +26,10 @@
                 <tbody>
                     @foreach (var member in Model.Members)
                     {
-                        <tr class="bg-black">
+                        <tr>
+                            <td>
+                                <img src="/images/@member.Photo" height="50" width="50" class="img-fluid" />
+                            </td>
                             <td>@member.GivenName</td>
                             <td>@member.LastName</td>
                             <td>@member.Title</td>
