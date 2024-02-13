@@ -11,7 +11,7 @@ public class GetTeamMembersModel(TeamService teamService) : PageModel
 {
 
     public string TeamId { get; set; }
-    public List<GetTeamDeveloper> Members { get; set; } = new();
+    public List<GetDevelopersResponse> Members { get; set; } = new();
     public async Task OnGetAsync(string teamId)
     {
         TeamId = teamId;

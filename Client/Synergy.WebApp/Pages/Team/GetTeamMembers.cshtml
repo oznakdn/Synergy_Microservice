@@ -21,6 +21,7 @@
                         <th>Name</th>
                         <th>Last Name</th>
                         <th>Title</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,6 +34,12 @@
                             <td>@member.GivenName</td>
                             <td>@member.LastName</td>
                             <td>@member.Title</td>
+                            <td>
+                                <a  class="btn btn-info" asp-page="/Team/GetTeamMemberDetail" 
+                                   asp-route-teamId="@Model.TeamId" 
+                                   asp-route-memberId ="@member.Id"><i class="fa-solid fa-circle-info"></i></a>
+                            </td>
+
                         </tr>
                     }
                 </tbody>

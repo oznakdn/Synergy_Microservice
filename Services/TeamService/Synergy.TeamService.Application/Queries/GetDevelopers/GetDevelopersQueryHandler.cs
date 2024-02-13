@@ -23,20 +23,8 @@ public class GetDevelopersQueryHandler : IRequestHandler<GetDevelopersQuery, Res
 
         var developers = await query.ToListAsync();
 
-        var developerQuery = await _manager.DeveloperSkill.GetAsync(includes: x => x.Technology!);
-        var developerSkills = await developerQuery.ToListAsync(cancellationToken);
+        var result = developers.Select(x => new DeveloperDto(x.Id.ToString(), x.GivenName, x.LastName, x.Photo, x.Title, x.Team.TeamName)).ToList();
 
-        var developerSkillsDto = developerSkills.Select(x => new DeveloperSkillDto(x.Technology!.Name, x.Experience)).ToList();
-
-        var developerDto = developers.Select(x => new DeveloperDto(
-            x.GivenName,
-            x.LastName,
-            x.Photo,
-            x.Title,
-            x.Team!.TeamName,
-            developerSkillsDto
-            )).ToList();
-
-        return Result<DeveloperDto>.Success(statusCode: 200, values: developerDto);
+        return Result<DeveloperDto>.Success(statusCode: 200, values: result);
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Synergy.TeamService.Application.Commands.AddDeveloperSkill;
 using Synergy.TeamService.Application.Commands.CreateDeveloper;
+using Synergy.TeamService.Application.Queries.GetDeveloperDetails;
 using Synergy.TeamService.Application.Queries.GetDevelopers;
 using Synergy.TeamService.Application.Queries.GetDevelopersByTeamId;
 using Synergy.TeamService.Shared.Dtos.DeveloperDtos;
@@ -29,6 +30,13 @@ public class DeveloperController(IMediator mediator) : ControllerBase
     {
         var result = await mediator.Send(new GetDevelopersByTeamIdQuery(teamId));
         return Ok(result.Values);
+    }
+
+    [HttpGet("details/{developerId}")]
+    public async Task<IActionResult> GetDeveloperDetails(string developerId)
+    {
+        var result = await mediator.Send(new GetDeveloperDetailsQuery(developerId));
+        return result.IsSuccess ? Ok(result.Value) : NotFound();
     }
 
     [HttpPost]

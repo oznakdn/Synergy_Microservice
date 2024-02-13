@@ -31,7 +31,7 @@ public class TeamService : ClientServiceBase
 
     }
 
-    public async Task<Result<GetTeamDeveloper>> GetDevelopersByTeamIdAsync(string teamId)
+    public async Task<Result<GetDevelopersResponse>> GetDevelopersByTeamIdAsync(string teamId)
     {
         var hasHeader = await base.AddAuthorizeHeader();
         if (hasHeader)
@@ -40,15 +40,34 @@ public class TeamService : ClientServiceBase
 
             if(responseMessage.IsSuccessStatusCode)
             {
-                var result = await responseMessage.Content.ReadFromJsonAsync<List<GetTeamDeveloper>>();
-                return Result<GetTeamDeveloper>.Success(values: result!);
+                var result = await responseMessage.Content.ReadFromJsonAsync<List<GetDevelopersResponse>>();
+                return Result<GetDevelopersResponse>.Success(values: result!);
             }
 
-            return Result<GetTeamDeveloper>.Failure();
+            return Result<GetDevelopersResponse>.Failure();
         }
 
-        return Result<GetTeamDeveloper>.Failure(error: "You must be login!");
+        return Result<GetDevelopersResponse>.Failure(error: "You must be login!");
 
+    }
+
+    public async Task<IResult<GetDeveloperDetailsResponse>> GetDeveloperDetails(string developerId)
+    {
+        var hasHeader = await base.AddAuthorizeHeader();
+        if (hasHeader)
+        {
+            var responseMessage = await HttpClient.GetAsync($"{Endpoints.Team.GetDeveloperDetails}/{developerId}");
+
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var result = await responseMessage.Content.ReadFromJsonAsync<GetDeveloperDetailsResponse>();
+                return Result<GetDeveloperDetailsResponse>.Success(value: result!);
+            }
+
+            return Result<GetDeveloperDetailsResponse>.Failure();
+        }
+
+        return Result<GetDeveloperDetailsResponse>.Failure(error: "You must be login!");
     }
 
     public async Task<Result> AddMemberTeamAsync(AddTeamMemberRequest addTeamMember)
