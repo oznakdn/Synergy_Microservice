@@ -2,7 +2,7 @@
 @model Synergy.WebApp.Pages.Team.GetTeamMemberDetailModel
 
 <div class="row justify-content-center my-5">
-    <div class="display-3 text-center">@Model.Member.Developer.GivenName @Model.Member.Developer.LastName</div>
+    <div class="display-3 text-center">@Model.Member!.Developer.GivenName @Model.Member.Developer.LastName</div>
     <div class="text-center">@Model.Member.Developer.Title</div>
     <div class="text-center">(@Model.Member.Developer.Team) Team Member</div>
 </div>
@@ -25,7 +25,7 @@
     <div class="col-4">
         <h5 class="my-1 text-center">Skills</h5>
         <div class="col-3 align-content-start">
-            <a class="my-1 btn btn-primary"><i class="fa-solid fa-circle-plus"></i></a>
+            <a class="my-1 btn btn-primary" asp-route-developerId="@Model.Member.Developer.Id" asp-page="/Team/AddSkillToMember"><i class="fa-solid fa-circle-plus"></i></a>
         </div>
         <table class="table table-bordered table-striped table-responsive table-secondary">
             <thead>

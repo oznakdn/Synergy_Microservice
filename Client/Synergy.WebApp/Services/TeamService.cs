@@ -89,5 +89,23 @@ public class TeamService : ClientServiceBase
 
     }
 
+    public async Task<Result>AddSkillToMemberAsync(AddSkillToMemberRequest addSkillToMember)
+    {
+        var hasHeader = await base.AddAuthorizeHeader();
+
+        if (hasHeader)
+        {
+            var response = await HttpClient.PostAsJsonAsync<AddSkillToMemberRequest>(Endpoints.Team.AddDeveloperSkill, addSkillToMember);
+            if (response.IsSuccessStatusCode)
+            {
+                return Result.Success(message: "The skill has been added to the member.");
+            }
+
+            return Result.Failure();
+        }
+
+        return Result.Failure(error: "You must be login!");
+    }
+
 
 }

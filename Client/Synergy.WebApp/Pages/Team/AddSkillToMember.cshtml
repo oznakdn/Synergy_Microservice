@@ -1,0 +1,29 @@
+﻿@page "/Team/AddSkill"
+@model Synergy.WebApp.Pages.Team.AddSkillToMemberModel
+
+    <div class="row justify-content-center">
+        <div class="display-6 text-center">Add Skill to Member</div>
+    </div>
+
+<div class="row justify-content-center my-5">
+    <div class="col-6">
+        <form method="post">
+            <div class="form-group">
+                <input type="hidden" asp-for="@Model.AddSkillToMember.DeveloperId" />
+                <label class="form-label">Technology</label>
+                <select asp-items="@Model.TechnologiesList" asp-for="@Model.AddSkillToMember.TechnologyId" class="form-control form-select my-1">
+                    <option value="">Select a technology</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Experience</label>
+                <select asp-items="@Model.ExperienceEnumList" asp-for="@Model.AddSkillToMember.Experience" class="form-control form-select my-1">
+                    <option value="">Select a experience type</option>
+                </select>
+            </div>
+            <div class="form-group my-2">
+                <button class="btn btn-primary" type="submit">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
