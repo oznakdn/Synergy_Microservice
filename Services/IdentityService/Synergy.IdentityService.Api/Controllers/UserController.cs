@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Synergy.IdentityService.Application.Commands.UserCommands.RegisterUser;
+using Synergy.IdentityService.Application.Queries.UserQueries.GetUserById;
 using Synergy.IdentityService.Application.Queries.UserQueries.GetUserByRefreshToken;
 using Synergy.IdentityService.Application.Queries.UserQueries.LoginUser;
 using Synergy.IdentityService.Application.Queries.UserQueries.LogoutUser;
@@ -39,6 +40,14 @@ public class UserController(IMediator _mediator) : ControllerBase
     public async Task<IActionResult> Relogin(string refreshToken)
     {
         var user = await _mediator.Send(new GetUserByRefreshTokenQuery(refreshToken));
+        return user.IsSuccess ? Ok(user.Value) : NotFound(user.Message);
+    }
+
+
+    [HttpGet("profile/{userId}")]
+    public async Task<IActionResult> GetProfile(string userId)
+    {
+        var user = await _mediator.Send(new GetUserByIdQuery(userId));
         return user.IsSuccess ? Ok(user.Value) : NotFound(user.Message);
     }
 
