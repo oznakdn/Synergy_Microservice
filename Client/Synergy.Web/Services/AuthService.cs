@@ -140,5 +140,38 @@ public class AuthService : ClientServiceBase
         return Result.Failure(error: "You must be login!");
     }
 
+    public async Task<Result> CreateRoleAsync(CreateRoleInput createRole)
+    {
+        var hasHeader = await base.AddAuthorizeHeaderAsync();
+        if (hasHeader)
+        {
+            await HttpClient.PostAsJsonAsync(Endpoints.Identity.CreateRole, createRole);
+            return Result.Success(message: "Role was created successfully.");
+        }
+
+        return Result.Failure(error: "You must be login!");
+    }
+
+    public async Task<Result> AssignRoleAsync(AssignRoleInput assignRole)
+    {
+        var hasHeader = await base.AddAuthorizeHeaderAsync();
+
+        if (hasHeader)
+        {
+            var response = await HttpClient.PutAsJsonAsync(Endpoints.Identity.AssignRole, assignRole);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return Result.Success(message: "Role has been assigned the user.");
+            }
+
+            var message = await response.Content.ReadFromJsonAsync<Result>();
+            return Result.Failure(error: message!.Message);
+
+        }
+
+        return Result.Failure(error: "You must be login!");
+    }
+
 
 }

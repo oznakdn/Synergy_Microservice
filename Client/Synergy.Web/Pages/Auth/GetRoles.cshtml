@@ -185,17 +185,22 @@
 
 
 
-<div id="alert" class="row justify-content-center">
-    <div class="col-4">
-        @if (TempData["RoleUpdateSuccess"] != null)
-        {
-            <div class="alert alert-success text-center" role="alert">@TempData["RoleUpdateSuccess"]</div>
-        }
-    </div>
-</div>
 
 
 <div class="container">
+
+    <div id="alert" class="row justify-content-center">
+        <div class="col-4">
+            @if (TempData["RoleUpdateSuccess"] != null)
+            {
+                <div class="alert alert-success text-center" role="alert">@TempData["RoleUpdateSuccess"]</div>
+            }
+            @if (TempData["CreateRoleSuccess"] != null)
+            {
+                <div class="alert alert-success text-center" role="alert">@TempData["CreateRoleSuccess"]</div>
+            }
+        </div>
+    </div>
     <div class="row">
         <div class="col-12 col-sm-12 col-md-12">
             <div class="card">
@@ -203,7 +208,7 @@
                     <div class="display-6 text-center">Role List</div>
                 </div>
                 <div class="text-end mr-4">
-                    <a class="btn btn-primary btn-sm text-white">Add Role</a>
+                    <a asp-page="/Auth/CreateRole" class="btn btn-primary btn-sm text-white">Add Role</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive" id="proTeamScroll" tabindex="2" style="height: 400px; overflow: hidden; outline: none;">

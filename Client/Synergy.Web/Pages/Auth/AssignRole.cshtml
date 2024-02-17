@@ -1,0 +1,41 @@
+﻿@page "/assign-role"
+@model Synergy.Web.Pages.Auth.AssignRoleModel
+
+
+<div id="alert" class="row justify-content-center">
+    <div class="col-4">
+        @if (ViewData["AssignRoleFailure"] != null)
+        {
+            <div class="alert alert-danger text-center" role="alert">@ViewData["AssignRoleFailure"]</div>
+        }
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="card" style="width: 40rem;">
+        <div class="card-body">
+            <h5 class="card-title display-6">Assigning Role</h5>
+            <form method="post">
+                <div class="form-group">
+                    <select asp-items="Model.RoleList" asp-for="AssignRole.RoleId" name="roleId" class="form-control">
+                        <option value="">Select a Role</option>
+                    </select>
+                </div>
+                <div class="form-group mt-3">
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <a asp-page="/Auth/GetUsers" class="btn btn-warning">Back</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script>
+        $(document).ready(() => {
+            $("#alert").hide(5000);
+        });
+    </script>
+
+}
