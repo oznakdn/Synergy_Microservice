@@ -1,0 +1,53 @@
+﻿@page "/Login"
+@model Synergy.Web.Pages.Auth.LoginModel
+
+<div id="alert" class="row justify-content-center">
+    <div class="col-4">
+        @if (TempData["Failure"] != null)
+        {
+            <div class="alert alert-danger" role="alert">@TempData["Failure"]</div>
+        }
+        @if (TempData["LogoutSuccess"] != null)
+        {
+            <div class="alert alert-success" role="alert">@TempData["LogoutSuccess"]</div>
+        }
+    </div>
+</div>
+<div class="row justify-content-center my-3">
+    <div class="jumbotron-fluid text-center">
+        <div class="display-3"><i class="fas fa-cube"></i> SYNERGY</div>
+    </div>
+</div>
+<div class="row justify-content-center my-xl-4">
+    <div class="card account-dialog">
+        <div class="card-header bg-primary text-white text-center"> Sign In </div>
+        <div class="card-body">
+            <form method="post">
+                <div class="form-group">
+                    <input type="text" value="johndoe" asp-for="LoginInput.Username" class="form-control" placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <input type="password" value="johndoe123" asp-for="LoginInput.Password" class="form-control" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <input class="form-check-input ml-1" asp-for="LoginInput.RememberMe">
+                    <label class="control-label ml-4">Remember me</label>
+                </div>
+                <div class="account-dialog-actions">
+                    <button type="submit" class="btn btn-primary">Sign in</button>
+                    <a class="account-dialog-link" asp-page="/Auth/Register">Create a new account</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script>
+        $(document).ready(() => {
+            $("#alert").hide(5000);
+        });
+    </script>
+
+}

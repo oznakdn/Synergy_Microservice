@@ -1,0 +1,22 @@
+﻿@page "/logout"
+@model Synergy.Web.Pages.Auth.LogoutModel
+
+
+<div id="alert" class="row justify-content-center">
+    <div class="col-4">
+        @if (ViewData["LogoutFailure"] != null)
+        {
+            <div class="alert alert-danger text-center" role="alert">@ViewData["LogoutFailure"]</div>
+        }
+    </div>
+</div>
+
+@section Scripts{
+
+    <script>
+        $(document).ready(() => {
+            $("#alert").hide(5000);
+        });
+    </script>
+
+}
