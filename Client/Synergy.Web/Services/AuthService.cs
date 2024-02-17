@@ -173,5 +173,10 @@ public class AuthService : ClientServiceBase
         return Result.Failure(error: "You must be login!");
     }
 
+    public async Task<IResult<GetProfileOutput>>GetProfileAsync(string userId)
+    {
+        GetProfileOutput? response = await HttpClient.GetFromJsonAsync<GetProfileOutput>($"{Endpoints.Identity.GetProfile}/{userId}");
+        return Result<GetProfileOutput>.Success(value: response!);
+    }
 
 }

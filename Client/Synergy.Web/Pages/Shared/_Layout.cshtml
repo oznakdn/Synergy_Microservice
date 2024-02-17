@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -104,7 +106,7 @@
                              aria-labelledby="dropdownMenu1">
                             @if (User.Identity!.IsAuthenticated)
                             {
-                                <a class="dropdown-item" href="#!">Profile</a>
+                                <a class="dropdown-item" asp-route-userId="@User.Claims.First(x=>x.Type == ClaimTypes.NameIdentifier).Value" asp-page="/Auth/GetProfile">Profile</a>
                                 <a class="dropdown-item" asp-page="/Auth/Logout">Logout</a>
                             }
                             else

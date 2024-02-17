@@ -14,12 +14,12 @@ public class ClientAuthenticationFilter : ActionFilterAttribute, IAsyncAuthoriza
     {
         var clientService = context.HttpContext.RequestServices.GetRequiredService<HttpClient>();
 
-        string? accessToken = await context.HttpContext.GetTokenAsync("access_token");
+        string? accessToken = await context.HttpContext.GetTokenAsync(CookieConst.ACCESS_TOKEN);
 
         if (string.IsNullOrEmpty(accessToken))
         {
 
-            string? refreshToken = await context.HttpContext.GetTokenAsync("refresh_token");
+            string? refreshToken = await context.HttpContext.GetTokenAsync(CookieConst.REFRESH_TOKEN);
 
             if (!string.IsNullOrEmpty(refreshToken))
             {

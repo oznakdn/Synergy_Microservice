@@ -1,0 +1,25 @@
+﻿@page "/profile"
+@model Synergy.Web.Pages.Auth.GetProfileModel
+
+
+    <style>
+        span{
+            font-style:oblique;
+            font:bold;
+               
+        }
+    </style>
+<div class="container">
+    <div class="row d-flex justify-content-center">
+            <div class="card" style="border-radius: 15px; width:30rem">
+                <div class="card-body text-center ">
+                    <div class="display-6 text-center my-4">Profile</div>
+                        <p>Role: <span class="text-success">@Model.Profile.Role</span></p>
+                        <p>Username: <span class="text-success">@Model.Profile.Username</span><a href="#" class="btn btn-info btn-sm ml-3">Change</a></p>
+                        <p>Email: <span class="text-success">@Model.Profile.Email</span>  <a href="#" class="btn btn-info btn-sm ml-3">Change</a></p>
+                </div>
+            </div>
+
+       
+    </div>
+</div>
