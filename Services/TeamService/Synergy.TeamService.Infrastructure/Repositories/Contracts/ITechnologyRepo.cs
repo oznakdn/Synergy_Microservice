@@ -2,7 +2,11 @@
 
 namespace Synergy.TeamService.Infrastructure.Repositories.Contracts;
 
-public interface ITechnologyRepo : IGenericRepository<Technology>
+public interface ITechnologyRepo
 {
-    void InsertRange(List<Technology> technologies);
+    Task InsertTechnologyAsync(Technology technology);
+    Task<IEnumerable<Technology>> GetTechnologies();
+    Task<Technology> GetTechnology(string id);
+    Task<bool> RemoveTechnology(string id);
+
 }

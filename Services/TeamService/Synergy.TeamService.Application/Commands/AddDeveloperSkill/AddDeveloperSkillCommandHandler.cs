@@ -20,8 +20,8 @@ public class AddDeveloperSkillCommandHandler : IRequestHandler<AddDeveloperSkill
         if (!developer.Any())
             return Result.Failure(404, "Developer not found!");
 
-        var technology = await _manager.Technology.GetAsync(_ => _.Id == Guid.Parse(request.AddDeveloperSkill.TechnologyId));
-        if(!technology.Any())
+        var technology = await _manager.Technology.GetTechnology(request.AddDeveloperSkill.TechnologyId);
+        if(technology is null)
             return Result.Failure(404, "Technology not found!");
 
         var developerSkill = new DeveloperSkill
@@ -29,7 +29,7 @@ public class AddDeveloperSkillCommandHandler : IRequestHandler<AddDeveloperSkill
             CreatedDate = DateTime.Now,
             CreatedBy = request.CreatedBy,
             DeveloperId = developer.SingleOrDefault()!.Id,
-            TechnologyId = technology.SingleOrDefault()!.Id,
+            TechnologyId = technology.Id,
             Experience = request.AddDeveloperSkill.Experience
         };
 

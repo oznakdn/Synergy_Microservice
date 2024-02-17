@@ -17,20 +17,20 @@ public class CreateTechnologiesCommandHandler : IRequestHandler<CreateTechnologi
     public async Task<Result> Handle(CreateTechnologiesCommand request, CancellationToken cancellationToken)
     {
 
-        var query = await _manager.Technology.GetAsync(_ => _.Name == request.CreateTechnology.Name);
+        //var query = await _manager.Technology.GetTechnology(_ => _.Name == request.CreateTechnology.Name);
 
-        if (query.Any())
-        {
-            return Result.Failure(400, $"{request.CreateTechnology.Name} is already exist!");
-        }
+        //if (query.Any())
+        //{
+        //    return Result.Failure(400, $"{request.CreateTechnology.Name} is already exist!");
+        //}
 
-        _manager.Technology.Insert(new Technology
+       await _manager.Technology.InsertTechnologyAsync(new Technology
         {
             Name = request.CreateTechnology.Name,
             Description = request.CreateTechnology.Description
         });
 
-        await _manager.SaveAsync(cancellationToken);
+        //await _manager.SaveAsync(cancellationToken);
 
 
         return Result.Success(204);
