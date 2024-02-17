@@ -22,6 +22,8 @@ internal class Program
 
 
         builder.Services.AddScoped<AuthService>();
+        builder.Services.AddScoped<TechnologyService>();
+
 
         var app = builder.Build();
 

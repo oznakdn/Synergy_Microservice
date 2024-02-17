@@ -1,0 +1,41 @@
+﻿@page "/create-technology"
+@model Synergy.Web.Pages.Technology.CreateTechnologyModel
+
+<div id="alert" class="row justify-content-center">
+    <div class="col-4">
+        @if (ViewData["CreateRoleFailure"] != null)
+        {
+            <div class="alert alert-warning text-center" role="alert">@ViewData["CreateRoleFailure"]</div>
+        }
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="card" style="width: 40rem;">
+        <div class="card-body">
+            <h5 class="card-title display-6">Creating Technology</h5>
+            <form method="post" class="my-4">
+                <div class="form-group my-2">
+                    <input type="text" asp-for="@Model.CreateTechnology.Name" class="form-control input-lg" placeholder="Name">
+                </div>
+                <div class="form-group my-2">
+                    <input type="text" asp-for="@Model.CreateTechnology.Description" class="form-control input-lg" placeholder="Description">
+                </div>
+                <div class="form-group my-4">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Save</button>
+                    <a asp-page="/Auth/GetRoles" class="btn btn-warning btn-lg btn-block">Back</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script>
+        $(document).ready(() => {
+            $("#alert").hide(5000);
+        });
+    </script>
+
+}
