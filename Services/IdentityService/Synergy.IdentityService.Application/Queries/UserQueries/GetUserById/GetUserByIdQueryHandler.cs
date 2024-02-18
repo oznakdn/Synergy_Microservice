@@ -22,7 +22,14 @@ public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, IResult
             return Result<UserDto>.Failure(404);
 
 
-        var result = new UserDto(user.Id, user.Username, user.Email, user.Role!.RoleName);
+        if (user.Role is not null)
+        {
+            var resultWithRole = new UserDto(user.Id, user.Username, user.Email, user.Role!.RoleName ?? default);
+            return Result<UserDto>.Success(value: resultWithRole, statusCode: 200);
+
+        }
+
+        var result = new UserDto(user.Id, user.Username, user.Email, string.Empty);
         return Result<UserDto>.Success(value: result, statusCode: 200);
     }
 }

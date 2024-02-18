@@ -43,15 +43,24 @@ namespace Synergy.IdentityService.MessageWorker
 
                 if (user is not null)
                 {
-                    await _collection.InsertOneAsync(new Domain.Models.User
+                    var existUser = await _collection.Find(x => x.Email == user.Email || x.Username == user.Username).SingleOrDefaultAsync();
+                    if(existUser is null)
                     {
-                        Email = user.Email,
-                        Password = user.Password,
-                        MemberId = key,
-                        Username = user.Username
-                    });
+                        await _collection.InsertOneAsync(new Domain.Models.User
+                        {
+                            Email = user.Email,
+                            Password = user.Password,
+                            MemberId = key,
+                            Username = user.Username
+                        });
 
-                    _logger.LogInformation("User has created successfully.");
+                        _logger.LogInformation("User has created successfully.");
+                    }
+                    else
+                    {
+                        _logger.LogInformation("User is already exists!");
+                    }
+                    
 
                 }
                 else
