@@ -18,11 +18,11 @@ public class GetMembersQueryHandler : IRequestHandler<GetMembersQuery, Result<Me
     public async Task<Result<MemberDto>> Handle(GetMembersQuery request, CancellationToken cancellationToken)
     {
         var query = await _manager.Member.GetAsync(filter: null
-            , x => x.Team!, x => x.Skills);
+            ,x => x.Skills);
 
         var developers = await query.ToListAsync();
 
-        var result = developers.Select(x => new MemberDto(x.Id.ToString(), x.GivenName, x.LastName, x.Photo, x.Title, x.Team.TeamName)).ToList();
+        var result = developers.Select(x => new MemberDto(x.Id.ToString(), x.GivenName, x.LastName, x.Photo, x.Title)).ToList();
 
         return Result<MemberDto>.Success(statusCode: 200, values: result);
     }

@@ -10,8 +10,6 @@ public class Member : AuditableEntity
     public string Title { get; set; }
     public Contact Contact { get; set; }
     public ICollection<Skill>Skills { get; set; } = new HashSet<Skill>();
-
     public Guid? TeamId { get; set; }
-    public Team? Team { get; set; }
 
 }

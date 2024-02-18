@@ -14,7 +14,8 @@ namespace Synergy.TeamService.Api.Controllers;
 
 [Route("api/members")]
 [ApiController]
-//[Authorize(Roles = "manager")]
+[Authorize(Roles = "manager")]
+
 public class MemberController(IMediator mediator) : ControllerBase
 {
 
@@ -40,15 +41,13 @@ public class MemberController(IMediator mediator) : ControllerBase
     }
 
     [HttpPost]
+    [AllowAnonymous]
     public async Task<IActionResult> CreateMember([FromBody] CreateMemberDto createMember)
     {
-        // TODO: Buraya istek geldiginde message produce edecek ve identity service register consumer'i tetikleyecek.
-        // TODO: CreateDeveloperDto degisecek. Icerisinde register icin gerekli olan propertiler de olacak (username, email, password) 
-        //string createdBy = User.FindFirst(_ => _.Type == ClaimTypes.Name)!.Value;
         var result = await mediator.Send(new CreateMemberCommand
         {
             CreateMember = createMember,
-            CreatedBy =  "admin"
+            CreatedBy =  createMember.CreateUser.Username
         });
 
         return Ok();

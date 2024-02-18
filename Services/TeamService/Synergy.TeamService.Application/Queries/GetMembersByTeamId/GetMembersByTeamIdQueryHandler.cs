@@ -16,10 +16,10 @@ internal class GetMembersByTeamIdQueryHandler : IRequestHandler<GetMembersByTeam
 
     public async Task<Result<MemberDto>> Handle(GetMembersByTeamIdQuery request, CancellationToken cancellationToken)
     {
-        var query = await _developerRepo.GetAsync(filter: _ => _.TeamId == Guid.Parse(request.TeamId), x => x.Team);
+        var query = await _developerRepo.GetAsync(filter: _ => _.TeamId == Guid.Parse(request.TeamId));
         var developers = await query.ToListAsync(cancellationToken);
 
-        var developer = developers.Select(x => new MemberDto(x.Id.ToString(), x.GivenName, x.LastName, x.Photo, x.Title, x.Team!.TeamName)).ToList();
+        var developer = developers.Select(x => new MemberDto(x.Id.ToString(), x.GivenName, x.LastName, x.Photo, x.Title)).ToList();
 
         return Result<MemberDto>.Success(values: developer);
     }

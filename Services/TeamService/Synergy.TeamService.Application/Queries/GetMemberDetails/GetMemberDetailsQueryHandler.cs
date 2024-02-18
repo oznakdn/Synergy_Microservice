@@ -19,7 +19,7 @@ public class GetMemberDetailsQueryHandler : IRequestHandler<GetMemberDetailsQuer
 
     public async Task<IResult<MemberDetailsDto>> Handle(GetMemberDetailsQuery request, CancellationToken cancellationToken)
     {
-        var developerQuery = await _developerRepo.GetAsync(x => x.Id == Guid.Parse(request.DeveloperId), x => x.Contact, y => y.Team!);
+        var developerQuery = await _developerRepo.GetAsync(x => x.Id == Guid.Parse(request.DeveloperId), x => x.Contact);
         var developerSkillQuery = await _developerSkillRepo.GetAsync(x => x.MemberId == Guid.Parse(request.DeveloperId), x => x.Technology!);
 
         var developer = await developerQuery.SingleOrDefaultAsync();
@@ -38,8 +38,7 @@ public class GetMemberDetailsQueryHandler : IRequestHandler<GetMemberDetailsQuer
             , developer.GivenName,
              developer.LastName,
              developer.Photo,
-             developer.Title,
-             developer.Team!.TeamName)
+             developer.Title)
             , developerContact,
             developerSkill);
         return Result<MemberDetailsDto>.Success(value: result);

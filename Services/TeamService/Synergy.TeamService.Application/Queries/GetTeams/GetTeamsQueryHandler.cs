@@ -17,7 +17,7 @@ public class GetTeamsQueryHandler : IRequestHandler<GetTeamsQuery, Result<TeamDt
 
     public async Task<Result<TeamDto>> Handle(GetTeamsQuery request, CancellationToken cancellationToken)
     {
-        var query = await _manager.Team.GetAsync(includes: _ => _.Members);
+        var query = await _manager.Team.GetAsync();
 
         var teams = await query.ToListAsync(cancellationToken);
         var teamDto = teams.Select(x=> new TeamDto(x.Id.ToString(),x.TeamName,x.TeamDescription)).ToList();

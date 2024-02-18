@@ -12,8 +12,8 @@ using Synergy.TeamService.Infrastructure.Context;
 namespace Synergy.TeamService.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240218101441_InitTeamServiceDb")]
-    partial class InitTeamServiceDb
+    [Migration("20240218165628_InitTeamDb")]
+    partial class InitTeamDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -95,8 +95,6 @@ namespace Synergy.TeamService.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TeamId");
 
                     b.ToTable("Members");
                 });
@@ -213,15 +211,6 @@ namespace Synergy.TeamService.Infrastructure.Migrations
                     b.Navigation("Member");
                 });
 
-            modelBuilder.Entity("Synergy.TeamService.Domain.Models.Member", b =>
-                {
-                    b.HasOne("Synergy.TeamService.Domain.Models.Team", "Team")
-                        .WithMany("Members")
-                        .HasForeignKey("TeamId");
-
-                    b.Navigation("Team");
-                });
-
             modelBuilder.Entity("Synergy.TeamService.Domain.Models.Skill", b =>
                 {
                     b.HasOne("Synergy.TeamService.Domain.Models.Member", "Member")
@@ -247,11 +236,6 @@ namespace Synergy.TeamService.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Skills");
-                });
-
-            modelBuilder.Entity("Synergy.TeamService.Domain.Models.Team", b =>
-                {
-                    b.Navigation("Members");
                 });
 #pragma warning restore 612, 618
         }

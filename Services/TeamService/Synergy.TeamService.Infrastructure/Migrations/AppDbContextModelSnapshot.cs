@@ -93,8 +93,6 @@ namespace Synergy.TeamService.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TeamId");
-
                     b.ToTable("Members");
                 });
 
@@ -210,15 +208,6 @@ namespace Synergy.TeamService.Infrastructure.Migrations
                     b.Navigation("Member");
                 });
 
-            modelBuilder.Entity("Synergy.TeamService.Domain.Models.Member", b =>
-                {
-                    b.HasOne("Synergy.TeamService.Domain.Models.Team", "Team")
-                        .WithMany("Members")
-                        .HasForeignKey("TeamId");
-
-                    b.Navigation("Team");
-                });
-
             modelBuilder.Entity("Synergy.TeamService.Domain.Models.Skill", b =>
                 {
                     b.HasOne("Synergy.TeamService.Domain.Models.Member", "Member")
@@ -244,11 +233,6 @@ namespace Synergy.TeamService.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Skills");
-                });
-
-            modelBuilder.Entity("Synergy.TeamService.Domain.Models.Team", b =>
-                {
-                    b.Navigation("Members");
                 });
 #pragma warning restore 612, 618
         }

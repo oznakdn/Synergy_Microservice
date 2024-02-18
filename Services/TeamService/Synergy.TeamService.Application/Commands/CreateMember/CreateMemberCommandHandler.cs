@@ -27,7 +27,6 @@ public class CreateMemberCommandHandler : IRequestHandler<CreateMemberCommand, R
             LastName = request.CreateMember.LastName,
             Photo = request.CreateMember.Photo,
             Title = request.CreateMember.Title,
-            TeamId = Guid.Parse(request.CreateMember.TeamId)
         };
         _manager.Member.Insert(member);
 
