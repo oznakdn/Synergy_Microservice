@@ -15,10 +15,10 @@ public static class ServiceConfigurationExtension
         services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
         services.AddRedisService(configuration);
         services.AddScoped<ITeamRepo, TeamRepo>();
-        services.AddScoped<IDeveloperRepo, DeveloperRepo>();
+        services.AddScoped<IMemberRepo, MemberRepo>();
         services.AddScoped<ITechnologyRepo, TechnologyRepo>();
         services.AddScoped<IContactRepo, ContactRepo>();
-        services.AddScoped<IDeveloperSkillRepo, DeveloperSkillRepo>();
+        services.AddScoped<ISkillRepo, SkillRepo>();
         services.AddScoped<IRepositoryManager, RepositoryManager>();
     }
 

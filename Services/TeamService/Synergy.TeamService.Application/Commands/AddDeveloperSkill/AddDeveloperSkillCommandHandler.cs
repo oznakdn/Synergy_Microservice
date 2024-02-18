@@ -16,7 +16,7 @@ public class AddDeveloperSkillCommandHandler : IRequestHandler<AddDeveloperSkill
 
     public async Task<Result> Handle(AddDeveloperSkillCommand request, CancellationToken cancellationToken)
     {
-        var developer = await _manager.Developer.GetAsync(_ => _.Id == Guid.Parse(request.AddDeveloperSkill.DeveloperId));
+        var developer = await _manager.Member.GetAsync(_ => _.Id == Guid.Parse(request.AddDeveloperSkill.DeveloperId));
         if (!developer.Any())
             return Result.Failure(404, "Developer not found!");
 
@@ -24,16 +24,16 @@ public class AddDeveloperSkillCommandHandler : IRequestHandler<AddDeveloperSkill
         if(technology is null)
             return Result.Failure(404, "Technology not found!");
 
-        var developerSkill = new DeveloperSkill
+        var developerSkill = new Skill
         {
             CreatedDate = DateTime.Now,
             CreatedBy = request.CreatedBy,
-            DeveloperId = developer.SingleOrDefault()!.Id,
+            MemberId = developer.SingleOrDefault()!.Id,
             TechnologyId = technology.Id,
             Experience = request.AddDeveloperSkill.Experience
         };
 
-        _manager.DeveloperSkill.Insert(developerSkill);
+        _manager.Skill.Insert(developerSkill);
         await _manager.SaveAsync(cancellationToken);
 
         return Result.Success(204);

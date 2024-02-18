@@ -11,8 +11,8 @@ public class AppDbContext : DbContext
     }
 
     public DbSet<Team>Teams { get; set; }
-    public DbSet<Developer>Developers { get; set; }
-    public DbSet<DeveloperSkill>DevelopersSkills { get; set;}
+    public DbSet<Member>Members { get; set; }
+    public DbSet<Skill>Skills { get; set;}
     public DbSet<Technology>Technologies { get; set; }
     public DbSet<Contact> Contacts { get; set; }
 

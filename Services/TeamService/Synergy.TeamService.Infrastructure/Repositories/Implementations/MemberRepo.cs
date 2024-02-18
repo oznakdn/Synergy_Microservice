@@ -4,9 +4,9 @@ using Synergy.TeamService.Infrastructure.Repositories.Contracts;
 
 namespace Synergy.TeamService.Infrastructure.Repositories.Implementations;
 
-public class DeveloperRepo : GenericRepository<Developer>, IDeveloperRepo
+public class MemberRepo : GenericRepository<Member>, IMemberRepo
 {
-    public DeveloperRepo(AppDbContext db) : base(db)
+    public MemberRepo(AppDbContext db) : base(db)
     {
     }
 }

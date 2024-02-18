@@ -4,9 +4,9 @@ public interface IRepositoryManager : IAsyncDisposable
 {
     Task<int> SaveAsync(CancellationToken cancellationToken = default(CancellationToken));
     ITeamRepo Team { get; }
-    IDeveloperRepo Developer { get; }
+    IMemberRepo Member { get; }
     ITechnologyRepo Technology { get; }
     IContactRepo Contact { get; }
-    IDeveloperSkillRepo DeveloperSkill { get; }
+    ISkillRepo Skill { get; }
 
 }

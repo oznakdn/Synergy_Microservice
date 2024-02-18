@@ -42,6 +42,8 @@ public class DeveloperController(IMediator mediator) : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateDeveloper([FromBody] CreateDeveloperDto createDeveloper)
     {
+        // TODO: Buraya istek geldiginde message produce edecek ve identity service register consumer'i tetikleyecek.
+        // TODO: CreateDeveloperDto degisecek. Icerisinde register icin gerekli olan propertiler de olacak (username, email, password) 
         string createdBy = User.FindFirst(_ => _.Type == ClaimTypes.Name)!.Value;
         var result = await mediator.Send(new CreateDeveloperCommand
         {

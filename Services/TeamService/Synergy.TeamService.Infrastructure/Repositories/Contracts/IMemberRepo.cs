@@ -2,6 +2,6 @@
 
 namespace Synergy.TeamService.Infrastructure.Repositories.Contracts;
 
-public interface IDeveloperRepo : IGenericRepository<Developer>
+public interface IMemberRepo : IGenericRepository<Member>
 {
 }

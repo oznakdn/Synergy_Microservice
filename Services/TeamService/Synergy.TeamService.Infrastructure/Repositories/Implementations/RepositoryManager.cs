@@ -7,31 +7,31 @@ public class RepositoryManager : IRepositoryManager
 {
 
     private readonly ITeamRepo _team;
-    private readonly IDeveloperRepo _developer;
+    private readonly IMemberRepo _member;
     private readonly ITechnologyRepo _technology;
     private readonly IContactRepo _contact;
-    private readonly IDeveloperSkillRepo _developerSkill;
+    private readonly ISkillRepo _skill;
     private readonly AppDbContext _context;
 
-    public RepositoryManager(ITeamRepo team, IDeveloperRepo developer, AppDbContext context, ITechnologyRepo technology, IContactRepo contact, IDeveloperSkillRepo developerSkill)
+    public RepositoryManager(ITeamRepo team, IMemberRepo member, AppDbContext context, ITechnologyRepo technology, IContactRepo contact, ISkillRepo skill)
     {
         _team = team;
-        _developer = developer;
+        _member = member;
         _technology = technology;
         _context = context;
         _contact = contact;
-        _developerSkill = developerSkill;
+        _skill = skill;
     }
 
     public ITeamRepo Team => _team;
 
-    public IDeveloperRepo Developer => _developer;
+    public IMemberRepo Member => _member;
 
     public ITechnologyRepo Technology => _technology;
 
     public IContactRepo Contact => _contact;
 
-    public IDeveloperSkillRepo DeveloperSkill => _developerSkill;
+    public ISkillRepo Skill => _skill;
 
     public async ValueTask DisposeAsync() => await _context.DisposeAsync();
 

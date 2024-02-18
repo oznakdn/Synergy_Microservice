@@ -8,10 +8,10 @@ namespace Synergy.TeamService.Application.Queries.GetDeveloperDetails;
 
 public class GetDeveloperDetailsQueryHandler : IRequestHandler<GetDeveloperDetailsQuery, IResult<DeveloperDetailsDto>>
 {
-    private readonly IDeveloperRepo _developerRepo;
-    private readonly IDeveloperSkillRepo _developerSkillRepo;
+    private readonly IMemberRepo _developerRepo;
+    private readonly ISkillRepo _developerSkillRepo;
 
-    public GetDeveloperDetailsQueryHandler(IDeveloperRepo developerRepo, IDeveloperSkillRepo developerSkillRepo)
+    public GetDeveloperDetailsQueryHandler(IMemberRepo developerRepo, ISkillRepo developerSkillRepo)
     {
         _developerRepo = developerRepo;
         _developerSkillRepo = developerSkillRepo;
@@ -20,7 +20,7 @@ public class GetDeveloperDetailsQueryHandler : IRequestHandler<GetDeveloperDetai
     public async Task<IResult<DeveloperDetailsDto>> Handle(GetDeveloperDetailsQuery request, CancellationToken cancellationToken)
     {
         var developerQuery = await _developerRepo.GetAsync(x => x.Id == Guid.Parse(request.DeveloperId), x => x.Contact, y => y.Team!);
-        var developerSkillQuery = await _developerSkillRepo.GetAsync(x => x.DeveloperId == Guid.Parse(request.DeveloperId), x => x.Technology!);
+        var developerSkillQuery = await _developerSkillRepo.GetAsync(x => x.MemberId == Guid.Parse(request.DeveloperId), x => x.Technology!);
 
         var developer = await developerQuery.SingleOrDefaultAsync();
         var skills = await developerSkillQuery.ToListAsync();

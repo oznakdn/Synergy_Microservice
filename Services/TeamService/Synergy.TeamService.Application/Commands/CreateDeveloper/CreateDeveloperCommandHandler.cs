@@ -16,7 +16,7 @@ public class CreateDeveloperCommandHandler : IRequestHandler<CreateDeveloperComm
 
     public async Task<Result> Handle(CreateDeveloperCommand request, CancellationToken cancellationToken)
     {
-        var developer = new Developer
+        var developer = new Member
         {
             CreatedDate = DateTime.Now,
             CreatedBy = request.CreatedBy,
@@ -26,7 +26,7 @@ public class CreateDeveloperCommandHandler : IRequestHandler<CreateDeveloperComm
             Title = request.CreateDeveloper.Title,
             TeamId = Guid.Parse(request.CreateDeveloper.TeamId)
         };
-        _manager.Developer.Insert(developer);
+        _manager.Member.Insert(developer);
 
         var contact = new Contact
         {

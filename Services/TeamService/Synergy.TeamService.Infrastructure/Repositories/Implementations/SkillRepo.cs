@@ -4,9 +4,9 @@ using Synergy.TeamService.Infrastructure.Repositories.Contracts;
 
 namespace Synergy.TeamService.Infrastructure.Repositories.Implementations;
 
-public class DeveloperSkillRepo : GenericRepository<DeveloperSkill>, IDeveloperSkillRepo
+public class SkillRepo : GenericRepository<Skill>, ISkillRepo
 {
-    public DeveloperSkillRepo(AppDbContext db) : base(db)
+    public SkillRepo(AppDbContext db) : base(db)
     {
     }
 }

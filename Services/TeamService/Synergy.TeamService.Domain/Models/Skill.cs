@@ -2,12 +2,12 @@
 
 namespace Synergy.TeamService.Domain.Models;
 
-public class DeveloperSkill : AuditableEntity
+public class Skill : AuditableEntity
 {
     public Guid TechnologyId { get; set; }
-    public Guid DeveloperId { get; set; }
+    public Guid MemberId { get; set; }
     public Technology? Technology { get; set;}
-    public Developer? Developer { get; set; }
+    public Member? Member { get; set; }
     public string Experience { get; set; }
 
 }

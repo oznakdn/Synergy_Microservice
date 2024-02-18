@@ -2,6 +2,6 @@
 
 namespace Synergy.TeamService.Infrastructure.Repositories.Contracts;
 
-public interface IDeveloperSkillRepo : IGenericRepository<DeveloperSkill>
+public interface ISkillRepo : IGenericRepository<Skill>
 {
 }

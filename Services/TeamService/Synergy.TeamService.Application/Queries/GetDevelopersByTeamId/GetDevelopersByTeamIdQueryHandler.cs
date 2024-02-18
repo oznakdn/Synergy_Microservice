@@ -8,8 +8,8 @@ namespace Synergy.TeamService.Application.Queries.GetDevelopersByTeamId;
 
 internal class GetDevelopersByTeamIdQueryHandler : IRequestHandler<GetDevelopersByTeamIdQuery, Result<DeveloperDto>>
 {
-    private readonly IDeveloperRepo _developerRepo;
-    public GetDevelopersByTeamIdQueryHandler(IDeveloperRepo developerRepo)
+    private readonly IMemberRepo _developerRepo;
+    public GetDevelopersByTeamIdQueryHandler(IMemberRepo developerRepo)
     {
         _developerRepo = developerRepo;
     }

@@ -18,7 +18,7 @@ public class GetDevelopersQueryHandler : IRequestHandler<GetDevelopersQuery, Res
 
     public async Task<Result<DeveloperDto>> Handle(GetDevelopersQuery request, CancellationToken cancellationToken)
     {
-        var query = await _manager.Developer.GetAsync(filter: null
+        var query = await _manager.Member.GetAsync(filter: null
             , x => x.Team!, x => x.Skills);
 
         var developers = await query.ToListAsync();

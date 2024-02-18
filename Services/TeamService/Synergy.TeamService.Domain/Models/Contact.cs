@@ -9,6 +9,6 @@ public class Contact : Entity
     public string Address { get; set; }
 
     public Guid DeveloperId { get; set; }
-    public Developer? Developer { get; set; }
+    public Member? Developer { get; set; }
 
 }
