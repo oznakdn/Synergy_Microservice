@@ -1,0 +1,6 @@
+@Synergy.ReportService.GraphQL_HostAddress = http://localhost:5135
+
+GET {{Synergy.ReportService.GraphQL_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
