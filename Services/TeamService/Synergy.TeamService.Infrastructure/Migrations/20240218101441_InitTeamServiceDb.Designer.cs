@@ -12,8 +12,8 @@ using Synergy.TeamService.Infrastructure.Context;
 namespace Synergy.TeamService.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240218072549_InitTeamDb")]
-    partial class InitTeamDb
+    [Migration("20240218101441_InitTeamServiceDb")]
+    partial class InitTeamServiceDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,10 +32,6 @@ namespace Synergy.TeamService.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

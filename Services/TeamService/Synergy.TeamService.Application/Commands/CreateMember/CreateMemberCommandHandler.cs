@@ -34,7 +34,6 @@ public class CreateMemberCommandHandler : IRequestHandler<CreateMemberCommand, R
         var contact = new Contact
         {
             MemberId = member.Id,
-            Email = request.CreateMember.ContractDto.Email,
             PhoneNumber = request.CreateMember.ContractDto.PhoneNumber,
             Address = request.CreateMember.ContractDto.Address
         };

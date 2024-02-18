@@ -30,7 +30,7 @@ public class GetMemberDetailsQueryHandler : IRequestHandler<GetMemberDetailsQuer
             return Result<MemberDetailsDto>.Failure(404);
         }
 
-        var developerContact = new MemberContact(developer.Contact.Email, developer.Contact.PhoneNumber, developer.Contact.Address);
+        var developerContact = new MemberContact(developer.Contact.PhoneNumber, developer.Contact.Address);
         var developerSkill = skills.Select(x => new MemberSkill(x.Technology!.Name, x.Experience)).ToList();
         var result = new MemberDetailsDto(
             new MemberDto(

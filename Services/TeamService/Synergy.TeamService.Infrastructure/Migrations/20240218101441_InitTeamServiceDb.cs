@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Synergy.TeamService.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitTeamDb : Migration
+    public partial class InitTeamServiceDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -75,7 +75,6 @@ namespace Synergy.TeamService.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MemberId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)

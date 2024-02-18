@@ -32,10 +32,6 @@ namespace Synergy.TeamService.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<Guid>("MemberId")
                         .HasColumnType("uniqueidentifier");
 
