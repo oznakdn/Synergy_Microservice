@@ -10,5 +10,11 @@
   <ItemGroup>
     <PackageReference Include="Confluent.Kafka" Version="2.3.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+    <PackageReference Include="MongoDB.Driver" Version="2.23.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Synergy.Shared\Synergy.Shared.csproj" />
+    <ProjectReference Include="..\Synergy.IdentityService.Infrastructure\Synergy.IdentityService.Infrastructure.csproj" />
   </ItemGroup>
 </Project>

@@ -20,6 +20,6 @@ public class RegisterModel(AuthService authService) : PageModel
         }
 
         TempData["RegisterSuccess"] = "Registered was be success.";
-        return RedirectToPage("/Auth/Login", new { Username = RegisterInput.Username });
+        return RedirectToPage("/Auth/Login", new { Username = RegisterInput.CreateUser.Username});
     }
 }

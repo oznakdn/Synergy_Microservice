@@ -1,7 +1,10 @@
-﻿using MediatR;
+﻿using Confluent.Kafka;
+using MediatR;
+using Synergy.Shared.Constants;
 using Synergy.Shared.Results;
 using Synergy.TeamService.Domain.Models;
 using Synergy.TeamService.Infrastructure.Repositories.Contracts;
+using System.Text.Json;
 
 namespace Synergy.TeamService.Application.Commands.CreateMember;
 
@@ -16,7 +19,7 @@ public class CreateMemberCommandHandler : IRequestHandler<CreateMemberCommand, R
 
     public async Task<Result> Handle(CreateMemberCommand request, CancellationToken cancellationToken)
     {
-        var developer = new Member
+        var member = new Member
         {
             CreatedDate = DateTime.Now,
             CreatedBy = request.CreatedBy,
@@ -26,11 +29,11 @@ public class CreateMemberCommandHandler : IRequestHandler<CreateMemberCommand, R
             Title = request.CreateMember.Title,
             TeamId = Guid.Parse(request.CreateMember.TeamId)
         };
-        _manager.Member.Insert(developer);
+        _manager.Member.Insert(member);
 
         var contact = new Contact
         {
-            MemberId = developer.Id,
+            MemberId = member.Id,
             Email = request.CreateMember.ContractDto.Email,
             PhoneNumber = request.CreateMember.ContractDto.PhoneNumber,
             Address = request.CreateMember.ContractDto.Address
@@ -38,8 +41,38 @@ public class CreateMemberCommandHandler : IRequestHandler<CreateMemberCommand, R
 
         _manager.Contact.Insert(contact);
 
-        await _manager.SaveAsync(cancellationToken);
+        var result = await _manager.SaveAsync(cancellationToken);
 
-        return Result.Success(204);
+        if (result > 0)
+        {
+            var config = new ProducerConfig
+            {
+                Acks = Acks.All,
+                BootstrapServers = "localhost:29092",
+                ClientId = "CreatedMember"
+            };
+
+            using var producer = new ProducerBuilder<string, string>(config).Build();
+
+            var message = new Message<string, string>
+            {
+                Key = member.Id.ToString(),
+                Value = JsonSerializer.Serialize(request.CreateMember.CreateUser)
+            };
+
+            var status = await producer.ProduceAsync(MessageTopic.CREATED_MEMBER, message);
+
+            if (status.Status == PersistenceStatus.Persisted)
+            {
+                return Result.Success(204);
+
+            }
+
+            return Result.Failure(status.Value.Single());
+
+        }
+
+        return Result.Failure(400);
+
     }
 }

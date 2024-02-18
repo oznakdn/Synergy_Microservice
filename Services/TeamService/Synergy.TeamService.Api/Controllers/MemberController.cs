@@ -14,53 +14,53 @@ namespace Synergy.TeamService.Api.Controllers;
 
 [Route("api/members")]
 [ApiController]
-[Authorize(Roles = "manager")]
+//[Authorize(Roles = "manager")]
 public class MemberController(IMediator mediator) : ControllerBase
 {
 
     [HttpGet]
-    public async Task<IActionResult> GetDevelopers()
+    public async Task<IActionResult> GetMembers()
     {
         var result = await mediator.Send(new GetMembersQuery());
         return Ok(result.Values);
     }
 
     [HttpGet("{teamId}")]
-    public async Task<IActionResult> GetDevelopersByTeamId(string teamId)
+    public async Task<IActionResult> GetMembersByTeamId(string teamId)
     {
         var result = await mediator.Send(new GetMembersByTeamIdQuery(teamId));
         return Ok(result.Values);
     }
 
-    [HttpGet("details/{developerId}")]
-    public async Task<IActionResult> GetDeveloperDetails(string developerId)
+    [HttpGet("details/{memberId}")]
+    public async Task<IActionResult> GetMemberDetails(string memberId)
     {
-        var result = await mediator.Send(new GetMemberDetailsQuery(developerId));
+        var result = await mediator.Send(new GetMemberDetailsQuery(memberId));
         return result.IsSuccess ? Ok(result.Value) : NotFound();
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateDeveloper([FromBody] CreateMemberDto createDeveloper)
+    public async Task<IActionResult> CreateMember([FromBody] CreateMemberDto createMember)
     {
         // TODO: Buraya istek geldiginde message produce edecek ve identity service register consumer'i tetikleyecek.
         // TODO: CreateDeveloperDto degisecek. Icerisinde register icin gerekli olan propertiler de olacak (username, email, password) 
-        string createdBy = User.FindFirst(_ => _.Type == ClaimTypes.Name)!.Value;
+        //string createdBy = User.FindFirst(_ => _.Type == ClaimTypes.Name)!.Value;
         var result = await mediator.Send(new CreateMemberCommand
         {
-            CreateMember = createDeveloper,
-            CreatedBy = createdBy
+            CreateMember = createMember,
+            CreatedBy =  "admin"
         });
 
         return Ok();
     }
 
     [HttpPost("skill")]
-    public async Task<IActionResult> AddDeveloperSkill([FromBody] AddMemberSkillDto addDeveloperSkill)
+    public async Task<IActionResult> AddMemberSkill([FromBody] AddMemberSkillDto addMemberSkill)
     {
         string createdBy = User.FindFirst(_ => _.Type == ClaimTypes.Name)!.Value;
         var result = await mediator.Send(new AddMemberSkillCommand
         {
-            AddDeveloperSkill = addDeveloperSkill,
+            AddDeveloperSkill = addMemberSkill,
             CreatedBy = createdBy
         });
 

@@ -15,15 +15,15 @@ public class UserController(IMediator _mediator) : ControllerBase
 {
 
 
-    [HttpPost("register")]
-    public async Task<IActionResult> Register([FromBody] RegisterDto register)
-    {
-        var result = await _mediator.Send(new RegisterUserCommand
-        {
-            Register = register
-        });
-        return result.IsSuccess ? Ok(result) : BadRequest(result.Errors);
-    }
+    //[HttpPost("register")]
+    //public async Task<IActionResult> Register([FromBody] RegisterDto register)
+    //{
+    //    var result = await _mediator.Send(new RegisterUserCommand
+    //    {
+    //        Register = register
+    //    });
+    //    return result.IsSuccess ? Ok(result) : BadRequest(result.Errors);
+    //}
 
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginDto login)

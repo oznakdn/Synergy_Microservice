@@ -94,7 +94,9 @@ public class AuthService : ClientServiceBase
 
     public async Task<Shared.Results.IResult> RegisterAsync(RegisterInput register)
     {
-        HttpResponseMessage responseMessage = await HttpClient.PostAsJsonAsync(Endpoints.Identity.Register, register);
+
+        // TODO : Username ve Email kontrolu icin getuser istegi atilacak ve user yoksa register'a devam edilecek
+        HttpResponseMessage responseMessage = await HttpClient.PostAsJsonAsync(Endpoints.Team.CreateDeveloper, register);
         if (responseMessage.IsSuccessStatusCode)
             return Result.Success(204);
 

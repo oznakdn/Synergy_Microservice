@@ -11,7 +11,7 @@ public class Endpoints
 public class Identity
 {
     public string Login { get; set; }
-    public string Register { get; set; }
+    //public string Register { get; set; }
     public string Logout { get; set; }
     public string GetProfile { get; set; }
     public string Relogin { get; set; }
