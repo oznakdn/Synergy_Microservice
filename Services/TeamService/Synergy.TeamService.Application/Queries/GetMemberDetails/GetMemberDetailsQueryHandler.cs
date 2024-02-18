@@ -2,22 +2,22 @@
 using Microsoft.EntityFrameworkCore;
 using Synergy.Shared.Results;
 using Synergy.TeamService.Infrastructure.Repositories.Contracts;
-using Synergy.TeamService.Shared.Dtos.DeveloperDtos;
+using Synergy.TeamService.Shared.Dtos.MemberDtos;
 
-namespace Synergy.TeamService.Application.Queries.GetDeveloperDetails;
+namespace Synergy.TeamService.Application.Queries.GetMemberDetails;
 
-public class GetDeveloperDetailsQueryHandler : IRequestHandler<GetDeveloperDetailsQuery, IResult<DeveloperDetailsDto>>
+public class GetMemberDetailsQueryHandler : IRequestHandler<GetMemberDetailsQuery, IResult<MemberDetailsDto>>
 {
     private readonly IMemberRepo _developerRepo;
     private readonly ISkillRepo _developerSkillRepo;
 
-    public GetDeveloperDetailsQueryHandler(IMemberRepo developerRepo, ISkillRepo developerSkillRepo)
+    public GetMemberDetailsQueryHandler(IMemberRepo developerRepo, ISkillRepo developerSkillRepo)
     {
         _developerRepo = developerRepo;
         _developerSkillRepo = developerSkillRepo;
     }
 
-    public async Task<IResult<DeveloperDetailsDto>> Handle(GetDeveloperDetailsQuery request, CancellationToken cancellationToken)
+    public async Task<IResult<MemberDetailsDto>> Handle(GetMemberDetailsQuery request, CancellationToken cancellationToken)
     {
         var developerQuery = await _developerRepo.GetAsync(x => x.Id == Guid.Parse(request.DeveloperId), x => x.Contact, y => y.Team!);
         var developerSkillQuery = await _developerSkillRepo.GetAsync(x => x.MemberId == Guid.Parse(request.DeveloperId), x => x.Technology!);
@@ -27,13 +27,13 @@ public class GetDeveloperDetailsQueryHandler : IRequestHandler<GetDeveloperDetai
 
         if (developer is null)
         {
-            return Result<DeveloperDetailsDto>.Failure(404);
+            return Result<MemberDetailsDto>.Failure(404);
         }
 
-        var developerContact = new DeveloperContact(developer.Contact.Email, developer.Contact.PhoneNumber, developer.Contact.Address);
-        var developerSkill = skills.Select(x => new DeveloperSkill(x.Technology!.Name, x.Experience)).ToList();
-        var result = new DeveloperDetailsDto(
-            new DeveloperDto(
+        var developerContact = new MemberContact(developer.Contact.Email, developer.Contact.PhoneNumber, developer.Contact.Address);
+        var developerSkill = skills.Select(x => new MemberSkill(x.Technology!.Name, x.Experience)).ToList();
+        var result = new MemberDetailsDto(
+            new MemberDto(
              developer.Id.ToString()
             , developer.GivenName,
              developer.LastName,
@@ -42,6 +42,6 @@ public class GetDeveloperDetailsQueryHandler : IRequestHandler<GetDeveloperDetai
              developer.Team!.TeamName)
             , developerContact,
             developerSkill);
-        return Result<DeveloperDetailsDto>.Success(value: result);
+        return Result<MemberDetailsDto>.Success(value: result);
     }
 }

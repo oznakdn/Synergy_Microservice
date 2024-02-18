@@ -3,18 +3,18 @@ using Synergy.Shared.Results;
 using Synergy.TeamService.Domain.Models;
 using Synergy.TeamService.Infrastructure.Repositories.Contracts;
 
-namespace Synergy.TeamService.Application.Commands.AddDeveloperSkill;
+namespace Synergy.TeamService.Application.Commands.AddMemberSkill;
 
-public class AddDeveloperSkillCommandHandler : IRequestHandler<AddDeveloperSkillCommand, Result>
+public class AddMemberSkillCommandHandler : IRequestHandler<AddMemberSkillCommand, Result>
 {
     private readonly IRepositoryManager _manager;
 
-    public AddDeveloperSkillCommandHandler(IRepositoryManager manager)
+    public AddMemberSkillCommandHandler(IRepositoryManager manager)
     {
         _manager = manager;
     }
 
-    public async Task<Result> Handle(AddDeveloperSkillCommand request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(AddMemberSkillCommand request, CancellationToken cancellationToken)
     {
         var developer = await _manager.Member.GetAsync(_ => _.Id == Guid.Parse(request.AddDeveloperSkill.DeveloperId));
         if (!developer.Any())

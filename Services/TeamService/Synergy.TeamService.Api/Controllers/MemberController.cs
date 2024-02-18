@@ -1,53 +1,53 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Synergy.TeamService.Application.Commands.AddDeveloperSkill;
-using Synergy.TeamService.Application.Commands.CreateDeveloper;
-using Synergy.TeamService.Application.Queries.GetDeveloperDetails;
-using Synergy.TeamService.Application.Queries.GetDevelopers;
-using Synergy.TeamService.Application.Queries.GetDevelopersByTeamId;
-using Synergy.TeamService.Shared.Dtos.DeveloperDtos;
-using Synergy.TeamService.Shared.Dtos.DeveloperSkillDtos;
+using Synergy.TeamService.Application.Commands.AddMemberSkill;
+using Synergy.TeamService.Application.Commands.CreateMember;
+using Synergy.TeamService.Application.Queries.GetMemberDetails;
+using Synergy.TeamService.Application.Queries.GetMembers;
+using Synergy.TeamService.Application.Queries.GetMembersByTeamId;
+using Synergy.TeamService.Shared.Dtos.MemberDtos;
+using Synergy.TeamService.Shared.Dtos.SkillDtos;
 using System.Security.Claims;
 
 namespace Synergy.TeamService.Api.Controllers;
 
-[Route("api/developers")]
+[Route("api/members")]
 [ApiController]
 [Authorize(Roles = "manager")]
-public class DeveloperController(IMediator mediator) : ControllerBase
+public class MemberController(IMediator mediator) : ControllerBase
 {
 
     [HttpGet]
     public async Task<IActionResult> GetDevelopers()
     {
-        var result = await mediator.Send(new GetDevelopersQuery());
+        var result = await mediator.Send(new GetMembersQuery());
         return Ok(result.Values);
     }
 
     [HttpGet("{teamId}")]
     public async Task<IActionResult> GetDevelopersByTeamId(string teamId)
     {
-        var result = await mediator.Send(new GetDevelopersByTeamIdQuery(teamId));
+        var result = await mediator.Send(new GetMembersByTeamIdQuery(teamId));
         return Ok(result.Values);
     }
 
     [HttpGet("details/{developerId}")]
     public async Task<IActionResult> GetDeveloperDetails(string developerId)
     {
-        var result = await mediator.Send(new GetDeveloperDetailsQuery(developerId));
+        var result = await mediator.Send(new GetMemberDetailsQuery(developerId));
         return result.IsSuccess ? Ok(result.Value) : NotFound();
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateDeveloper([FromBody] CreateDeveloperDto createDeveloper)
+    public async Task<IActionResult> CreateDeveloper([FromBody] CreateMemberDto createDeveloper)
     {
         // TODO: Buraya istek geldiginde message produce edecek ve identity service register consumer'i tetikleyecek.
         // TODO: CreateDeveloperDto degisecek. Icerisinde register icin gerekli olan propertiler de olacak (username, email, password) 
         string createdBy = User.FindFirst(_ => _.Type == ClaimTypes.Name)!.Value;
-        var result = await mediator.Send(new CreateDeveloperCommand
+        var result = await mediator.Send(new CreateMemberCommand
         {
-            CreateDeveloper = createDeveloper,
+            CreateMember = createDeveloper,
             CreatedBy = createdBy
         });
 
@@ -55,10 +55,10 @@ public class DeveloperController(IMediator mediator) : ControllerBase
     }
 
     [HttpPost("skill")]
-    public async Task<IActionResult> AddDeveloperSkill([FromBody] AddDeveloperSkillDto addDeveloperSkill)
+    public async Task<IActionResult> AddDeveloperSkill([FromBody] AddMemberSkillDto addDeveloperSkill)
     {
         string createdBy = User.FindFirst(_ => _.Type == ClaimTypes.Name)!.Value;
-        var result = await mediator.Send(new AddDeveloperSkillCommand
+        var result = await mediator.Send(new AddMemberSkillCommand
         {
             AddDeveloperSkill = addDeveloperSkill,
             CreatedBy = createdBy

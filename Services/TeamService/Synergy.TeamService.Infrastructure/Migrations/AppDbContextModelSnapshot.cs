@@ -32,12 +32,12 @@ namespace Synergy.TeamService.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("DeveloperId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("MemberId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
@@ -45,13 +45,13 @@ namespace Synergy.TeamService.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DeveloperId")
+                    b.HasIndex("MemberId")
                         .IsUnique();
 
                     b.ToTable("Contacts");
                 });
 
-            modelBuilder.Entity("Synergy.TeamService.Domain.Models.Developer", b =>
+            modelBuilder.Entity("Synergy.TeamService.Domain.Models.Member", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -99,10 +99,10 @@ namespace Synergy.TeamService.Infrastructure.Migrations
 
                     b.HasIndex("TeamId");
 
-                    b.ToTable("Developers");
+                    b.ToTable("Members");
                 });
 
-            modelBuilder.Entity("Synergy.TeamService.Domain.Models.DeveloperSkill", b =>
+            modelBuilder.Entity("Synergy.TeamService.Domain.Models.Skill", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -121,12 +121,12 @@ namespace Synergy.TeamService.Infrastructure.Migrations
                     b.Property<DateTime?>("DeleteDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("DeveloperId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Experience")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("MemberId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("nvarchar(max)");
@@ -139,11 +139,11 @@ namespace Synergy.TeamService.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DeveloperId");
+                    b.HasIndex("MemberId");
 
                     b.HasIndex("TechnologyId");
 
-                    b.ToTable("DevelopersSkills");
+                    b.ToTable("Skills");
                 });
 
             modelBuilder.Entity("Synergy.TeamService.Domain.Models.Team", b =>
@@ -205,29 +205,29 @@ namespace Synergy.TeamService.Infrastructure.Migrations
 
             modelBuilder.Entity("Synergy.TeamService.Domain.Models.Contact", b =>
                 {
-                    b.HasOne("Synergy.TeamService.Domain.Models.Developer", "Developer")
+                    b.HasOne("Synergy.TeamService.Domain.Models.Member", "Member")
                         .WithOne("Contact")
-                        .HasForeignKey("Synergy.TeamService.Domain.Models.Contact", "DeveloperId")
+                        .HasForeignKey("Synergy.TeamService.Domain.Models.Contact", "MemberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Developer");
+                    b.Navigation("Member");
                 });
 
-            modelBuilder.Entity("Synergy.TeamService.Domain.Models.Developer", b =>
+            modelBuilder.Entity("Synergy.TeamService.Domain.Models.Member", b =>
                 {
                     b.HasOne("Synergy.TeamService.Domain.Models.Team", "Team")
-                        .WithMany("Developers")
+                        .WithMany("Members")
                         .HasForeignKey("TeamId");
 
                     b.Navigation("Team");
                 });
 
-            modelBuilder.Entity("Synergy.TeamService.Domain.Models.DeveloperSkill", b =>
+            modelBuilder.Entity("Synergy.TeamService.Domain.Models.Skill", b =>
                 {
-                    b.HasOne("Synergy.TeamService.Domain.Models.Developer", "Developer")
+                    b.HasOne("Synergy.TeamService.Domain.Models.Member", "Member")
                         .WithMany("Skills")
-                        .HasForeignKey("DeveloperId")
+                        .HasForeignKey("MemberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -237,12 +237,12 @@ namespace Synergy.TeamService.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Developer");
+                    b.Navigation("Member");
 
                     b.Navigation("Technology");
                 });
 
-            modelBuilder.Entity("Synergy.TeamService.Domain.Models.Developer", b =>
+            modelBuilder.Entity("Synergy.TeamService.Domain.Models.Member", b =>
                 {
                     b.Navigation("Contact")
                         .IsRequired();
@@ -252,7 +252,7 @@ namespace Synergy.TeamService.Infrastructure.Migrations
 
             modelBuilder.Entity("Synergy.TeamService.Domain.Models.Team", b =>
                 {
-                    b.Navigation("Developers");
+                    b.Navigation("Members");
                 });
 #pragma warning restore 612, 618
         }

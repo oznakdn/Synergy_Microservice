@@ -44,7 +44,7 @@ namespace Synergy.TeamService.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Developers",
+                name: "Members",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -62,9 +62,9 @@ namespace Synergy.TeamService.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Developers", x => x.Id);
+                    table.PrimaryKey("PK_Members", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Developers_Teams_TeamId",
+                        name: "FK_Members_Teams_TeamId",
                         column: x => x.TeamId,
                         principalTable: "Teams",
                         principalColumn: "Id");
@@ -78,27 +78,27 @@ namespace Synergy.TeamService.Infrastructure.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DeveloperId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    MemberId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Contacts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Contacts_Developers_DeveloperId",
-                        column: x => x.DeveloperId,
-                        principalTable: "Developers",
+                        name: "FK_Contacts_Members_MemberId",
+                        column: x => x.MemberId,
+                        principalTable: "Members",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "DevelopersSkills",
+                name: "Skills",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TechnologyId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MemberId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Experience = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DeveloperId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -108,14 +108,15 @@ namespace Synergy.TeamService.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DevelopersSkills", x => x.Id);
+                    table.PrimaryKey("PK_Skills", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DevelopersSkills_Developers_DeveloperId",
-                        column: x => x.DeveloperId,
-                        principalTable: "Developers",
-                        principalColumn: "Id");
+                        name: "FK_Skills_Members_MemberId",
+                        column: x => x.MemberId,
+                        principalTable: "Members",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_DevelopersSkills_Technologies_TechnologyId",
+                        name: "FK_Skills_Technologies_TechnologyId",
                         column: x => x.TechnologyId,
                         principalTable: "Technologies",
                         principalColumn: "Id",
@@ -123,24 +124,24 @@ namespace Synergy.TeamService.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Contacts_DeveloperId",
+                name: "IX_Contacts_MemberId",
                 table: "Contacts",
-                column: "DeveloperId",
+                column: "MemberId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Developers_TeamId",
-                table: "Developers",
+                name: "IX_Members_TeamId",
+                table: "Members",
                 column: "TeamId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DevelopersSkills_DeveloperId",
-                table: "DevelopersSkills",
-                column: "DeveloperId");
+                name: "IX_Skills_MemberId",
+                table: "Skills",
+                column: "MemberId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DevelopersSkills_TechnologyId",
-                table: "DevelopersSkills",
+                name: "IX_Skills_TechnologyId",
+                table: "Skills",
                 column: "TechnologyId");
         }
 
@@ -151,10 +152,10 @@ namespace Synergy.TeamService.Infrastructure.Migrations
                 name: "Contacts");
 
             migrationBuilder.DropTable(
-                name: "DevelopersSkills");
+                name: "Skills");
 
             migrationBuilder.DropTable(
-                name: "Developers");
+                name: "Members");
 
             migrationBuilder.DropTable(
                 name: "Technologies");

@@ -1,6 +1,4 @@
-﻿using Synergy.TeamService.Domain.Models.Abstracts;
-
-namespace Synergy.TeamService.Domain.Models;
+﻿namespace Synergy.TeamService.Domain.Models;
 
 public class Technology
 {
