@@ -213,7 +213,7 @@
                                     <th>Email</th>
                                     <th>Role</th>
                                     <th>ROLE ACTIONS</th>
-
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -234,6 +234,10 @@
                                                 <a asp-page="/Auth/AssignRole" asp-route-userId="@item.Id" class="btn btn-warning btn-sm text-white"> Update</a>
                                             }
                                         </td>
+                                        <td>
+                                            <a asp-page="/Team/GetMemberDetails" asp-route-memberId="@item.MemberId" class="btn btn-info btn-sm text-white"> Detail</a>
+                                        </td>
+
                                     </tr>
                                 }
 

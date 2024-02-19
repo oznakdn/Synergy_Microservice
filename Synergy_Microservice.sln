@@ -57,9 +57,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synergy.Web", "Client\Syner
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReportService", "ReportService", "{00B09558-2A32-4E13-B631-B85CDD5CB712}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.ReportService.GraphQL", "Services\ReportService\Synergy.ReportService.GraphQL\Synergy.ReportService.GraphQL.csproj", "{41B8BF79-8F3D-407D-A6C9-7BDDE7FA0A4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synergy.ReportService.GraphQL", "Services\ReportService\Synergy.ReportService.GraphQL\Synergy.ReportService.GraphQL.csproj", "{41B8BF79-8F3D-407D-A6C9-7BDDE7FA0A4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.IdentityService.MessageWorker", "Services\IdentityService\Synergy.IdentityService.MessageWorker\Synergy.IdentityService.MessageWorker.csproj", "{51C50FAF-6034-4D90-B712-EB7C6C097D77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synergy.IdentityService.MessageWorker", "Services\IdentityService\Synergy.IdentityService.MessageWorker\Synergy.IdentityService.MessageWorker.csproj", "{51C50FAF-6034-4D90-B712-EB7C6C097D77}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
