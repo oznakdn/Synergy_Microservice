@@ -27,4 +27,23 @@ public class TeamService : ClientServiceBase
 
         return Result<GetMemberDetailOutput>.Failure(error: "You must be login!");
     }
+
+
+    public async Task<Result> AddSkillToMemberAsync(AddSkillToMemberInput addSkillToMember)
+    {
+        var hasHeader = await base.AddAuthorizeHeaderAsync();
+
+        if (hasHeader)
+        {
+            var response = await HttpClient.PostAsJsonAsync(Endpoints.Team.AddDeveloperSkill, addSkillToMember);
+            if (response.IsSuccessStatusCode)
+            {
+                return Result.Success(message: "The skill has been added to the member.");
+            }
+
+            return Result.Failure();
+        }
+
+        return Result.Failure(error: "You must be login!");
+    }
 }

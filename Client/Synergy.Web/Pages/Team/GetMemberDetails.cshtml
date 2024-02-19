@@ -15,9 +15,8 @@
                                 <p class="text-secondary mb-1">@Model.GetMemberDetail.Member.Title</p>
                                 <p class="text-muted font-size-sm">@Model.GetMemberDetail.Contact.Address</p>
                                 <p class="text-muted font-size-sm">@Model.GetMemberDetail.Contact.PhoneNumber</p>
-
-                                @*<button class="btn btn-primary"></button>
-                                    <button class="btn btn-outline-primary">Message</button>*@
+                                <a  class="btn btn-primary" asp-page="/Team/AddSkillToMember" asp-route-memberId="@Model.GetMemberDetail.Member.Id">Add Skill</a>
+                               
                             </div>
                         </div>
                     </div>
@@ -90,7 +89,7 @@
                     <div class="col-sm-6 mb-3">
                         <div class="card h-100">
                             <div class="card-body">
-                                <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i>Teck Stack</h6>
+                                <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Teck Stack</i></h6>
                                 @foreach (var item in Model.GetMemberDetail.Skills)
                                 {
                                     <small>@item.Technology</small>
@@ -101,7 +100,7 @@
                     <div class="col-sm-6 mb-3">
                         <div class="card h-100">
                             <div class="card-body">
-                                <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i>Experience</h6>
+                                <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Experience</i></h6>
                                 @foreach (var item in Model.GetMemberDetail.Skills)
                                 {
                                     <small>@item.Experience</small>
