@@ -34,9 +34,14 @@ public class AddMemberSkillCommandHandler : IRequestHandler<AddMemberSkillComman
         };
 
         _manager.Skill.Insert(developerSkill);
-        await _manager.SaveAsync(cancellationToken);
+        var result = await _manager.SaveAsync(cancellationToken);
 
-        return Result.Success(204);
+        if (result > 0)
+        {
+            return Result.Success(204);
+        }
+
+        return Result.Failure(400);
 
     }
 }

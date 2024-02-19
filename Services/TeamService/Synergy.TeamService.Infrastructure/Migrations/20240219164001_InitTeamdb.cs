@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Synergy.TeamService.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitTeamDb : Migration
+    public partial class InitTeamdb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -53,19 +53,6 @@ namespace Synergy.TeamService.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Technologies",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Technologies", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Contacts",
                 columns: table => new
                 {
@@ -90,7 +77,7 @@ namespace Synergy.TeamService.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TechnologyId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TechnologyId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MemberId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Experience = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -109,12 +96,6 @@ namespace Synergy.TeamService.Infrastructure.Migrations
                         principalTable: "Members",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Skills_Technologies_TechnologyId",
-                        column: x => x.TechnologyId,
-                        principalTable: "Technologies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -127,11 +108,6 @@ namespace Synergy.TeamService.Infrastructure.Migrations
                 name: "IX_Skills_MemberId",
                 table: "Skills",
                 column: "MemberId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Skills_TechnologyId",
-                table: "Skills",
-                column: "TechnologyId");
         }
 
         /// <inheritdoc />
@@ -148,9 +124,6 @@ namespace Synergy.TeamService.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Members");
-
-            migrationBuilder.DropTable(
-                name: "Technologies");
         }
     }
 }

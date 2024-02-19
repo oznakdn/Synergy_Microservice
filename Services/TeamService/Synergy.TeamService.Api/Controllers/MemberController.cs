@@ -63,6 +63,6 @@ public class MemberController(IMediator mediator) : ControllerBase
             CreatedBy = createdBy
         });
 
-        return Ok();
+        return result.IsSuccess ? Ok() : BadRequest();
     }
 }

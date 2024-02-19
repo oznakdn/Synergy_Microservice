@@ -12,8 +12,8 @@ using Synergy.TeamService.Infrastructure.Context;
 namespace Synergy.TeamService.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240218165628_InitTeamDb")]
-    partial class InitTeamDb
+    [Migration("20240219164001_InitTeamdb")]
+    partial class InitTeamdb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -131,14 +131,13 @@ namespace Synergy.TeamService.Infrastructure.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("TechnologyId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("TechnologyId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("MemberId");
-
-                    b.HasIndex("TechnologyId");
 
                     b.ToTable("Skills");
                 });
@@ -181,25 +180,6 @@ namespace Synergy.TeamService.Infrastructure.Migrations
                     b.ToTable("Teams");
                 });
 
-            modelBuilder.Entity("Synergy.TeamService.Domain.Models.Technology", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Technologies");
-                });
-
             modelBuilder.Entity("Synergy.TeamService.Domain.Models.Contact", b =>
                 {
                     b.HasOne("Synergy.TeamService.Domain.Models.Member", "Member")
@@ -219,15 +199,7 @@ namespace Synergy.TeamService.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Synergy.TeamService.Domain.Models.Technology", "Technology")
-                        .WithMany()
-                        .HasForeignKey("TechnologyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Member");
-
-                    b.Navigation("Technology");
                 });
 
             modelBuilder.Entity("Synergy.TeamService.Domain.Models.Member", b =>
