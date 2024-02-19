@@ -44,8 +44,8 @@
                             <h6 class="card-title font-weight-bold">@item.Title</h6>
                             <hr>
                             <p>
-                                <a asp-page="/Team/GetMemberDetails" asp-route-memberId="@item.Id" class="btn btn-info">Profile</a>
-                                <a asp-page="/Auth/GetUserByMember" asp-route-memberId="@item.Id" class="btn btn-warning">Account</a>
+                                <a asp-page="/Team/GetMemberDetails" asp-route-memberId="@item.Id" class="btn btn-info btn-sm"><i class="fas fa-user"></i></a>
+                                <a asp-page="/Auth/GetUserByMember" asp-route-memberId="@item.Id" class="btn btn-warning btn-sm"><i class="fas fa-key"></i></a>
                             </p>
                         </div>
                     </div>
