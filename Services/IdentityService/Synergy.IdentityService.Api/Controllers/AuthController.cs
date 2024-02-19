@@ -5,6 +5,7 @@ using Synergy.IdentityService.Application.Commands.RoleCommands.AssignRole;
 using Synergy.IdentityService.Application.Commands.RoleCommands.CreateRole;
 using Synergy.IdentityService.Application.Commands.RoleCommands.UpdateRole;
 using Synergy.IdentityService.Application.Queries.RoleQueries.GetRoles;
+using Synergy.IdentityService.Application.Queries.UserQueries.GetUserByMemberId;
 using Synergy.IdentityService.Application.Queries.UserQueries.GetUsers;
 using Synergy.IdentityService.Shared.Dtos.RoleDtos;
 
@@ -22,6 +23,13 @@ public class AuthController(IMediator mediator) : ControllerBase
     {
         var result = await mediator.Send(new GetUsersQuery());
         return Ok(result.Values);
+    }
+
+    [HttpGet("users/{memberId}")]
+    public async Task<IActionResult> GetUserByMemberId(string memberId)
+    {
+        var result = await mediator.Send(new GetUserByMemberIdQuery(memberId));
+        return result.IsSuccess ? Ok(result.Value) : NotFound();
     }
 
 
