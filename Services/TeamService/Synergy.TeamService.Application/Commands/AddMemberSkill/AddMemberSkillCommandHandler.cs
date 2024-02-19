@@ -20,16 +20,16 @@ public class AddMemberSkillCommandHandler : IRequestHandler<AddMemberSkillComman
         if (!developer.Any())
             return Result.Failure(404, "Developer not found!");
 
-        var technology = await _manager.Technology.GetTechnology(request.AddDeveloperSkill.TechnologyId);
-        if(technology is null)
-            return Result.Failure(404, "Technology not found!");
+        //var technology = await _manager.Technology.GetTechnology(request.AddDeveloperSkill.TechnologyId);
+        //if(technology is null)
+        //    return Result.Failure(404, "Technology not found!");
 
         var developerSkill = new Skill
         {
             CreatedDate = DateTime.Now,
             CreatedBy = request.CreatedBy,
             MemberId = developer.SingleOrDefault()!.Id,
-            TechnologyId = technology.Id,
+            TechnologyId = request.AddDeveloperSkill.TechnologyId,
             Experience = request.AddDeveloperSkill.Experience
         };
 

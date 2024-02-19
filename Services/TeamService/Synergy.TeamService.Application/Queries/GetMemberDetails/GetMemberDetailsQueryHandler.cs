@@ -8,39 +8,49 @@ namespace Synergy.TeamService.Application.Queries.GetMemberDetails;
 
 public class GetMemberDetailsQueryHandler : IRequestHandler<GetMemberDetailsQuery, IResult<MemberDetailsDto>>
 {
-    private readonly IMemberRepo _developerRepo;
-    private readonly ISkillRepo _developerSkillRepo;
+    private readonly IMemberRepo _memberRepo;
+    private readonly ISkillRepo _skillRepo;
+    private readonly ITechnologyRepo _technologyRepo;
 
-    public GetMemberDetailsQueryHandler(IMemberRepo developerRepo, ISkillRepo developerSkillRepo)
+    public GetMemberDetailsQueryHandler(IMemberRepo memberRepo, ISkillRepo skillRepo, ITechnologyRepo technologyRepo)
     {
-        _developerRepo = developerRepo;
-        _developerSkillRepo = developerSkillRepo;
+        _memberRepo = memberRepo;
+        _skillRepo = skillRepo;
+        _technologyRepo = technologyRepo;
     }
 
     public async Task<IResult<MemberDetailsDto>> Handle(GetMemberDetailsQuery request, CancellationToken cancellationToken)
     {
-        var developerQuery = await _developerRepo.GetAsync(x => x.Id == Guid.Parse(request.DeveloperId), x => x.Contact);
-        var developerSkillQuery = await _developerSkillRepo.GetAsync(x => x.MemberId == Guid.Parse(request.DeveloperId), x => x.Technology!);
+        var memberQuery = await _memberRepo.GetAsync(x => x.Id == Guid.Parse(request.DeveloperId), x => x.Contact);
 
-        var developer = await developerQuery.SingleOrDefaultAsync();
-        var skills = await developerSkillQuery.ToListAsync();
-
-        if (developer is null)
+        if (!memberQuery.Any())
         {
             return Result<MemberDetailsDto>.Failure(404);
         }
 
-        var developerContact = new MemberContact(developer.Contact.PhoneNumber, developer.Contact.Address);
-        var developerSkill = skills.Select(x => new MemberSkill(x.Technology!.Name, x.Experience)).ToList();
-        var result = new MemberDetailsDto(
-            new MemberDto(
-             developer.Id.ToString()
-            , developer.GivenName,
-             developer.LastName,
-             developer.Photo,
-             developer.Title)
-            , developerContact,
-            developerSkill);
+        var memberSkillQuery = await _skillRepo.GetAsync(x => x.MemberId == Guid.Parse(request.DeveloperId));
+
+
+        var member = await memberQuery.SingleOrDefaultAsync();
+        var skills = await memberSkillQuery.ToListAsync();
+
+        var memberSkills = new List<MemberSkill>();
+
+        foreach (var item in skills)
+        {
+            var technology = await _technologyRepo.GetTechnology(item.TechnologyId);
+            if (technology is not null)
+            {
+                memberSkills.Add(new MemberSkill(technology.Name, item.Experience));
+            }
+        }
+
+
+        var memberDto = new MemberDto(member!.Id.ToString(), member.GivenName, member.LastName, member.Photo, member.Title);
+        var memberContact = new MemberContact(member.Contact.PhoneNumber, member.Contact.Address);
+
+        var result = new MemberDetailsDto(memberDto, memberContact, memberSkills);
+
         return Result<MemberDetailsDto>.Success(value: result);
     }
 }
