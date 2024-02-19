@@ -28,6 +28,25 @@ public class TeamService : ClientServiceBase
         return Result<GetMemberDetailOutput>.Failure(error: "You must be login!");
     }
 
+    public async Task<IResult<GetMemberOutput>> GetMembersAsync()
+    {
+        var hasHeader = await base.AddAuthorizeHeaderAsync();
+        if (hasHeader)
+        {
+            var response = await HttpClient.GetAsync(Endpoints.Team.GetDevelopers);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadFromJsonAsync<List<GetMemberOutput>>();
+                return Result<GetMemberOutput>.Success(values: result!);
+            }
+
+            return Result<GetMemberOutput>.Failure();
+        }
+
+        return Result<GetMemberOutput>.Failure(error: "You must be login!");
+    }
+
 
     public async Task<Result> AddSkillToMemberAsync(AddSkillToMemberInput addSkillToMember)
     {
@@ -46,4 +65,6 @@ public class TeamService : ClientServiceBase
 
         return Result.Failure(error: "You must be login!");
     }
+
+    
 }

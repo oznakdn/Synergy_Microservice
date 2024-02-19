@@ -117,6 +117,20 @@ public class AuthService : ClientServiceBase
         return Result<GetUsersOutput>.Failure(error: "Server error");
     }
 
+    public async Task<IResult<GetUsersOutput>> GetUserByMemberIdAsync(string memberId)
+    {
+        var hasHeader = await base.AddAuthorizeHeaderAsync();
+
+        if (hasHeader)
+        {
+            var responseMessage = await HttpClient.GetAsync($"{Endpoints.Identity.GetUserByMemberId}/{memberId}");
+            var response = await responseMessage.Content.ReadFromJsonAsync<GetUsersOutput>();
+            return Result<GetUsersOutput>.Success(response!);
+        }
+
+        return Result<GetUsersOutput>.Failure(error: "Server error");
+    }
+
     public async Task<IResult<GetRolesOutput>> GetRolesAsync()
     {
         var hasHeader = await base.AddAuthorizeHeaderAsync();

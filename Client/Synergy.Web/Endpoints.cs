@@ -16,6 +16,7 @@ public class Identity
     public string GetProfile { get; set; }
     public string Relogin { get; set; }
     public string GetUsers { get; set; }
+    public string GetUserByMemberId { get; set; }
     public string GetRoles { get; set; }
     public string CreateRole { get; set; }
     public string UpdateRole { get; set; }
