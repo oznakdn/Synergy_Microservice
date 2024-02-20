@@ -16,16 +16,19 @@
                 <p>Role: <span class="text-success">@Model.User.Role</span></p>
                 @if (Model.User.Role == null)
                 {
-                    <a asp-page="/Auth/AssignRole" asp-route-userId="@Model.User.Id" class="btn btn-info btn-sm text-white"> Assign</a>
+                    <a asp-page="/Auth/AssignRole" asp-route-userId="@Model.User.Id" class="btn btn-info btn-sm text-danger"> Assign Role</a>
                 }
                 else
                 {
 
-                    <a asp-page="/Auth/AssignRole" asp-route-userId="@Model.User.Id" class="btn btn-warning btn-sm text-white"> Update</a>
+                    <a asp-page="/Auth/AssignRole" asp-route-userId="@Model.User.Id" class="btn btn-warning btn-sm text-danger"> Update Role</a>
                 }
 
                 <p class="my-3">Email: <span class="text-success">@Model.User.Email</span></p>
 
+            </div>
+            <div class="mt-2 align-items-center text-center">
+                <a asp-page="/Auth/GetUsers" class="btn btn-warning btn-sm text-white">Back</a>
             </div>
         </div>
     </div>
