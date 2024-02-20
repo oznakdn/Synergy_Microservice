@@ -24,7 +24,7 @@ public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, IResult
 
         if (user.Role is not null)
         {
-            var resultWithRole = new UserDto(user.Id, user.Username, user.Email, user.Role!.RoleName ?? default);
+            var resultWithRole = new UserDto(user.Id, user.Username, user.Email,user.MemberId, user.Role != null ? user.Role.RoleName : string.Empty);
             return Result<UserDto>.Success(value: resultWithRole, statusCode: 200);
 
         }
