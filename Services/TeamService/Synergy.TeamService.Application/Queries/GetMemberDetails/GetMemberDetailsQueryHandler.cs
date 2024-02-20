@@ -46,7 +46,7 @@ public class GetMemberDetailsQueryHandler : IRequestHandler<GetMemberDetailsQuer
         }
 
 
-        var memberDto = new MemberDto(member!.Id.ToString(), member.GivenName, member.LastName, member.Photo, member.Title);
+        var memberDto = new MemberDto(member!.Id.ToString(), member.GivenName, member.LastName, member.Photo, member.Title, member.TeamId.ToString()!);
         var memberContact = new MemberContact(member.Contact.PhoneNumber, member.Contact.Address);
 
         var result = new MemberDetailsDto(memberDto, memberContact, memberSkills);

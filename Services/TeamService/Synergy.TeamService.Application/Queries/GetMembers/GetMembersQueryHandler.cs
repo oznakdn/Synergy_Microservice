@@ -22,7 +22,7 @@ public class GetMembersQueryHandler : IRequestHandler<GetMembersQuery, Result<Me
 
         var developers = await query.ToListAsync();
 
-        var result = developers.Select(x => new MemberDto(x.Id.ToString(), x.GivenName, x.LastName, x.Photo, x.Title)).ToList();
+        var result = developers.Select(x => new MemberDto(x.Id.ToString(), x.GivenName, x.LastName, x.Photo, x.Title, x.TeamId.ToString()!)).ToList();
 
         return Result<MemberDto>.Success(statusCode: 200, values: result);
     }

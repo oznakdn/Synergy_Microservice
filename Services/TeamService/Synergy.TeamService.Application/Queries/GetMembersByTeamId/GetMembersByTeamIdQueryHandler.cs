@@ -19,7 +19,7 @@ internal class GetMembersByTeamIdQueryHandler : IRequestHandler<GetMembersByTeam
         var query = await _developerRepo.GetAsync(filter: _ => _.TeamId == Guid.Parse(request.TeamId));
         var developers = await query.ToListAsync(cancellationToken);
 
-        var developer = developers.Select(x => new MemberDto(x.Id.ToString(), x.GivenName, x.LastName, x.Photo, x.Title)).ToList();
+        var developer = developers.Select(x => new MemberDto(x.Id.ToString(), x.GivenName, x.LastName, x.Photo, x.Title,x.TeamId.ToString()!)).ToList();
 
         return Result<MemberDto>.Success(values: developer);
     }

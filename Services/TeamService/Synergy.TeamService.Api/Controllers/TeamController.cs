@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Synergy.TeamService.Application.Commands.AssignMemberToTeam;
 using Synergy.TeamService.Application.Commands.CreateTeam;
 using Synergy.TeamService.Application.Commands.DeleteTeam;
 using Synergy.TeamService.Application.Commands.UpdateTeam;
@@ -13,14 +14,12 @@ namespace Synergy.TeamService.Api.Controllers;
 
 [Route("api/teams")]
 [ApiController]
-[Authorize(Roles ="manager")]
+[Authorize(Roles = "manager")]
 public class TeamController(IMediator mediator) : ControllerBase
 {
 
-   
-
     [HttpGet]
-    public async Task<IActionResult>GetTeams()
+    public async Task<IActionResult> GetTeams()
     {
         var result = await mediator.Send(new GetTeamsQuery());
         return Ok(result.Values);
@@ -43,6 +42,16 @@ public class TeamController(IMediator mediator) : ControllerBase
         return result.IsSuccess ? Ok() : BadRequest(result.Errors);
     }
 
+    [HttpPut("assignmember")]
+    [AllowAnonymous]
+    public async Task<IActionResult> AssignMember([FromBody] AssignMemberDto assignMember)
+    {
+
+        string createdBy = User.FindFirst(_ => _.Type == ClaimTypes.Name)!.Value;
+        var result = await mediator.Send(new AssignMemberCommand(assignMember, createdBy));
+        return result.StatusCode == 404 ? NotFound(result.Message) : result.StatusCode == 400 ? BadRequest() : Ok();
+    }
+
     [HttpPut]
     public async Task<IActionResult> UpdateTeam([FromBody] UpdateTeamDto updateTeam)
     {
@@ -54,11 +63,11 @@ public class TeamController(IMediator mediator) : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult>DeleteTeam(string id)
+    public async Task<IActionResult> DeleteTeam(string id)
     {
 
         string deletedBy = User.FindFirst(_ => _.Type == ClaimTypes.Name)!.Value;
-        var result = await mediator.Send(new DeleteTeamCommand(id,deletedBy));
+        var result = await mediator.Send(new DeleteTeamCommand(id, deletedBy));
 
         return result.StatusCode == 404 ? NotFound() : result.StatusCode == 400 ? BadRequest() : Ok();
     }
