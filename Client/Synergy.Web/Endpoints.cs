@@ -28,6 +28,8 @@ public class Team
     public string GetTeams { get; set; }
     public string GetTeamById { get; set; }
     public string CreateTeam { get; set; }
+    public string UpdateTeam { get; set; }
+    public string DeleteTeam { get; set; }
     public string GetDevelopers { get; set; }
     public string GetDevelopersByTeamId { get; set; }
     public string GetDeveloperDetails { get; set; }

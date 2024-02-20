@@ -7,8 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Synergy.Web</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600|Open+Sans:400,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.css" />
+    @*<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600|Open+Sans:400,600,700" rel="stylesheet">*@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
     <link rel="stylesheet" href="~/css/easion.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Synergy.Web.styles.css" asp-append-version="true" />
@@ -31,7 +32,9 @@
                 </a>
                 @if (User.IsInRole("manager"))
                 {
-
+                    <a asp-page="/Team/GetTeams" class="dash-nav-item">
+                        <i class="fas fa-people-group"></i> Team Management
+                    </a>
                     <a asp-page="/Auth/GetUsers" class="dash-nav-item">
                         <i class="fas fa-user"></i> User Management
                     </a>

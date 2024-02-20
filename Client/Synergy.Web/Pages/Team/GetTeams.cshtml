@@ -1,0 +1,296 @@
+﻿@page "/teams"
+@model Synergy.Web.Pages.Team.GetTeamsModel
+
+
+<h2>Team List</h2>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="OpenAddPopup();">Add Team</button>
+<br />
+<br />
+<table class="table table-bordered table-hover" id="datatable">
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </thead>
+    <tbody class="tbody" id="tblbody">
+        @foreach (var item in Model.Teams)
+        {
+            <tr>
+                <td class="TeamId">
+                    <input type="hidden" value="@item.Id" style="display:none" />
+                    <span>@item.Id</span>
+                </td>
+                <td class="TeamName">
+                    <span>@item.Name</span>
+                    <input type="text" value="@item.Name" style="display:none" />
+                </td>
+                <td class="TeamDescription">
+                    <span>@item.Description</span>
+                    <input type="text" value="@item.Description" style="display:none" />
+                </td>
+                <td>
+                    <a class="btnEdit btn btn-warning btn-sm" href="javascript:;"><i class="fa-solid fa-pen"></i></a>
+                    <a class="btnUpdate btn btn-success btn-sm" href="javascript:;" style="display:none"><i class="fa-solid fa-floppy-disk"></i></a>
+                    <a class="btnCancel btn btn-warning btn-sm" href="javascript:;" style="display:none"><i class="fa-solid fa-rectangle-xmark"></i></a>
+                    <a class="btnDelete btn btn-danger btn-sm" href="javascript:;"><i class="fa-solid fa-trash"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<div class="modal fade" id="AddUpdateModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-bs-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body">
+                <h4 class="modal-title my-2" id="AddUpdateModelLabel">Add Team</h4>
+                <form>
+                    <input type="hidden" id="hfTeamId" />
+                    <input type="hidden" id="accessToken" asp-for="AccessToken" name="AccessToken"/>
+                    <div class="form-group">
+                        <input type="text" class="form-control" asp-for="CreateInput.TeamName" id="txtTeamName" placeholder="Team Name" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" asp-for="CreateInput.TeamDescription" id="txtDescription" placeholder="Description" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnAddTeam" onclick="return AddTeam();">Create</button>
+                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section Scripts{
+
+    <script type="text/javascript">
+        const token = $("#accessToken").val();
+
+        function AppendRowAfterInsertRecord(row, Id, Name, Description) {
+
+            $(".TeamId", row).find("span").html(Id);
+
+            $(".TeamName", row).find("span").html(TeamName);
+            $(".TeamName", row).find("input").val(Name);
+
+            $(".TeamDescription", row).find("span").html(Description);
+            $(".TeamDescription", row).find("input").val(Description);
+
+            //debugger;
+            row.find(".btnEdit").show();
+            row.find(".btnDelete").show();
+            $("#datatable").append(row);
+        };
+
+        //Edit
+        $("body").on("click", "#datatable .btnEdit", function () {
+            debugger;
+            var row = $(this).closest("tr");
+            $("td", row).each(function () {
+                if ($(this).find("input").length > 0) {
+                    $(this).find("input").show();
+                    $(this).find("span").hide();
+                }
+            });
+            row.find(".btnUpdate").show();
+            row.find(".btnCancel").show();
+            row.find(".btnDelete").hide();
+            $(this).hide();
+        });
+
+        //Update
+        $("body").on("click", "#datatable .btnUpdate", function () {
+            var row = $(this).closest("tr");
+            $("td", row).each(function () {
+                if ($(this).find("input").length > 0) {
+                    var span = $(this).find("span");
+                    var input = $(this).find("input");
+                    span.html(input.val());
+                    span.show();
+                    input.hide();
+                }
+            });
+            row.find(".btnEdit").show();
+            row.find(".btnDelete").show();
+            row.find(".btnCancel").hide();
+            $(this).hide();
+
+
+            var teamObj = {
+                Id: row.find(".TeamId").find("span").html(),
+                TeamName: row.find(".TeamName").find("span").html(),
+                TeamDescription: row.find(".TeamDescription").find("span").html()
+            };
+            if (!teamObj.Id || teamObj.Id <= 0) {
+                alert("Invalid Id!");
+                return false;
+            }
+            $.ajax({
+                url: "http://localhost:5000/services/team/teams",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', "Bearer " + token);
+                },
+                data: JSON.stringify(teamObj),
+                type: "PUT",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    ClearAllInput();
+                    alert("Team has created successfully.");
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+        });
+
+        //Cancel
+        $("body").on("click", "#datatable .btnCancel", function () {
+            var row = $(this).closest("tr");
+            $("td", row).each(function () {
+                if ($(this).find("input").length > 0) {
+                    var span = $(this).find("span");
+                    var input = $(this).find("input");
+                    input.val(span.html());
+                    span.show();
+                    input.hide();
+                }
+            });
+            row.find(".btnEdit").show();
+            row.find(".btnDelete").show();
+            row.find(".btnUpdate").hide();
+            $(this).hide();
+        });
+
+        //Delete
+        $("body").on("click", "#datatable .btnDelete", function () {
+            if (confirm("Do you want to delete this row?")) {
+                var row = $(this).closest("tr");
+                var teamId = row.find("span").html();
+                $.ajax({
+                    url: "http://localhost:5000/services/team/teams/" + teamId,
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader('Authorization', "Bearer " + token);
+                    },
+                    type: "DELETE",
+                    contentType: "application/json;charset=UTF-8",
+                    dataType: "json",
+                    success: function (response) {
+                        if ($("#datatable tr").length > 2) {
+                            row.remove();
+                        } else {
+                            row.find(".btnEdit").hide();
+                            row.find(".btnDelete").hide();
+                            row.find("span").html(' ');
+                        }
+                    }
+                });
+            }
+        });
+
+
+        function OpenAddPopup() {
+            //title text
+            $("#AddUpdateModelLabel").text("Add Team")
+            //clear all input
+            ClearAllInput();
+            //open popup
+            $('#AddUpdateModel').modal('show');
+        }
+
+        function AddTeam() {
+           
+            
+            //var res = ValidateUserInput();
+            //if (res == false) {
+            //    return false;
+            //}
+            var teamObj = {
+                Id: $('#hfTeamId').val(),
+                TeamName: $('#txtTeamName').val(),
+                TeamDescription: $('#txtDescription').val()
+            };
+
+            console.log(teamObj.Id);
+            console.log(teamObj.TeamName);
+            console.log(teamObj.TeamDescription);
+
+
+            $.ajax({
+                url: "http://localhost:5000/services/team/teams",
+                type: "POST",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', "Bearer " + token);
+                },
+                data: JSON.stringify(teamObj),
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    var row = $("#tblbody tr:last-child");
+                    if ($("#tblbody tr:last-child span").eq(1).html() != " ") {
+                        row = row.clone();
+                    }
+
+                    AppendRowAfterInsertRecord(row, result.Id, result.TeamName, result.Description);
+                    $('#AddUpdateModel').modal('hide');
+                    
+                    ClearAllInput();
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+        }
+        function ClearAllInput() {
+            $('#AddUpdateModel').modal('hide');
+            $('#hfTeamId').val("");
+            $('#txtTeamName').val("");
+            $('#txtDescription').val("");
+
+            $('#txtTeamName').css('border-color', 'lightgrey');
+            $('#txtDescription').css('border-color', 'lightgrey');
+        }
+        function ValidateUserInput() {
+            var isValid = true;
+            if ($('#txtTeamName').val().trim() == "") {
+                $('#txtTeamName').css('border-color', 'Red');
+                isValid = false;
+            }
+            else {
+                $('#txtTeamName').css('border-color', 'lightgrey');
+            }
+            if ($('#txtDescription').val().trim() == "") {
+                $('#txtDescription').css('border-color', 'Red');
+                isValid = false;
+            }
+            else {
+                $('#txtDescription').css('border-color', 'lightgrey');
+            }
+            return isValid;
+        }
+    </script>
+
+
+}
+

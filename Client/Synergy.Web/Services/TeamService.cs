@@ -66,5 +66,45 @@ public class TeamService : ClientServiceBase
         return Result.Failure(error: "You must be login!");
     }
 
-    
+
+    public async Task<Result<GetTeamsOutput>> GetTeamsAsync()
+    {
+        var hasHeader = await base.AddAuthorizeHeaderAsync();
+
+        if (hasHeader)
+        {
+            var responseMessage = await HttpClient.GetAsync(Endpoints.Team.GetTeams);
+
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var result = await responseMessage.Content.ReadFromJsonAsync<List<GetTeamsOutput>>();
+                return Result<GetTeamsOutput>.Success(values: result!);
+            }
+
+            return Result<GetTeamsOutput>.Failure();
+        }
+
+        return Result<GetTeamsOutput>.Failure(error: "You must be login!");
+
+    }
+
+    public async Task<Shared.Results.IResult>CreateTeamAsync(CreateTeamInput createTeam)
+    {
+        var hasHeader = await base.AddAuthorizeHeaderAsync();
+
+        if (hasHeader)
+        {
+            var response = await HttpClient.PostAsJsonAsync(Endpoints.Team.CreateTeam, createTeam);
+            if (response.IsSuccessStatusCode)
+            {
+                return Result.Success(message: "Team has been created successfully");
+            }
+
+            return Result.Failure();
+        }
+
+        return Result.Failure(error: "You must be login!");
+    }
+
+
 }
