@@ -11,7 +11,6 @@ public class Endpoints
 public class Identity
 {
     public string Login { get; set; }
-    //public string Register { get; set; }
     public string Logout { get; set; }
     public string GetProfile { get; set; }
     public string Relogin { get; set; }
@@ -30,6 +29,7 @@ public class Team
     public string CreateTeam { get; set; }
     public string UpdateTeam { get; set; }
     public string DeleteTeam { get; set; }
+    public string AssignMember { get; set; }
     public string GetDevelopers { get; set; }
     public string GetDevelopersByTeamId { get; set; }
     public string GetDeveloperDetails { get; set; }

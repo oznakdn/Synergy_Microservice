@@ -1,0 +1,22 @@
+﻿@page "/assign-member"
+@model Synergy.Web.Pages.Team.AssignMemberModel
+
+<div class="row justify-content-center">
+    <div class="card" style="width: 40rem;">
+        <div class="card-body">
+            <h5 class="card-title display-6">Assigning To Member</h5>
+            <form method="post">
+                <div class="form-group">
+                    <input type="hidden" asp-for="AssignMember.MemberId"  />
+                    <select asp-items="Model.TeamSelectList" asp-for="AssignMember.TeamId" class="form-control">
+                        <option value="">Select a Team</option>
+                    </select>
+                </div>
+                <div class="form-group mt-3">
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <a asp-page="/Auth/GetUsers" class="btn btn-warning">Back</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

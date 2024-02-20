@@ -15,6 +15,15 @@
                                 <p class="text-secondary mb-1">@Model.GetMemberDetail.Member.Title</p>
                                 <p class="text-muted font-size-sm">@Model.GetMemberDetail.Contact.Address</p>
                                 <p class="text-muted font-size-sm">@Model.GetMemberDetail.Contact.PhoneNumber</p>
+                                <h4>@Model.TeamName</h4>
+                                @if (string.IsNullOrEmpty(Model.TeamName))
+                                {
+                                    <a class="btn btn-info btn-block" asp-page="/Team/AssignMember" asp-route-memberId="@Model.GetMemberDetail.Member.Id">Assign Team</a>
+                                }
+                                else
+                                {
+                                    <a class="btn btn-info btn-warning" asp-page="/Team/AssignMember" asp-route-memberId="@Model.GetMemberDetail.Member.Id">Update Team</a>
+                                }
                             </div>
                         </div>
                     </div>

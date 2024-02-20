@@ -106,5 +106,23 @@ public class TeamService : ClientServiceBase
         return Result.Failure(error: "You must be login!");
     }
 
+    public async Task<Shared.Results.IResult> AssignMemberAsync(AssignMemberInput memberInput)
+    {
+        var hasHeader = await base.AddAuthorizeHeaderAsync();
+
+        if (hasHeader)
+        {
+            var response = await HttpClient.PutAsJsonAsync(Endpoints.Team.AssignMember, memberInput);
+            if (response.IsSuccessStatusCode)
+            {
+                return Result.Success(message: "The member has assigned to the team successfully");
+            }
+
+            return Result.Failure();
+        }
+
+        return Result.Failure(error: "You must be login!");
+    }
+
 
 }
