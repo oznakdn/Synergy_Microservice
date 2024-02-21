@@ -32,6 +32,9 @@
                 </a>
                 @if (User.IsInRole("manager"))
                 {
+                    <a asp-page="/Project/GetProjects" class="dash-nav-item">
+                        <i class="fa-solid fa-diagram-project"></i> Project Management
+                    </a>
                     <a asp-page="/Team/GetTeams" class="dash-nav-item">
                         <i class="fas fa-people-group"></i> Team Management
                     </a>
