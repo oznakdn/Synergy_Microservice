@@ -21,6 +21,7 @@ public class GetProjectsQueryHandler : IRequestHandler<GetProjectsQuery, Result<
         var projects = await projectQuery.ToListAsync();
 
         var result = projects.Select(x => new ProjectDto(
+            x.Id,
             x.Title,
             x.Description,
             x.ProjectStatus.ToString(),

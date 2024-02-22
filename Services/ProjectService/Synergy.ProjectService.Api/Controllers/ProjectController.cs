@@ -10,6 +10,8 @@ namespace Synergy.ProjectService.Api.Controllers;
 
 [Route("api/projects")]
 [ApiController]
+[Authorize(Roles = "manager")]
+
 public class ProjectController(IMediator mediator) : ControllerBase
 {
 
@@ -21,11 +23,10 @@ public class ProjectController(IMediator mediator) : ControllerBase
     }
 
     [HttpPost]
-    [Authorize(Roles ="admin")]
     public async Task<IActionResult> CreateProject([FromBody] CreateProjectDto createProject)
     {
         string createdBy = User.FindFirst(_ => _.Type == ClaimTypes.Name)!.Value;
-        var result = await mediator.Send(new CreateProjectCommand(createProject, createdBy));
+        var result = await mediator.Send(new CreateProjectCommand(createProject, "admin"));
         return result.IsSuccess ? Ok() : BadRequest(result);
     }
 }

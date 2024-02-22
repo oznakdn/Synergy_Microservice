@@ -7,7 +7,7 @@ using Synergy.Shared.Results;
 
 namespace Synergy.ProjectService.Application.Queries.GetCasesByProjectId;
 
-public class GetCasesByProjectIdQueryHandler : IRequestHandler<GetCasesByProjectIdQuery, IResult<CaseDto>>>
+public class GetCasesByProjectIdQueryHandler : IRequestHandler<GetCasesByProjectIdQuery, IResult<CaseDto>>
 {
     private readonly IRepositoryManager _manager;
 
