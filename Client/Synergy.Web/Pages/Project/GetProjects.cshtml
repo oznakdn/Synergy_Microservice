@@ -1,3 +1,120 @@
 ﻿@page "/projects"
 @model Synergy.Web.Pages.Project.GetProjectsModel
 
+<style>
+    body {
+        background-color: #f5f7fa;
+    }
+
+    .testimonial-card .card-up {
+        height: 120px;
+        overflow: hidden;
+        border-top-left-radius: .25rem;
+        border-top-right-radius: .25rem;
+    }
+
+    .aqua-gradient {
+        background: linear-gradient(40deg, #2096ff, #05ffa3) !important;
+    }
+
+    .testimonial-card .avatar {
+        width: 120px;
+        margin-top: -60px;
+        overflow: hidden;
+        border: 5px solid #fff;
+        border-radius: 50%;
+    }
+</style>
+
+
+<div class="row">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Create Project
+    </button>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="display-6 text-center">Creating Project</div>
+                    <hr />
+                    <form method="post">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group">
+                            <input type="text" asp-for="@Model.CreateProject.Title" class="form-control" placeholder="Title" />
+                            <span asp-validation-for="@Model.CreateProject.Title" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" asp-for="@Model.CreateProject.Description" class="form-control" placeholder="Description" />
+                            <span asp-validation-for="@Model.CreateProject.Description" class="text-danger"></span>
+
+                        </div>
+                        <div class="form-group">
+                            <select asp-for="@Model.CreateProject.ProjectStatus" asp-items="@Html.GetEnumSelectList<Synergy.Web.Models.ProjectModels.StatusDto>()" class="form-control form-select-sm">
+                                <option value="">Select status</option>
+                            </select>
+                            <span asp-validation-for="@Model.CreateProject.ProjectStatus" class="text-danger"></span>
+
+                        </div>
+                        <div class="form-group">
+                            <select asp-for="@Model.CreateProject.TeamId" asp-items="@Model.TeamSelectList" class="form-control form-select-sm">
+                                <option value="">Select a team</option>
+                            </select>
+                            <span asp-validation-for="@Model.CreateProject.TeamId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="date" asp-for="@Model.CreateProject.StartDate" class="form-control" placeholder="Start Date" />
+                            <span asp-validation-for="@Model.CreateProject.StartDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="date" asp-for="@Model.CreateProject.EndDate" class="form-control" placeholder="End Date" />
+                            <span asp-validation-for="@Model.CreateProject.EndDate" class="text-danger"></span>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model.Projects)
+        {
+            <div class="col-md-3">
+                <section class="mx-auto my-5" style="max-width: 23rem;">
+                    <div class="card testimonial-card mt-2 mb-3">
+                        <div class="card-up aqua-gradient"></div>
+                        <div class="card-body text-center">
+                            <h4 class="card-title font-weight-bold">@item.Title</h4>
+                            <h6 class="card-title font-weight-bold">@item.Description</h6>
+                            <h6 class="card-title font-weight-bold">@item.ProjectStatus</h6>
+                            <h6 class="card-title font-weight-bold">@item.StartDate</h6>
+                            <h6 class="card-title font-weight-bold">@item.EndDate</h6>
+                            <hr>
+                            <p>
+                                <a asp-page="/Team/GetMemberDetails" asp-route-projectId="@item.Id" class="btn btn-warning btn-sm"><i class="fas fa-pencil"></i></a>
+                                <a asp-page="/Team/GetMemberDetails" asp-route-projectId="@item.Id" class="btn btn-info btn-sm"><i class="fa-solid fa-circle-info"></i></a>
+                            </p>
+                        </div>
+                    </div>
+
+                </section>
+
+            </div>
+        }
+
+    </div>
+</div>
