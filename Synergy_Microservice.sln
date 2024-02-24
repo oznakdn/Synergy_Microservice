@@ -61,6 +61,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synergy.ReportService.Graph
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synergy.IdentityService.MessageWorker", "Services\IdentityService\Synergy.IdentityService.MessageWorker\Synergy.IdentityService.MessageWorker.csproj", "{51C50FAF-6034-4D90-B712-EB7C6C097D77}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.IdentityService.Tests", "Services\IdentityService\Synergy.IdentityService.Tests\Synergy.IdentityService.Tests.csproj", "{D2CF3476-15C7-404B-A822-8C10C771A73C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -151,6 +153,10 @@ Global
 		{51C50FAF-6034-4D90-B712-EB7C6C097D77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51C50FAF-6034-4D90-B712-EB7C6C097D77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51C50FAF-6034-4D90-B712-EB7C6C097D77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2CF3476-15C7-404B-A822-8C10C771A73C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2CF3476-15C7-404B-A822-8C10C771A73C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2CF3476-15C7-404B-A822-8C10C771A73C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2CF3476-15C7-404B-A822-8C10C771A73C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -181,6 +187,7 @@ Global
 		{00B09558-2A32-4E13-B631-B85CDD5CB712} = {3822480C-A0C8-4D3F-8064-8FFC2BEBEC9D}
 		{41B8BF79-8F3D-407D-A6C9-7BDDE7FA0A4F} = {00B09558-2A32-4E13-B631-B85CDD5CB712}
 		{51C50FAF-6034-4D90-B712-EB7C6C097D77} = {3AC373D9-397E-4864-B79B-9F28A6B27EF9}
+		{D2CF3476-15C7-404B-A822-8C10C771A73C} = {3AC373D9-397E-4864-B79B-9F28A6B27EF9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A98B446-27F9-4F37-B0F4-5B0F1E171F0D}

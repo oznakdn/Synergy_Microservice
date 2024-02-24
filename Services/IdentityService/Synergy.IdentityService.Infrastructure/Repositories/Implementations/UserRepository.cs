@@ -16,7 +16,7 @@ public class UserRepository : RepositoryBase<User>, IUserRepository
 
 
 
-    public async Task<IList<User>> GetAllAsync(Expression<Func<User, bool>> predicate = null, CancellationToken cancellationToken = default)
+    public async Task<List<User>> GetAllAsync(Expression<Func<User, bool>> predicate = null, CancellationToken cancellationToken = default)
     {
         return predicate is null ? await _collection.Find(_ => true).ToListAsync(cancellationToken)
                                  : await _collection.Find(predicate).ToListAsync(cancellationToken);
