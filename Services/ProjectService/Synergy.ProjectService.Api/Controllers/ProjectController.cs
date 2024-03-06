@@ -26,7 +26,8 @@ public class ProjectController(IMediator mediator) : ControllerBase
     public async Task<IActionResult> CreateProject([FromBody] CreateProjectDto createProject)
     {
         string createdBy = User.FindFirst(_ => _.Type == ClaimTypes.Name)!.Value;
-        var result = await mediator.Send(new CreateProjectCommand(createProject, "admin"));
+        
+        var result = await mediator.Send(new CreateProjectCommand(createProject, "admin")); // TODO: admin, createdBy ile degistirilecek
         return result.IsSuccess ? Ok() : BadRequest(result);
     }
 }
