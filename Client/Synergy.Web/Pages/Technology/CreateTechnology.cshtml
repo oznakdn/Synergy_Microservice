@@ -1,14 +1,6 @@
 ﻿@page "/create-technology"
 @model Synergy.Web.Pages.Technology.CreateTechnologyModel
 
-<div id="alert" class="row justify-content-center">
-    <div class="col-4">
-        @if (ViewData["CreateRoleFailure"] != null)
-        {
-            <div class="alert alert-warning text-center" role="alert">@ViewData["CreateRoleFailure"]</div>
-        }
-    </div>
-</div>
 
 <div class="row justify-content-center">
     <div class="card" style="width: 40rem;">

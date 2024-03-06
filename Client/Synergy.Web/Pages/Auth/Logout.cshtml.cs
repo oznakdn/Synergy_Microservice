@@ -1,10 +1,11 @@
+using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Synergy.Web.Services;
 
 namespace Synergy.Web.Pages.Auth;
 
-public class LogoutModel(AuthService authService) : PageModel
+public class LogoutModel(AuthService authService, INotyfService notyf) : PageModel
 {
     public async Task<IActionResult> OnGetAsync()
     {
@@ -13,11 +14,11 @@ public class LogoutModel(AuthService authService) : PageModel
 
         if (!result.IsSuccess)
         {
-            ViewData["LogoutFailure"] = result.Message;
+            notyf.Error(result.Message);
             return Page();
         }
 
-        TempData["LogoutSuccess"] = result.Message;
+        notyf.Success(result.Message);
         return RedirectToPage("/Auth/Login");
     }
 }

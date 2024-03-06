@@ -1,3 +1,4 @@
+using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Synergy.Web.Filters;
@@ -7,7 +8,7 @@ using Synergy.Web.Services;
 namespace Synergy.Web.Pages.Auth;
 
 [ClientAuthenticationFilter]
-public class UpdateRoleModel(AuthService authService) : PageModel
+public class UpdateRoleModel(AuthService authService, INotyfService notyf) : PageModel
 {
     [BindProperty]
     public UpdateRoleInput UpdateRole { get; set; } = new();
@@ -25,11 +26,11 @@ public class UpdateRoleModel(AuthService authService) : PageModel
         var result = await authService.UpdateRoleAsync(UpdateRole);
         if (result.IsSuccess)
         {
-            TempData["RoleUpdateSuccess"] = "Role has been updated successfully";
+            notyf.Success("Role has been updated successfully.");
             return RedirectToPage("/Auth/GetRoles");
         }
 
-        ViewData["RoleUpdateFailure"] = result.Message;
+        notyf.Error(result.Message);
         return Page();
     }
 }

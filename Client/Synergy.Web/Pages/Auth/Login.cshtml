@@ -1,18 +1,6 @@
 ﻿@page "/Login"
 @model Synergy.Web.Pages.Auth.LoginModel
 
-<div id="alert" class="row justify-content-center">
-    <div class="col-4">
-        @if (TempData["Failure"] != null)
-        {
-            <div class="alert alert-danger" role="alert">@TempData["Failure"]</div>
-        }
-        @if (TempData["LogoutSuccess"] != null)
-        {
-            <div class="alert alert-success" role="alert">@TempData["LogoutSuccess"]</div>
-        }
-    </div>
-</div>
 <div class="row justify-content-center my-3">
     <div class="jumbotron-fluid text-center">
         <div class="display-3"><i class="fas fa-cube"></i> SYNERGY</div>

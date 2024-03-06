@@ -39,10 +39,10 @@ public class TechnologyService : ClientServiceBase
 
             if (response.IsSuccessStatusCode)
             {
-                return Result.Success();
+                return Result.Success(message:"Technology was created successfully.");
             }
 
-            return Result.Failure();
+            return Result.Failure(error: "Technology was not created!");
         }
 
         return Result.Failure(error: "You must be login!");

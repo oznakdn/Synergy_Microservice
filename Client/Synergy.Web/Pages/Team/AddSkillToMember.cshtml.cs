@@ -1,3 +1,4 @@
+using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -6,7 +7,7 @@ using Synergy.Web.Services;
 
 namespace Synergy.Web.Pages.Team;
 
-public class AddSkillToMemberModel(TeamService teamService, TechnologyService technologyService) : PageModel
+public class AddSkillToMemberModel(TeamService teamService, TechnologyService technologyService, INotyfService notyf) : PageModel
 {
     [BindProperty]
     public AddSkillToMemberInput AddSkillToMember { get; set; } = new();
@@ -33,9 +34,11 @@ public class AddSkillToMemberModel(TeamService teamService, TechnologyService te
         var response = await teamService.AddSkillToMemberAsync(AddSkillToMember);
         if (response.IsSuccess)
         {
+            notyf.Success(response.Message);
             return RedirectToPage("/Team/GetMemberDetails", new { memberId = AddSkillToMember.DeveloperId });
         }
 
+        notyf.Error(response.Message);
         return Page();
     }
 }

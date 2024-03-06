@@ -1,3 +1,5 @@
+using AspNetCoreHero.ToastNotification;
+using AspNetCoreHero.ToastNotification.Extensions;
 using Microsoft.Extensions.Options;
 using Synergy.Web;
 using Synergy.Web.Filters;
@@ -10,6 +12,13 @@ internal class Program
         var builder = WebApplication.CreateBuilder(args);
 
         builder.Services.AddRazorPages();
+        builder.Services.AddNotyf(conf =>
+        {
+            conf.IsDismissable = false;
+            conf.Position = NotyfPosition.TopRight;
+            conf.DurationInSeconds = 2;
+        });
+
         builder.Services.AddHttpClient("SynergyWeb", conf => conf.BaseAddress = new Uri(builder.Configuration["BaseUrl"]!));
         builder.Services.AddHttpContextAccessor();
         builder.Services.AddAuthentication("Bearer")
@@ -29,6 +38,8 @@ internal class Program
 
 
         var app = builder.Build();
+
+        app.UseNotyf();
 
         if (!app.Environment.IsDevelopment())
         {

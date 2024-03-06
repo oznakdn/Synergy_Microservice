@@ -1,3 +1,4 @@
+using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Synergy.Web.Filters;
@@ -8,7 +9,7 @@ namespace Synergy.Web.Pages.Auth;
 
 
 [ClientAuthenticationFilter]
-public class CreateRoleModel(AuthService authService) : PageModel
+public class CreateRoleModel(AuthService authService, INotyfService notyf) : PageModel
 {
     [BindProperty]
     public CreateRoleInput CreateRole { get; set; }
@@ -18,11 +19,11 @@ public class CreateRoleModel(AuthService authService) : PageModel
         var result = await authService.CreateRoleAsync(CreateRole);
         if (result.IsSuccess)
         {
-            TempData["CreateRoleSuccess"] = result.Message;
+            notyf.Success(result.Message);
             return RedirectToPage("/Auth/GetRoles");
         }
 
-        ViewData["CreateRoleFailure"] = result.Message;
+        notyf.Error(result.Message);
         return Page();
     }
 }

@@ -1,3 +1,4 @@
+using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -6,7 +7,7 @@ using Synergy.Web.Services;
 
 namespace Synergy.Web.Pages.Auth;
 
-public class RegisterModel(AuthService authService) : PageModel
+public class RegisterModel(AuthService authService, INotyfService notyf) : PageModel
 {
     [BindProperty]
     public RegisterInput RegisterInput { get; set; }
@@ -32,11 +33,11 @@ public class RegisterModel(AuthService authService) : PageModel
         var response = await authService.RegisterAsync(RegisterInput);
         if (!response.IsSuccess)
         {
-            ViewData["RegisterFailure"] = "Register could not be!";
+            notyf.Error("Register could not be!");
             return Page();
         }
 
-        TempData["RegisterSuccess"] = "Registered was be success.";
+        notyf.Success("Registered was be successfully.");
         return RedirectToPage("/Auth/Login", new { Username = RegisterInput.CreateUser.Username});
     }
 }

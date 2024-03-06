@@ -1,3 +1,4 @@
+using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -6,7 +7,7 @@ using Synergy.Web.Services;
 
 namespace Synergy.Web.Pages.Team;
 
-public class AssignMemberModel(TeamService teamService) : PageModel
+public class AssignMemberModel(TeamService teamService, INotyfService notyf) : PageModel
 {
 
     [BindProperty]
@@ -30,9 +31,11 @@ public class AssignMemberModel(TeamService teamService) : PageModel
         var result = await teamService.AssignMemberAsync(AssignMember);
         if(result.IsSuccess)
         {
+            notyf.Success(result.Message);
             return RedirectToPage("/Auth/GetUsers");
         }
 
+        notyf.Error(result.Message);
         return Page();
 
     }
