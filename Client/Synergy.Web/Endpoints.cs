@@ -44,7 +44,7 @@ public class Project
 {
     public string GetProjects { get; set; }
     public string CreateProject { get; set; }
-    public string CreateCase { get; set; }
+    public string CreateIssue { get; set; }
     public string GetCasesByProjectId { get; set; }
-    public string GetCasesByMemberId { get; set; }
+    public string GetIssuesByMemberId { get; set; }
 }
