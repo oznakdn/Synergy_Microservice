@@ -23,8 +23,8 @@ public class GetProjectsQueryHandler : IRequestHandler<GetProjectsQuery, Result<
         var result = projects.Select(x => new ProjectDto(
             x.Id,
             x.Title,
-            x.Description,
-            x.ProjectStatus.ToString(),
+            x.Description!,
+            x.Github,
             x.StartDate.ToShortDateString(),
             x.EndDate.ToShortDateString(),
             x.TeamId));

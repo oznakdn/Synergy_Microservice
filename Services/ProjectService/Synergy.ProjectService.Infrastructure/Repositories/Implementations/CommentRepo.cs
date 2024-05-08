@@ -4,9 +4,9 @@ using Synergy.ProjectService.Infrastructure.Repositories.Contracts;
 
 namespace Synergy.ProjectService.Infrastructure.Repositories.Implementations;
 
-public class ProjectRepo : GenericRepository<Project>, IProjectRepository
+public class CommentRepo : GenericRepository<Comment>, ICommentRepository
 {
-    public ProjectRepo(AppDbContext db) : base(db)
+    public CommentRepo(AppDbContext db) : base(db)
     {
     }
 }

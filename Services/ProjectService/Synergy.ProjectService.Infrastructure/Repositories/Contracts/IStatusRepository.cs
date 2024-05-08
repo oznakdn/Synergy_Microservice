@@ -2,6 +2,6 @@
 
 namespace Synergy.ProjectService.Infrastructure.Repositories.Contracts;
 
-public interface IProjectRepo : IGenericRepository<Project>
+public interface IStatusRepository : IGenericRepository<Status>
 {
 }

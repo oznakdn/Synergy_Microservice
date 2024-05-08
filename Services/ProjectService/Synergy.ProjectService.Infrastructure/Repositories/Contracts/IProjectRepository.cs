@@ -2,6 +2,6 @@
 
 namespace Synergy.ProjectService.Infrastructure.Repositories.Contracts;
 
-public interface ICaseRepo : IGenericRepository<Case>
+public interface IProjectRepository : IGenericRepository<Project>
 {
 }

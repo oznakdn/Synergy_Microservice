@@ -1,9 +1,7 @@
 ﻿using MediatR;
 using Synergy.ProjectService.Domain.Models;
-using Synergy.ProjectService.Domain.Models.Enums;
 using Synergy.ProjectService.Infrastructure.Repositories.Contracts;
 using Synergy.Shared.Results;
-using System.Globalization;
 
 namespace Synergy.ProjectService.Application.Commands.CreateProject;
 
@@ -27,11 +25,11 @@ public class CreateProjectCommandHandler : IRequestHandler<CreateProjectCommand,
         {
             Title = request.CreateProject.Title,
             Description = request.CreateProject.Description,
+            Github = request.CreateProject.Github,
             CreatedDate = DateTime.UtcNow,
             CreatedBy = request.CreatedBy,
             StartDate = request.CreateProject.StartDate.ToUniversalTime(),
             EndDate = request.CreateProject.EndDate.ToUniversalTime(),
-            ProjectStatus = (Status)request.CreateProject.ProjectStatus,
             TeamId = request.CreateProject.TeamId
         };
 

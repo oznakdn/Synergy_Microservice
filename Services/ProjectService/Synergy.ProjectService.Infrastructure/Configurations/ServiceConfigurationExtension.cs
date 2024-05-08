@@ -12,8 +12,10 @@ public static class ServiceConfigurationExtension
     public static void AddInfrastructureService(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<AppDbContext>(opt => opt.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
-        services.AddScoped<IProjectRepo, ProjectRepo>();
-        services.AddScoped<ICaseRepo, CaseRepo>();
+        services.AddScoped<IProjectRepository, ProjectRepo>();
+        services.AddScoped<IStatusRepository, StatusRepo>();
+        services.AddScoped<IIssueRepository, IssueRepo>();
+        services.AddScoped<ICommentRepository, CommentRepo>();
         services.AddScoped<IRepositoryManager,RepositoryManager > ();
 
     }

@@ -4,9 +4,9 @@ using Synergy.ProjectService.Infrastructure.Repositories.Contracts;
 
 namespace Synergy.ProjectService.Infrastructure.Repositories.Implementations;
 
-public class CaseRepo : GenericRepository<Case>, ICaseRepo
+public class StatusRepo : GenericRepository<Status>, IStatusRepository
 {
-    public CaseRepo(AppDbContext db) : base(db)
+    public StatusRepo(AppDbContext db) : base(db)
     {
     }
 }

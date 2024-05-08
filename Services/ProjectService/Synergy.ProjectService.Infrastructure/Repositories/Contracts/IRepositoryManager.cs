@@ -3,7 +3,9 @@
 public interface IRepositoryManager : IAsyncDisposable
 {
     Task<int> SaveAsync(CancellationToken cancellationToken = default(CancellationToken));
-    IProjectRepo Project { get; }
-    ICaseRepo Case { get; }
+    IProjectRepository Project { get; }
+    IStatusRepository Status { get; }
+    IIssueRepository Issue { get; }
+    ICommentRepository Comment { get; }
 
 }

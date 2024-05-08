@@ -30,6 +30,7 @@ builder.Services.AddAuthentication(scheme =>
 });
 
 var app = builder.Build();
+app.Services.AddAutoMigration();
 
 if (app.Environment.IsDevelopment())
 {

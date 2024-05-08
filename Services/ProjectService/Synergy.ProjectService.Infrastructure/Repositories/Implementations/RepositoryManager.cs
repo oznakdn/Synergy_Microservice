@@ -5,20 +5,29 @@ namespace Synergy.ProjectService.Infrastructure.Repositories.Implementations;
 
 public class RepositoryManager : IRepositoryManager
 {
-    private readonly IProjectRepo _project;
-    private readonly ICaseRepo _case;
+    private readonly IProjectRepository _project;
+    private readonly IStatusRepository _status;
+    private readonly IIssueRepository _issue;
+    private readonly ICommentRepository _comment;
+
     private readonly AppDbContext _context;
 
-    public RepositoryManager(IProjectRepo project, ICaseRepo @case, AppDbContext context)
+    public RepositoryManager(IProjectRepository project, IIssueRepository issue, AppDbContext context, IStatusRepository status, ICommentRepository comment)
     {
         _project = project;
-        _case = @case;
+        _issue = issue;
         _context = context;
+        _status = status;
+        _comment = comment;
     }
 
-    public IProjectRepo Project => _project;
+    public IProjectRepository Project => _project;
 
-    public ICaseRepo Case => _case;
+    public IIssueRepository Issue => _issue;
+
+    public IStatusRepository Status => _status;
+
+    public ICommentRepository Comment => _comment;
 
     public async ValueTask DisposeAsync() => await _context.DisposeAsync();
 
